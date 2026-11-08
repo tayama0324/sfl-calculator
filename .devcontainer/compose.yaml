@@ -1,0 +1,11 @@
+name: local-env
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    tty: true
+    volumes:
+      - ..:/workspace
+    ports:
+      - 8000:8000
