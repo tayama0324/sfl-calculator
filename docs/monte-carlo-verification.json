@@ -1,0 +1,4499 @@
+[
+  {
+    "divisionId": "S",
+    "mode": "points",
+    "seconds": 0.668684804,
+    "checkpoint": {
+      "kind": "sfl-monte-carlo-checkpoint",
+      "version": 1,
+      "modelVersion": "fair-independent-v1",
+      "rngVersion": "chacha20-sha256-v1",
+      "samplerVersion": "shared-inverse-cdf-v1",
+      "ciVersion": "hoeffding-anytime-alpha-spending-v1",
+      "division": {
+        "id": "S",
+        "teams": [
+          {
+            "id": "zet",
+            "name": "ZETA DIVISION",
+            "shortName": "ZETA"
+          },
+          {
+            "id": "fav",
+            "name": "FAV gaming",
+            "shortName": "FAV"
+          },
+          {
+            "id": "sol",
+            "name": "Saishunkan Sol 熊本",
+            "shortName": "SOL"
+          },
+          {
+            "id": "ibs",
+            "name": "FUKUSHIMA IBUSHIGIN",
+            "shortName": "IBS"
+          },
+          {
+            "id": "cr",
+            "name": "Crazy Raccoon",
+            "shortName": "CR"
+          },
+          {
+            "id": "ixa",
+            "name": "広島 TEAM iXA",
+            "shortName": "iXA"
+          }
+        ],
+        "fixtures": [
+          {
+            "id": "s-1-fav-ibs",
+            "round": 1,
+            "homeTeamId": "fav",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-08-25"
+          },
+          {
+            "id": "s-1-cr-zet",
+            "round": 1,
+            "homeTeamId": "cr",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-08-25"
+          },
+          {
+            "id": "s-1-ixa-sol",
+            "round": 1,
+            "homeTeamId": "ixa",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-08-25"
+          },
+          {
+            "id": "s-2-zet-ixa",
+            "round": 2,
+            "homeTeamId": "zet",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-09-01"
+          },
+          {
+            "id": "s-2-fav-sol",
+            "round": 2,
+            "homeTeamId": "fav",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-09-01"
+          },
+          {
+            "id": "s-2-ibs-cr",
+            "round": 2,
+            "homeTeamId": "ibs",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-09-01"
+          },
+          {
+            "id": "s-3-zet-ibs",
+            "round": 3,
+            "homeTeamId": "zet",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-09-08"
+          },
+          {
+            "id": "s-3-sol-cr",
+            "round": 3,
+            "homeTeamId": "sol",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-09-08"
+          },
+          {
+            "id": "s-3-ixa-fav",
+            "round": 3,
+            "homeTeamId": "ixa",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-09-08"
+          },
+          {
+            "id": "s-4-fav-cr",
+            "round": 4,
+            "homeTeamId": "fav",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-10-16"
+          },
+          {
+            "id": "s-4-sol-zet",
+            "round": 4,
+            "homeTeamId": "sol",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-10-16"
+          },
+          {
+            "id": "s-4-ibs-ixa",
+            "round": 4,
+            "homeTeamId": "ibs",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-10-16"
+          },
+          {
+            "id": "s-5-zet-fav",
+            "round": 5,
+            "homeTeamId": "zet",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-10-23"
+          },
+          {
+            "id": "s-5-ibs-sol",
+            "round": 5,
+            "homeTeamId": "ibs",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-10-23"
+          },
+          {
+            "id": "s-5-cr-ixa",
+            "round": 5,
+            "homeTeamId": "cr",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-10-23"
+          },
+          {
+            "id": "s-6-zet-cr",
+            "round": 6,
+            "homeTeamId": "zet",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-10-30"
+          },
+          {
+            "id": "s-6-sol-ixa",
+            "round": 6,
+            "homeTeamId": "sol",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-10-30"
+          },
+          {
+            "id": "s-6-ibs-fav",
+            "round": 6,
+            "homeTeamId": "ibs",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-10-30"
+          },
+          {
+            "id": "s-7-sol-fav",
+            "round": 7,
+            "homeTeamId": "sol",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-11-06"
+          },
+          {
+            "id": "s-7-cr-ibs",
+            "round": 7,
+            "homeTeamId": "cr",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-11-06"
+          },
+          {
+            "id": "s-7-ixa-zet",
+            "round": 7,
+            "homeTeamId": "ixa",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-11-06"
+          },
+          {
+            "id": "s-8-fav-ixa",
+            "round": 8,
+            "homeTeamId": "fav",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-11-13"
+          },
+          {
+            "id": "s-8-ibs-zet",
+            "round": 8,
+            "homeTeamId": "ibs",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-11-13"
+          },
+          {
+            "id": "s-8-cr-sol",
+            "round": 8,
+            "homeTeamId": "cr",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-11-13"
+          },
+          {
+            "id": "s-9-zet-sol",
+            "round": 9,
+            "homeTeamId": "zet",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-12-01"
+          },
+          {
+            "id": "s-9-cr-fav",
+            "round": 9,
+            "homeTeamId": "cr",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-12-01"
+          },
+          {
+            "id": "s-9-ixa-ibs",
+            "round": 9,
+            "homeTeamId": "ixa",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-12-01"
+          },
+          {
+            "id": "s-10-fav-zet",
+            "round": 10,
+            "homeTeamId": "fav",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-12-08"
+          },
+          {
+            "id": "s-10-sol-ibs",
+            "round": 10,
+            "homeTeamId": "sol",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-12-08"
+          },
+          {
+            "id": "s-10-ixa-cr",
+            "round": 10,
+            "homeTeamId": "ixa",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-12-08"
+          }
+        ],
+        "baseline": {
+          "asOf": "2026-11-07",
+          "sourceStatus": "secondary-checked",
+          "includedMatchIds": [
+            "s-1-fav-ibs",
+            "s-1-cr-zet",
+            "s-1-ixa-sol",
+            "s-2-zet-ixa",
+            "s-2-fav-sol",
+            "s-2-ibs-cr",
+            "s-3-zet-ibs",
+            "s-3-sol-cr",
+            "s-3-ixa-fav",
+            "s-4-fav-cr",
+            "s-4-sol-zet",
+            "s-4-ibs-ixa",
+            "s-5-zet-fav",
+            "s-5-ibs-sol",
+            "s-5-cr-ixa",
+            "s-6-zet-cr",
+            "s-6-sol-ixa",
+            "s-6-ibs-fav",
+            "s-7-sol-fav",
+            "s-7-cr-ibs",
+            "s-7-ixa-zet"
+          ],
+          "standings": [
+            {
+              "teamId": "zet",
+              "played": 7,
+              "points": 190,
+              "battleDiff": 12,
+              "roundDiff": 16
+            },
+            {
+              "teamId": "fav",
+              "played": 7,
+              "points": 180,
+              "battleDiff": 12,
+              "roundDiff": 15
+            },
+            {
+              "teamId": "sol",
+              "played": 7,
+              "points": 180,
+              "battleDiff": 5,
+              "roundDiff": 5
+            },
+            {
+              "teamId": "ibs",
+              "played": 7,
+              "points": 150,
+              "battleDiff": -9,
+              "roundDiff": -16
+            },
+            {
+              "teamId": "cr",
+              "played": 7,
+              "points": 130,
+              "battleDiff": -4,
+              "roundDiff": 0
+            },
+            {
+              "teamId": "ixa",
+              "played": 7,
+              "points": 70,
+              "battleDiff": -16,
+              "roundDiff": -20
+            }
+          ]
+        },
+        "results": {},
+        "explorationMode": "points",
+        "cases": [
+          {
+            "id": "all-win",
+            "name": "首位チーム全勝",
+            "conditions": [
+              {
+                "targetTeamId": "zet",
+                "mode": "win"
+              }
+            ]
+          },
+          {
+            "id": "priority",
+            "name": "優先条件付き",
+            "conditions": [
+              {
+                "targetTeamId": "zet",
+                "mode": "win"
+              },
+              {
+                "targetTeamId": "fav",
+                "mode": "win"
+              }
+            ]
+          }
+        ],
+        "fixedScores": {},
+        "calculationMethod": "monteCarlo",
+        "simulation": {
+          "trials": 100000,
+          "seed": "sfl-2026-verification-v1"
+        }
+      },
+      "fingerprint": "{\"baseline\":{\"asOf\":\"2026-11-07\",\"includedMatchIds\":[\"s-1-fav-ibs\",\"s-1-cr-zet\",\"s-1-ixa-sol\",\"s-2-zet-ixa\",\"s-2-fav-sol\",\"s-2-ibs-cr\",\"s-3-zet-ibs\",\"s-3-sol-cr\",\"s-3-ixa-fav\",\"s-4-fav-cr\",\"s-4-sol-zet\",\"s-4-ibs-ixa\",\"s-5-zet-fav\",\"s-5-ibs-sol\",\"s-5-cr-ixa\",\"s-6-zet-cr\",\"s-6-sol-ixa\",\"s-6-ibs-fav\",\"s-7-sol-fav\",\"s-7-cr-ibs\",\"s-7-ixa-zet\"],\"sourceStatus\":\"secondary-checked\",\"standings\":[{\"battleDiff\":12,\"played\":7,\"points\":190,\"roundDiff\":16,\"teamId\":\"zet\"},{\"battleDiff\":12,\"played\":7,\"points\":180,\"roundDiff\":15,\"teamId\":\"fav\"},{\"battleDiff\":5,\"played\":7,\"points\":180,\"roundDiff\":5,\"teamId\":\"sol\"},{\"battleDiff\":-9,\"played\":7,\"points\":150,\"roundDiff\":-16,\"teamId\":\"ibs\"},{\"battleDiff\":-4,\"played\":7,\"points\":130,\"roundDiff\":0,\"teamId\":\"cr\"},{\"battleDiff\":-16,\"played\":7,\"points\":70,\"roundDiff\":-20,\"teamId\":\"ixa\"}]},\"calculationMethod\":\"monteCarlo\",\"cases\":[{\"conditions\":[{\"mode\":\"win\",\"targetTeamId\":\"zet\"}],\"id\":\"all-win\",\"name\":\"首位チーム全勝\"},{\"conditions\":[{\"mode\":\"win\",\"targetTeamId\":\"zet\"},{\"mode\":\"win\",\"targetTeamId\":\"fav\"}],\"id\":\"priority\",\"name\":\"優先条件付き\"}],\"explorationMode\":\"points\",\"fixedScores\":{},\"fixtures\":[{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"fav\",\"id\":\"s-1-fav-ibs\",\"round\":1,\"scheduledAt\":\"2026-08-25\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"cr\",\"id\":\"s-1-cr-zet\",\"round\":1,\"scheduledAt\":\"2026-08-25\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"ixa\",\"id\":\"s-1-ixa-sol\",\"round\":1,\"scheduledAt\":\"2026-08-25\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"zet\",\"id\":\"s-2-zet-ixa\",\"round\":2,\"scheduledAt\":\"2026-09-01\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"fav\",\"id\":\"s-2-fav-sol\",\"round\":2,\"scheduledAt\":\"2026-09-01\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"ibs\",\"id\":\"s-2-ibs-cr\",\"round\":2,\"scheduledAt\":\"2026-09-01\"},{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"zet\",\"id\":\"s-3-zet-ibs\",\"round\":3,\"scheduledAt\":\"2026-09-08\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"sol\",\"id\":\"s-3-sol-cr\",\"round\":3,\"scheduledAt\":\"2026-09-08\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"ixa\",\"id\":\"s-3-ixa-fav\",\"round\":3,\"scheduledAt\":\"2026-09-08\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"fav\",\"id\":\"s-4-fav-cr\",\"round\":4,\"scheduledAt\":\"2026-10-16\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"sol\",\"id\":\"s-4-sol-zet\",\"round\":4,\"scheduledAt\":\"2026-10-16\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"ibs\",\"id\":\"s-4-ibs-ixa\",\"round\":4,\"scheduledAt\":\"2026-10-16\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"zet\",\"id\":\"s-5-zet-fav\",\"round\":5,\"scheduledAt\":\"2026-10-23\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"ibs\",\"id\":\"s-5-ibs-sol\",\"round\":5,\"scheduledAt\":\"2026-10-23\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"cr\",\"id\":\"s-5-cr-ixa\",\"round\":5,\"scheduledAt\":\"2026-10-23\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"zet\",\"id\":\"s-6-zet-cr\",\"round\":6,\"scheduledAt\":\"2026-10-30\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"sol\",\"id\":\"s-6-sol-ixa\",\"round\":6,\"scheduledAt\":\"2026-10-30\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"ibs\",\"id\":\"s-6-ibs-fav\",\"round\":6,\"scheduledAt\":\"2026-10-30\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"sol\",\"id\":\"s-7-sol-fav\",\"round\":7,\"scheduledAt\":\"2026-11-06\"},{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"cr\",\"id\":\"s-7-cr-ibs\",\"round\":7,\"scheduledAt\":\"2026-11-06\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"ixa\",\"id\":\"s-7-ixa-zet\",\"round\":7,\"scheduledAt\":\"2026-11-06\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"fav\",\"id\":\"s-8-fav-ixa\",\"round\":8,\"scheduledAt\":\"2026-11-13\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"ibs\",\"id\":\"s-8-ibs-zet\",\"round\":8,\"scheduledAt\":\"2026-11-13\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"cr\",\"id\":\"s-8-cr-sol\",\"round\":8,\"scheduledAt\":\"2026-11-13\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"zet\",\"id\":\"s-9-zet-sol\",\"round\":9,\"scheduledAt\":\"2026-12-01\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"cr\",\"id\":\"s-9-cr-fav\",\"round\":9,\"scheduledAt\":\"2026-12-01\"},{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"ixa\",\"id\":\"s-9-ixa-ibs\",\"round\":9,\"scheduledAt\":\"2026-12-01\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"fav\",\"id\":\"s-10-fav-zet\",\"round\":10,\"scheduledAt\":\"2026-12-08\"},{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"sol\",\"id\":\"s-10-sol-ibs\",\"round\":10,\"scheduledAt\":\"2026-12-08\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"ixa\",\"id\":\"s-10-ixa-cr\",\"round\":10,\"scheduledAt\":\"2026-12-08\"}],\"id\":\"S\",\"results\":{},\"simulation\":{\"seed\":\"sfl-2026-verification-v1\"},\"teams\":[{\"id\":\"zet\",\"name\":\"ZETA DIVISION\",\"shortName\":\"ZETA\"},{\"id\":\"fav\",\"name\":\"FAV gaming\",\"shortName\":\"FAV\"},{\"id\":\"sol\",\"name\":\"Saishunkan Sol 熊本\",\"shortName\":\"SOL\"},{\"id\":\"ibs\",\"name\":\"FUKUSHIMA IBUSHIGIN\",\"shortName\":\"IBS\"},{\"id\":\"cr\",\"name\":\"Crazy Raccoon\",\"shortName\":\"CR\"},{\"id\":\"ixa\",\"name\":\"広島 TEAM iXA\",\"shortName\":\"iXA\"}]}",
+      "completed": 100000,
+      "nextTrial": 100000,
+      "records": [
+        {
+          "id": "baseline",
+          "lowerRanks": [
+            "2717491",
+            "1514356",
+            "1180026",
+            "502676",
+            "85451",
+            "0",
+            "1521841",
+            "1892961",
+            "1690501",
+            "659481",
+            "234796",
+            "420",
+            "1562786",
+            "1856691",
+            "1511521",
+            "772461",
+            "296381",
+            "160",
+            "187201",
+            "598556",
+            "1183186",
+            "2606466",
+            "1379831",
+            "44760",
+            "10681",
+            "137436",
+            "434516",
+            "1435876",
+            "3709781",
+            "271710",
+            "0",
+            "0",
+            "250",
+            "23040",
+            "293760",
+            "5682950"
+          ],
+          "upperRanks": [
+            "2717491",
+            "1514356",
+            "1180026",
+            "502676",
+            "85451",
+            "0",
+            "1521841",
+            "1892961",
+            "1690501",
+            "659481",
+            "234796",
+            "420",
+            "1562786",
+            "1856691",
+            "1511521",
+            "772461",
+            "296381",
+            "160",
+            "187201",
+            "598556",
+            "1183186",
+            "2606466",
+            "1379831",
+            "44760",
+            "10681",
+            "137436",
+            "434516",
+            "1435876",
+            "3709781",
+            "271710",
+            "0",
+            "0",
+            "250",
+            "23040",
+            "293760",
+            "5682950"
+          ],
+          "poLower": [
+            "5411873",
+            "5105303",
+            "4930998",
+            "1968943",
+            "582633",
+            "250"
+          ],
+          "poUpper": [
+            "5411873",
+            "5105303",
+            "4930998",
+            "1968943",
+            "582633",
+            "250"
+          ],
+          "unresolved": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "borderTies": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "deltaLower": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "deltaUpper": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "id": "all-win",
+          "lowerRanks": [
+            "5987270",
+            "12650",
+            "80",
+            "0",
+            "0",
+            "0",
+            "5840",
+            "2620575",
+            "2341445",
+            "749865",
+            "281465",
+            "810",
+            "6890",
+            "2696905",
+            "2051475",
+            "836035",
+            "408335",
+            "360",
+            "0",
+            "354145",
+            "975555",
+            "2633505",
+            "1949285",
+            "87510",
+            "0",
+            "315725",
+            "630875",
+            "1737895",
+            "3050735",
+            "264770",
+            "0",
+            "0",
+            "570",
+            "42700",
+            "310180",
+            "5646550"
+          ],
+          "upperRanks": [
+            "5987270",
+            "12650",
+            "80",
+            "0",
+            "0",
+            "0",
+            "5840",
+            "2620575",
+            "2341445",
+            "749865",
+            "281465",
+            "810",
+            "6890",
+            "2696905",
+            "2051475",
+            "836035",
+            "408335",
+            "360",
+            "0",
+            "354145",
+            "975555",
+            "2633505",
+            "1949285",
+            "87510",
+            "0",
+            "315725",
+            "630875",
+            "1737895",
+            "3050735",
+            "264770",
+            "0",
+            "0",
+            "570",
+            "42700",
+            "310180",
+            "5646550"
+          ],
+          "poLower": [
+            "6000000",
+            "4967860",
+            "4755270",
+            "1329700",
+            "946600",
+            "570"
+          ],
+          "poUpper": [
+            "6000000",
+            "4967860",
+            "4755270",
+            "1329700",
+            "946600",
+            "570"
+          ],
+          "unresolved": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "borderTies": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "deltaLower": [
+            "588127",
+            "-137443",
+            "-175728",
+            "-639243",
+            "363967",
+            "320"
+          ],
+          "deltaUpper": [
+            "588127",
+            "-137443",
+            "-175728",
+            "-639243",
+            "363967",
+            "320"
+          ]
+        },
+        {
+          "id": "priority",
+          "lowerRanks": [
+            "5968120",
+            "31720",
+            "160",
+            "0",
+            "0",
+            "0",
+            "25030",
+            "4981970",
+            "991760",
+            "1240",
+            "0",
+            "0",
+            "6850",
+            "965870",
+            "3776060",
+            "973300",
+            "277920",
+            "0",
+            "0",
+            "20440",
+            "1062190",
+            "3538410",
+            "1363190",
+            "15770",
+            "0",
+            "0",
+            "169830",
+            "1478840",
+            "4177580",
+            "173750",
+            "0",
+            "0",
+            "0",
+            "8210",
+            "181310",
+            "5810480"
+          ],
+          "upperRanks": [
+            "5968120",
+            "31720",
+            "160",
+            "0",
+            "0",
+            "0",
+            "25030",
+            "4981970",
+            "991760",
+            "1240",
+            "0",
+            "0",
+            "6850",
+            "965870",
+            "3776060",
+            "973300",
+            "277920",
+            "0",
+            "0",
+            "20440",
+            "1062190",
+            "3538410",
+            "1363190",
+            "15770",
+            "0",
+            "0",
+            "169830",
+            "1478840",
+            "4177580",
+            "173750",
+            "0",
+            "0",
+            "0",
+            "8210",
+            "181310",
+            "5810480"
+          ],
+          "poLower": [
+            "6000000",
+            "5998760",
+            "4748780",
+            "1082630",
+            "169830",
+            "0"
+          ],
+          "poUpper": [
+            "6000000",
+            "5998760",
+            "4748780",
+            "1082630",
+            "169830",
+            "0"
+          ],
+          "unresolved": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "borderTies": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "deltaLower": [
+            "588127",
+            "893457",
+            "-182218",
+            "-886313",
+            "-412803",
+            "-250"
+          ],
+          "deltaUpper": [
+            "588127",
+            "893457",
+            "-182218",
+            "-886313",
+            "-412803",
+            "-250"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "divisionId": "S",
+    "mode": "battles",
+    "seconds": 0.7022580930000001,
+    "checkpoint": {
+      "kind": "sfl-monte-carlo-checkpoint",
+      "version": 1,
+      "modelVersion": "fair-independent-v1",
+      "rngVersion": "chacha20-sha256-v1",
+      "samplerVersion": "shared-inverse-cdf-v1",
+      "ciVersion": "hoeffding-anytime-alpha-spending-v1",
+      "division": {
+        "id": "S",
+        "teams": [
+          {
+            "id": "zet",
+            "name": "ZETA DIVISION",
+            "shortName": "ZETA"
+          },
+          {
+            "id": "fav",
+            "name": "FAV gaming",
+            "shortName": "FAV"
+          },
+          {
+            "id": "sol",
+            "name": "Saishunkan Sol 熊本",
+            "shortName": "SOL"
+          },
+          {
+            "id": "ibs",
+            "name": "FUKUSHIMA IBUSHIGIN",
+            "shortName": "IBS"
+          },
+          {
+            "id": "cr",
+            "name": "Crazy Raccoon",
+            "shortName": "CR"
+          },
+          {
+            "id": "ixa",
+            "name": "広島 TEAM iXA",
+            "shortName": "iXA"
+          }
+        ],
+        "fixtures": [
+          {
+            "id": "s-1-fav-ibs",
+            "round": 1,
+            "homeTeamId": "fav",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-08-25"
+          },
+          {
+            "id": "s-1-cr-zet",
+            "round": 1,
+            "homeTeamId": "cr",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-08-25"
+          },
+          {
+            "id": "s-1-ixa-sol",
+            "round": 1,
+            "homeTeamId": "ixa",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-08-25"
+          },
+          {
+            "id": "s-2-zet-ixa",
+            "round": 2,
+            "homeTeamId": "zet",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-09-01"
+          },
+          {
+            "id": "s-2-fav-sol",
+            "round": 2,
+            "homeTeamId": "fav",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-09-01"
+          },
+          {
+            "id": "s-2-ibs-cr",
+            "round": 2,
+            "homeTeamId": "ibs",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-09-01"
+          },
+          {
+            "id": "s-3-zet-ibs",
+            "round": 3,
+            "homeTeamId": "zet",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-09-08"
+          },
+          {
+            "id": "s-3-sol-cr",
+            "round": 3,
+            "homeTeamId": "sol",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-09-08"
+          },
+          {
+            "id": "s-3-ixa-fav",
+            "round": 3,
+            "homeTeamId": "ixa",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-09-08"
+          },
+          {
+            "id": "s-4-fav-cr",
+            "round": 4,
+            "homeTeamId": "fav",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-10-16"
+          },
+          {
+            "id": "s-4-sol-zet",
+            "round": 4,
+            "homeTeamId": "sol",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-10-16"
+          },
+          {
+            "id": "s-4-ibs-ixa",
+            "round": 4,
+            "homeTeamId": "ibs",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-10-16"
+          },
+          {
+            "id": "s-5-zet-fav",
+            "round": 5,
+            "homeTeamId": "zet",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-10-23"
+          },
+          {
+            "id": "s-5-ibs-sol",
+            "round": 5,
+            "homeTeamId": "ibs",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-10-23"
+          },
+          {
+            "id": "s-5-cr-ixa",
+            "round": 5,
+            "homeTeamId": "cr",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-10-23"
+          },
+          {
+            "id": "s-6-zet-cr",
+            "round": 6,
+            "homeTeamId": "zet",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-10-30"
+          },
+          {
+            "id": "s-6-sol-ixa",
+            "round": 6,
+            "homeTeamId": "sol",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-10-30"
+          },
+          {
+            "id": "s-6-ibs-fav",
+            "round": 6,
+            "homeTeamId": "ibs",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-10-30"
+          },
+          {
+            "id": "s-7-sol-fav",
+            "round": 7,
+            "homeTeamId": "sol",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-11-06"
+          },
+          {
+            "id": "s-7-cr-ibs",
+            "round": 7,
+            "homeTeamId": "cr",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-11-06"
+          },
+          {
+            "id": "s-7-ixa-zet",
+            "round": 7,
+            "homeTeamId": "ixa",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-11-06"
+          },
+          {
+            "id": "s-8-fav-ixa",
+            "round": 8,
+            "homeTeamId": "fav",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-11-13"
+          },
+          {
+            "id": "s-8-ibs-zet",
+            "round": 8,
+            "homeTeamId": "ibs",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-11-13"
+          },
+          {
+            "id": "s-8-cr-sol",
+            "round": 8,
+            "homeTeamId": "cr",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-11-13"
+          },
+          {
+            "id": "s-9-zet-sol",
+            "round": 9,
+            "homeTeamId": "zet",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-12-01"
+          },
+          {
+            "id": "s-9-cr-fav",
+            "round": 9,
+            "homeTeamId": "cr",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-12-01"
+          },
+          {
+            "id": "s-9-ixa-ibs",
+            "round": 9,
+            "homeTeamId": "ixa",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-12-01"
+          },
+          {
+            "id": "s-10-fav-zet",
+            "round": 10,
+            "homeTeamId": "fav",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-12-08"
+          },
+          {
+            "id": "s-10-sol-ibs",
+            "round": 10,
+            "homeTeamId": "sol",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-12-08"
+          },
+          {
+            "id": "s-10-ixa-cr",
+            "round": 10,
+            "homeTeamId": "ixa",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-12-08"
+          }
+        ],
+        "baseline": {
+          "asOf": "2026-11-07",
+          "sourceStatus": "secondary-checked",
+          "includedMatchIds": [
+            "s-1-fav-ibs",
+            "s-1-cr-zet",
+            "s-1-ixa-sol",
+            "s-2-zet-ixa",
+            "s-2-fav-sol",
+            "s-2-ibs-cr",
+            "s-3-zet-ibs",
+            "s-3-sol-cr",
+            "s-3-ixa-fav",
+            "s-4-fav-cr",
+            "s-4-sol-zet",
+            "s-4-ibs-ixa",
+            "s-5-zet-fav",
+            "s-5-ibs-sol",
+            "s-5-cr-ixa",
+            "s-6-zet-cr",
+            "s-6-sol-ixa",
+            "s-6-ibs-fav",
+            "s-7-sol-fav",
+            "s-7-cr-ibs",
+            "s-7-ixa-zet"
+          ],
+          "standings": [
+            {
+              "teamId": "zet",
+              "played": 7,
+              "points": 190,
+              "battleDiff": 12,
+              "roundDiff": 16
+            },
+            {
+              "teamId": "fav",
+              "played": 7,
+              "points": 180,
+              "battleDiff": 12,
+              "roundDiff": 15
+            },
+            {
+              "teamId": "sol",
+              "played": 7,
+              "points": 180,
+              "battleDiff": 5,
+              "roundDiff": 5
+            },
+            {
+              "teamId": "ibs",
+              "played": 7,
+              "points": 150,
+              "battleDiff": -9,
+              "roundDiff": -16
+            },
+            {
+              "teamId": "cr",
+              "played": 7,
+              "points": 130,
+              "battleDiff": -4,
+              "roundDiff": 0
+            },
+            {
+              "teamId": "ixa",
+              "played": 7,
+              "points": 70,
+              "battleDiff": -16,
+              "roundDiff": -20
+            }
+          ]
+        },
+        "results": {},
+        "explorationMode": "battles",
+        "cases": [
+          {
+            "id": "all-win",
+            "name": "首位チーム全勝",
+            "conditions": [
+              {
+                "targetTeamId": "zet",
+                "mode": "win"
+              }
+            ]
+          },
+          {
+            "id": "priority",
+            "name": "優先条件付き",
+            "conditions": [
+              {
+                "targetTeamId": "zet",
+                "mode": "win"
+              },
+              {
+                "targetTeamId": "fav",
+                "mode": "win"
+              }
+            ]
+          }
+        ],
+        "fixedScores": {},
+        "calculationMethod": "monteCarlo",
+        "simulation": {
+          "trials": 100000,
+          "seed": "sfl-2026-verification-v1"
+        }
+      },
+      "fingerprint": "{\"baseline\":{\"asOf\":\"2026-11-07\",\"includedMatchIds\":[\"s-1-fav-ibs\",\"s-1-cr-zet\",\"s-1-ixa-sol\",\"s-2-zet-ixa\",\"s-2-fav-sol\",\"s-2-ibs-cr\",\"s-3-zet-ibs\",\"s-3-sol-cr\",\"s-3-ixa-fav\",\"s-4-fav-cr\",\"s-4-sol-zet\",\"s-4-ibs-ixa\",\"s-5-zet-fav\",\"s-5-ibs-sol\",\"s-5-cr-ixa\",\"s-6-zet-cr\",\"s-6-sol-ixa\",\"s-6-ibs-fav\",\"s-7-sol-fav\",\"s-7-cr-ibs\",\"s-7-ixa-zet\"],\"sourceStatus\":\"secondary-checked\",\"standings\":[{\"battleDiff\":12,\"played\":7,\"points\":190,\"roundDiff\":16,\"teamId\":\"zet\"},{\"battleDiff\":12,\"played\":7,\"points\":180,\"roundDiff\":15,\"teamId\":\"fav\"},{\"battleDiff\":5,\"played\":7,\"points\":180,\"roundDiff\":5,\"teamId\":\"sol\"},{\"battleDiff\":-9,\"played\":7,\"points\":150,\"roundDiff\":-16,\"teamId\":\"ibs\"},{\"battleDiff\":-4,\"played\":7,\"points\":130,\"roundDiff\":0,\"teamId\":\"cr\"},{\"battleDiff\":-16,\"played\":7,\"points\":70,\"roundDiff\":-20,\"teamId\":\"ixa\"}]},\"calculationMethod\":\"monteCarlo\",\"cases\":[{\"conditions\":[{\"mode\":\"win\",\"targetTeamId\":\"zet\"}],\"id\":\"all-win\",\"name\":\"首位チーム全勝\"},{\"conditions\":[{\"mode\":\"win\",\"targetTeamId\":\"zet\"},{\"mode\":\"win\",\"targetTeamId\":\"fav\"}],\"id\":\"priority\",\"name\":\"優先条件付き\"}],\"explorationMode\":\"battles\",\"fixedScores\":{},\"fixtures\":[{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"fav\",\"id\":\"s-1-fav-ibs\",\"round\":1,\"scheduledAt\":\"2026-08-25\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"cr\",\"id\":\"s-1-cr-zet\",\"round\":1,\"scheduledAt\":\"2026-08-25\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"ixa\",\"id\":\"s-1-ixa-sol\",\"round\":1,\"scheduledAt\":\"2026-08-25\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"zet\",\"id\":\"s-2-zet-ixa\",\"round\":2,\"scheduledAt\":\"2026-09-01\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"fav\",\"id\":\"s-2-fav-sol\",\"round\":2,\"scheduledAt\":\"2026-09-01\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"ibs\",\"id\":\"s-2-ibs-cr\",\"round\":2,\"scheduledAt\":\"2026-09-01\"},{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"zet\",\"id\":\"s-3-zet-ibs\",\"round\":3,\"scheduledAt\":\"2026-09-08\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"sol\",\"id\":\"s-3-sol-cr\",\"round\":3,\"scheduledAt\":\"2026-09-08\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"ixa\",\"id\":\"s-3-ixa-fav\",\"round\":3,\"scheduledAt\":\"2026-09-08\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"fav\",\"id\":\"s-4-fav-cr\",\"round\":4,\"scheduledAt\":\"2026-10-16\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"sol\",\"id\":\"s-4-sol-zet\",\"round\":4,\"scheduledAt\":\"2026-10-16\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"ibs\",\"id\":\"s-4-ibs-ixa\",\"round\":4,\"scheduledAt\":\"2026-10-16\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"zet\",\"id\":\"s-5-zet-fav\",\"round\":5,\"scheduledAt\":\"2026-10-23\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"ibs\",\"id\":\"s-5-ibs-sol\",\"round\":5,\"scheduledAt\":\"2026-10-23\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"cr\",\"id\":\"s-5-cr-ixa\",\"round\":5,\"scheduledAt\":\"2026-10-23\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"zet\",\"id\":\"s-6-zet-cr\",\"round\":6,\"scheduledAt\":\"2026-10-30\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"sol\",\"id\":\"s-6-sol-ixa\",\"round\":6,\"scheduledAt\":\"2026-10-30\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"ibs\",\"id\":\"s-6-ibs-fav\",\"round\":6,\"scheduledAt\":\"2026-10-30\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"sol\",\"id\":\"s-7-sol-fav\",\"round\":7,\"scheduledAt\":\"2026-11-06\"},{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"cr\",\"id\":\"s-7-cr-ibs\",\"round\":7,\"scheduledAt\":\"2026-11-06\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"ixa\",\"id\":\"s-7-ixa-zet\",\"round\":7,\"scheduledAt\":\"2026-11-06\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"fav\",\"id\":\"s-8-fav-ixa\",\"round\":8,\"scheduledAt\":\"2026-11-13\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"ibs\",\"id\":\"s-8-ibs-zet\",\"round\":8,\"scheduledAt\":\"2026-11-13\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"cr\",\"id\":\"s-8-cr-sol\",\"round\":8,\"scheduledAt\":\"2026-11-13\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"zet\",\"id\":\"s-9-zet-sol\",\"round\":9,\"scheduledAt\":\"2026-12-01\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"cr\",\"id\":\"s-9-cr-fav\",\"round\":9,\"scheduledAt\":\"2026-12-01\"},{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"ixa\",\"id\":\"s-9-ixa-ibs\",\"round\":9,\"scheduledAt\":\"2026-12-01\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"fav\",\"id\":\"s-10-fav-zet\",\"round\":10,\"scheduledAt\":\"2026-12-08\"},{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"sol\",\"id\":\"s-10-sol-ibs\",\"round\":10,\"scheduledAt\":\"2026-12-08\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"ixa\",\"id\":\"s-10-ixa-cr\",\"round\":10,\"scheduledAt\":\"2026-12-08\"}],\"id\":\"S\",\"results\":{},\"simulation\":{\"seed\":\"sfl-2026-verification-v1\"},\"teams\":[{\"id\":\"zet\",\"name\":\"ZETA DIVISION\",\"shortName\":\"ZETA\"},{\"id\":\"fav\",\"name\":\"FAV gaming\",\"shortName\":\"FAV\"},{\"id\":\"sol\",\"name\":\"Saishunkan Sol 熊本\",\"shortName\":\"SOL\"},{\"id\":\"ibs\",\"name\":\"FUKUSHIMA IBUSHIGIN\",\"shortName\":\"IBS\"},{\"id\":\"cr\",\"name\":\"Crazy Raccoon\",\"shortName\":\"CR\"},{\"id\":\"ixa\",\"name\":\"広島 TEAM iXA\",\"shortName\":\"iXA\"}]}",
+      "completed": 100000,
+      "nextTrial": 100000,
+      "records": [
+        {
+          "id": "baseline",
+          "lowerRanks": [
+            "2773680",
+            "1490280",
+            "1179000",
+            "406560",
+            "59460",
+            "0",
+            "1749660",
+            "1945200",
+            "1544100",
+            "520320",
+            "163860",
+            "240",
+            "1302660",
+            "1869840",
+            "1729680",
+            "724560",
+            "305880",
+            "120",
+            "114960",
+            "462060",
+            "1033740",
+            "2656320",
+            "1653960",
+            "69300",
+            "9540",
+            "138060",
+            "436620",
+            "1603500",
+            "3457200",
+            "287100",
+            "0",
+            "0",
+            "0",
+            "34500",
+            "320700",
+            "5626980"
+          ],
+          "upperRanks": [
+            "2817900",
+            "1565400",
+            "1220880",
+            "422580",
+            "64740",
+            "0",
+            "1784940",
+            "2006820",
+            "1581240",
+            "535260",
+            "168360",
+            "360",
+            "1319880",
+            "1908840",
+            "1768500",
+            "752880",
+            "317220",
+            "120",
+            "115740",
+            "465240",
+            "1040280",
+            "2662740",
+            "1656300",
+            "69360",
+            "11160",
+            "148500",
+            "466440",
+            "1645080",
+            "3494040",
+            "303180",
+            "0",
+            "0",
+            "0",
+            "36060",
+            "338520",
+            "5643240"
+          ],
+          "poLower": [
+            "5517960",
+            "5300520",
+            "4941120",
+            "1613940",
+            "594540",
+            "0"
+          ],
+          "poUpper": [
+            "5528940",
+            "5311260",
+            "4958160",
+            "1618080",
+            "615600",
+            "0"
+          ],
+          "unresolved": [
+            "91020",
+            "76620",
+            "67260",
+            "9660",
+            "67980",
+            "17820"
+          ],
+          "borderTies": [
+            "10980",
+            "10740",
+            "17040",
+            "4140",
+            "21060",
+            "0"
+          ],
+          "deltaLower": [
+            "-10980",
+            "-10740",
+            "-17040",
+            "-4140",
+            "-21060",
+            "0"
+          ],
+          "deltaUpper": [
+            "10980",
+            "10740",
+            "17040",
+            "4140",
+            "21060",
+            "0"
+          ]
+        },
+        {
+          "id": "all-win",
+          "lowerRanks": [
+            "5985780",
+            "11880",
+            "0",
+            "0",
+            "0",
+            "0",
+            "10200",
+            "3060240",
+            "2118780",
+            "592380",
+            "187380",
+            "360",
+            "1680",
+            "2360400",
+            "2415780",
+            "764520",
+            "398160",
+            "360",
+            "0",
+            "220860",
+            "773820",
+            "2567760",
+            "2294760",
+            "134760",
+            "0",
+            "319560",
+            "632400",
+            "1959900",
+            "2739720",
+            "271620",
+            "0",
+            "0",
+            "240",
+            "60660",
+            "343740",
+            "5577240"
+          ],
+          "upperRanks": [
+            "5988120",
+            "14220",
+            "0",
+            "0",
+            "0",
+            "0",
+            "11280",
+            "3076500",
+            "2144940",
+            "606720",
+            "190860",
+            "420",
+            "2940",
+            "2380320",
+            "2459460",
+            "803700",
+            "412380",
+            "360",
+            "0",
+            "221760",
+            "778980",
+            "2574780",
+            "2297640",
+            "134880",
+            "0",
+            "334260",
+            "675240",
+            "2006520",
+            "2773740",
+            "287100",
+            "0",
+            "0",
+            "420",
+            "63120",
+            "361680",
+            "5592900"
+          ],
+          "poLower": [
+            "6000000",
+            "5205480",
+            "4797780",
+            "995580",
+            "966660",
+            "240"
+          ],
+          "poUpper": [
+            "6000000",
+            "5216460",
+            "4822800",
+            "999840",
+            "994800",
+            "420"
+          ],
+          "unresolved": [
+            "2340",
+            "30660",
+            "59100",
+            "8040",
+            "76800",
+            "18120"
+          ],
+          "borderTies": [
+            "0",
+            "10980",
+            "25020",
+            "4260",
+            "28140",
+            "180"
+          ],
+          "deltaLower": [
+            "471060",
+            "-105780",
+            "-160380",
+            "-622500",
+            "351060",
+            "240"
+          ],
+          "deltaUpper": [
+            "482040",
+            "-84060",
+            "-118320",
+            "-614100",
+            "400260",
+            "420"
+          ]
+        },
+        {
+          "id": "priority",
+          "lowerRanks": [
+            "5953440",
+            "40980",
+            "0",
+            "0",
+            "0",
+            "0",
+            "39300",
+            "5342880",
+            "605760",
+            "0",
+            "0",
+            "0",
+            "1680",
+            "599940",
+            "4314120",
+            "770880",
+            "274080",
+            "0",
+            "0",
+            "2880",
+            "824820",
+            "3459960",
+            "1674600",
+            "28680",
+            "0",
+            "0",
+            "230760",
+            "1721160",
+            "3817560",
+            "187200",
+            "0",
+            "0",
+            "0",
+            "14280",
+            "200760",
+            "5768040"
+          ],
+          "upperRanks": [
+            "5959020",
+            "46560",
+            "0",
+            "0",
+            "0",
+            "0",
+            "43620",
+            "5354940",
+            "613500",
+            "0",
+            "0",
+            "0",
+            "2940",
+            "608940",
+            "4338480",
+            "801180",
+            "287760",
+            "0",
+            "0",
+            "2880",
+            "830340",
+            "3469020",
+            "1678140",
+            "28680",
+            "0",
+            "0",
+            "242220",
+            "1748400",
+            "3849420",
+            "203280",
+            "0",
+            "0",
+            "0",
+            "15120",
+            "217680",
+            "5784120"
+          ],
+          "poLower": [
+            "6000000",
+            "6000000",
+            "4924740",
+            "827700",
+            "230760",
+            "0"
+          ],
+          "poUpper": [
+            "6000000",
+            "6000000",
+            "4941360",
+            "833220",
+            "242220",
+            "0"
+          ],
+          "unresolved": [
+            "5580",
+            "12060",
+            "39300",
+            "9060",
+            "43320",
+            "16920"
+          ],
+          "borderTies": [
+            "0",
+            "0",
+            "16620",
+            "5520",
+            "11460",
+            "0"
+          ],
+          "deltaLower": [
+            "471060",
+            "688740",
+            "-33420",
+            "-790380",
+            "-384840",
+            "0"
+          ],
+          "deltaUpper": [
+            "482040",
+            "699480",
+            "240",
+            "-780720",
+            "-352320",
+            "0"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "divisionId": "S",
+    "mode": "rounds",
+    "seconds": 0.772208138,
+    "checkpoint": {
+      "kind": "sfl-monte-carlo-checkpoint",
+      "version": 1,
+      "modelVersion": "fair-independent-v1",
+      "rngVersion": "chacha20-sha256-v1",
+      "samplerVersion": "shared-inverse-cdf-v1",
+      "ciVersion": "hoeffding-anytime-alpha-spending-v1",
+      "division": {
+        "id": "S",
+        "teams": [
+          {
+            "id": "zet",
+            "name": "ZETA DIVISION",
+            "shortName": "ZETA"
+          },
+          {
+            "id": "fav",
+            "name": "FAV gaming",
+            "shortName": "FAV"
+          },
+          {
+            "id": "sol",
+            "name": "Saishunkan Sol 熊本",
+            "shortName": "SOL"
+          },
+          {
+            "id": "ibs",
+            "name": "FUKUSHIMA IBUSHIGIN",
+            "shortName": "IBS"
+          },
+          {
+            "id": "cr",
+            "name": "Crazy Raccoon",
+            "shortName": "CR"
+          },
+          {
+            "id": "ixa",
+            "name": "広島 TEAM iXA",
+            "shortName": "iXA"
+          }
+        ],
+        "fixtures": [
+          {
+            "id": "s-1-fav-ibs",
+            "round": 1,
+            "homeTeamId": "fav",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-08-25"
+          },
+          {
+            "id": "s-1-cr-zet",
+            "round": 1,
+            "homeTeamId": "cr",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-08-25"
+          },
+          {
+            "id": "s-1-ixa-sol",
+            "round": 1,
+            "homeTeamId": "ixa",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-08-25"
+          },
+          {
+            "id": "s-2-zet-ixa",
+            "round": 2,
+            "homeTeamId": "zet",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-09-01"
+          },
+          {
+            "id": "s-2-fav-sol",
+            "round": 2,
+            "homeTeamId": "fav",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-09-01"
+          },
+          {
+            "id": "s-2-ibs-cr",
+            "round": 2,
+            "homeTeamId": "ibs",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-09-01"
+          },
+          {
+            "id": "s-3-zet-ibs",
+            "round": 3,
+            "homeTeamId": "zet",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-09-08"
+          },
+          {
+            "id": "s-3-sol-cr",
+            "round": 3,
+            "homeTeamId": "sol",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-09-08"
+          },
+          {
+            "id": "s-3-ixa-fav",
+            "round": 3,
+            "homeTeamId": "ixa",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-09-08"
+          },
+          {
+            "id": "s-4-fav-cr",
+            "round": 4,
+            "homeTeamId": "fav",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-10-16"
+          },
+          {
+            "id": "s-4-sol-zet",
+            "round": 4,
+            "homeTeamId": "sol",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-10-16"
+          },
+          {
+            "id": "s-4-ibs-ixa",
+            "round": 4,
+            "homeTeamId": "ibs",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-10-16"
+          },
+          {
+            "id": "s-5-zet-fav",
+            "round": 5,
+            "homeTeamId": "zet",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-10-23"
+          },
+          {
+            "id": "s-5-ibs-sol",
+            "round": 5,
+            "homeTeamId": "ibs",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-10-23"
+          },
+          {
+            "id": "s-5-cr-ixa",
+            "round": 5,
+            "homeTeamId": "cr",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-10-23"
+          },
+          {
+            "id": "s-6-zet-cr",
+            "round": 6,
+            "homeTeamId": "zet",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-10-30"
+          },
+          {
+            "id": "s-6-sol-ixa",
+            "round": 6,
+            "homeTeamId": "sol",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-10-30"
+          },
+          {
+            "id": "s-6-ibs-fav",
+            "round": 6,
+            "homeTeamId": "ibs",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-10-30"
+          },
+          {
+            "id": "s-7-sol-fav",
+            "round": 7,
+            "homeTeamId": "sol",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-11-06"
+          },
+          {
+            "id": "s-7-cr-ibs",
+            "round": 7,
+            "homeTeamId": "cr",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-11-06"
+          },
+          {
+            "id": "s-7-ixa-zet",
+            "round": 7,
+            "homeTeamId": "ixa",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-11-06"
+          },
+          {
+            "id": "s-8-fav-ixa",
+            "round": 8,
+            "homeTeamId": "fav",
+            "awayTeamId": "ixa",
+            "scheduledAt": "2026-11-13"
+          },
+          {
+            "id": "s-8-ibs-zet",
+            "round": 8,
+            "homeTeamId": "ibs",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-11-13"
+          },
+          {
+            "id": "s-8-cr-sol",
+            "round": 8,
+            "homeTeamId": "cr",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-11-13"
+          },
+          {
+            "id": "s-9-zet-sol",
+            "round": 9,
+            "homeTeamId": "zet",
+            "awayTeamId": "sol",
+            "scheduledAt": "2026-12-01"
+          },
+          {
+            "id": "s-9-cr-fav",
+            "round": 9,
+            "homeTeamId": "cr",
+            "awayTeamId": "fav",
+            "scheduledAt": "2026-12-01"
+          },
+          {
+            "id": "s-9-ixa-ibs",
+            "round": 9,
+            "homeTeamId": "ixa",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-12-01"
+          },
+          {
+            "id": "s-10-fav-zet",
+            "round": 10,
+            "homeTeamId": "fav",
+            "awayTeamId": "zet",
+            "scheduledAt": "2026-12-08"
+          },
+          {
+            "id": "s-10-sol-ibs",
+            "round": 10,
+            "homeTeamId": "sol",
+            "awayTeamId": "ibs",
+            "scheduledAt": "2026-12-08"
+          },
+          {
+            "id": "s-10-ixa-cr",
+            "round": 10,
+            "homeTeamId": "ixa",
+            "awayTeamId": "cr",
+            "scheduledAt": "2026-12-08"
+          }
+        ],
+        "baseline": {
+          "asOf": "2026-11-07",
+          "sourceStatus": "secondary-checked",
+          "includedMatchIds": [
+            "s-1-fav-ibs",
+            "s-1-cr-zet",
+            "s-1-ixa-sol",
+            "s-2-zet-ixa",
+            "s-2-fav-sol",
+            "s-2-ibs-cr",
+            "s-3-zet-ibs",
+            "s-3-sol-cr",
+            "s-3-ixa-fav",
+            "s-4-fav-cr",
+            "s-4-sol-zet",
+            "s-4-ibs-ixa",
+            "s-5-zet-fav",
+            "s-5-ibs-sol",
+            "s-5-cr-ixa",
+            "s-6-zet-cr",
+            "s-6-sol-ixa",
+            "s-6-ibs-fav",
+            "s-7-sol-fav",
+            "s-7-cr-ibs",
+            "s-7-ixa-zet"
+          ],
+          "standings": [
+            {
+              "teamId": "zet",
+              "played": 7,
+              "points": 190,
+              "battleDiff": 12,
+              "roundDiff": 16
+            },
+            {
+              "teamId": "fav",
+              "played": 7,
+              "points": 180,
+              "battleDiff": 12,
+              "roundDiff": 15
+            },
+            {
+              "teamId": "sol",
+              "played": 7,
+              "points": 180,
+              "battleDiff": 5,
+              "roundDiff": 5
+            },
+            {
+              "teamId": "ibs",
+              "played": 7,
+              "points": 150,
+              "battleDiff": -9,
+              "roundDiff": -16
+            },
+            {
+              "teamId": "cr",
+              "played": 7,
+              "points": 130,
+              "battleDiff": -4,
+              "roundDiff": 0
+            },
+            {
+              "teamId": "ixa",
+              "played": 7,
+              "points": 70,
+              "battleDiff": -16,
+              "roundDiff": -20
+            }
+          ]
+        },
+        "results": {},
+        "explorationMode": "rounds",
+        "cases": [
+          {
+            "id": "all-win",
+            "name": "首位チーム全勝",
+            "conditions": [
+              {
+                "targetTeamId": "zet",
+                "mode": "win"
+              }
+            ]
+          },
+          {
+            "id": "priority",
+            "name": "優先条件付き",
+            "conditions": [
+              {
+                "targetTeamId": "zet",
+                "mode": "win"
+              },
+              {
+                "targetTeamId": "fav",
+                "mode": "win"
+              }
+            ]
+          }
+        ],
+        "fixedScores": {},
+        "calculationMethod": "monteCarlo",
+        "simulation": {
+          "trials": 100000,
+          "seed": "sfl-2026-verification-v1"
+        }
+      },
+      "fingerprint": "{\"baseline\":{\"asOf\":\"2026-11-07\",\"includedMatchIds\":[\"s-1-fav-ibs\",\"s-1-cr-zet\",\"s-1-ixa-sol\",\"s-2-zet-ixa\",\"s-2-fav-sol\",\"s-2-ibs-cr\",\"s-3-zet-ibs\",\"s-3-sol-cr\",\"s-3-ixa-fav\",\"s-4-fav-cr\",\"s-4-sol-zet\",\"s-4-ibs-ixa\",\"s-5-zet-fav\",\"s-5-ibs-sol\",\"s-5-cr-ixa\",\"s-6-zet-cr\",\"s-6-sol-ixa\",\"s-6-ibs-fav\",\"s-7-sol-fav\",\"s-7-cr-ibs\",\"s-7-ixa-zet\"],\"sourceStatus\":\"secondary-checked\",\"standings\":[{\"battleDiff\":12,\"played\":7,\"points\":190,\"roundDiff\":16,\"teamId\":\"zet\"},{\"battleDiff\":12,\"played\":7,\"points\":180,\"roundDiff\":15,\"teamId\":\"fav\"},{\"battleDiff\":5,\"played\":7,\"points\":180,\"roundDiff\":5,\"teamId\":\"sol\"},{\"battleDiff\":-9,\"played\":7,\"points\":150,\"roundDiff\":-16,\"teamId\":\"ibs\"},{\"battleDiff\":-4,\"played\":7,\"points\":130,\"roundDiff\":0,\"teamId\":\"cr\"},{\"battleDiff\":-16,\"played\":7,\"points\":70,\"roundDiff\":-20,\"teamId\":\"ixa\"}]},\"calculationMethod\":\"monteCarlo\",\"cases\":[{\"conditions\":[{\"mode\":\"win\",\"targetTeamId\":\"zet\"}],\"id\":\"all-win\",\"name\":\"首位チーム全勝\"},{\"conditions\":[{\"mode\":\"win\",\"targetTeamId\":\"zet\"},{\"mode\":\"win\",\"targetTeamId\":\"fav\"}],\"id\":\"priority\",\"name\":\"優先条件付き\"}],\"explorationMode\":\"rounds\",\"fixedScores\":{},\"fixtures\":[{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"fav\",\"id\":\"s-1-fav-ibs\",\"round\":1,\"scheduledAt\":\"2026-08-25\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"cr\",\"id\":\"s-1-cr-zet\",\"round\":1,\"scheduledAt\":\"2026-08-25\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"ixa\",\"id\":\"s-1-ixa-sol\",\"round\":1,\"scheduledAt\":\"2026-08-25\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"zet\",\"id\":\"s-2-zet-ixa\",\"round\":2,\"scheduledAt\":\"2026-09-01\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"fav\",\"id\":\"s-2-fav-sol\",\"round\":2,\"scheduledAt\":\"2026-09-01\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"ibs\",\"id\":\"s-2-ibs-cr\",\"round\":2,\"scheduledAt\":\"2026-09-01\"},{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"zet\",\"id\":\"s-3-zet-ibs\",\"round\":3,\"scheduledAt\":\"2026-09-08\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"sol\",\"id\":\"s-3-sol-cr\",\"round\":3,\"scheduledAt\":\"2026-09-08\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"ixa\",\"id\":\"s-3-ixa-fav\",\"round\":3,\"scheduledAt\":\"2026-09-08\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"fav\",\"id\":\"s-4-fav-cr\",\"round\":4,\"scheduledAt\":\"2026-10-16\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"sol\",\"id\":\"s-4-sol-zet\",\"round\":4,\"scheduledAt\":\"2026-10-16\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"ibs\",\"id\":\"s-4-ibs-ixa\",\"round\":4,\"scheduledAt\":\"2026-10-16\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"zet\",\"id\":\"s-5-zet-fav\",\"round\":5,\"scheduledAt\":\"2026-10-23\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"ibs\",\"id\":\"s-5-ibs-sol\",\"round\":5,\"scheduledAt\":\"2026-10-23\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"cr\",\"id\":\"s-5-cr-ixa\",\"round\":5,\"scheduledAt\":\"2026-10-23\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"zet\",\"id\":\"s-6-zet-cr\",\"round\":6,\"scheduledAt\":\"2026-10-30\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"sol\",\"id\":\"s-6-sol-ixa\",\"round\":6,\"scheduledAt\":\"2026-10-30\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"ibs\",\"id\":\"s-6-ibs-fav\",\"round\":6,\"scheduledAt\":\"2026-10-30\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"sol\",\"id\":\"s-7-sol-fav\",\"round\":7,\"scheduledAt\":\"2026-11-06\"},{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"cr\",\"id\":\"s-7-cr-ibs\",\"round\":7,\"scheduledAt\":\"2026-11-06\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"ixa\",\"id\":\"s-7-ixa-zet\",\"round\":7,\"scheduledAt\":\"2026-11-06\"},{\"awayTeamId\":\"ixa\",\"homeTeamId\":\"fav\",\"id\":\"s-8-fav-ixa\",\"round\":8,\"scheduledAt\":\"2026-11-13\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"ibs\",\"id\":\"s-8-ibs-zet\",\"round\":8,\"scheduledAt\":\"2026-11-13\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"cr\",\"id\":\"s-8-cr-sol\",\"round\":8,\"scheduledAt\":\"2026-11-13\"},{\"awayTeamId\":\"sol\",\"homeTeamId\":\"zet\",\"id\":\"s-9-zet-sol\",\"round\":9,\"scheduledAt\":\"2026-12-01\"},{\"awayTeamId\":\"fav\",\"homeTeamId\":\"cr\",\"id\":\"s-9-cr-fav\",\"round\":9,\"scheduledAt\":\"2026-12-01\"},{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"ixa\",\"id\":\"s-9-ixa-ibs\",\"round\":9,\"scheduledAt\":\"2026-12-01\"},{\"awayTeamId\":\"zet\",\"homeTeamId\":\"fav\",\"id\":\"s-10-fav-zet\",\"round\":10,\"scheduledAt\":\"2026-12-08\"},{\"awayTeamId\":\"ibs\",\"homeTeamId\":\"sol\",\"id\":\"s-10-sol-ibs\",\"round\":10,\"scheduledAt\":\"2026-12-08\"},{\"awayTeamId\":\"cr\",\"homeTeamId\":\"ixa\",\"id\":\"s-10-ixa-cr\",\"round\":10,\"scheduledAt\":\"2026-12-08\"}],\"id\":\"S\",\"results\":{},\"simulation\":{\"seed\":\"sfl-2026-verification-v1\"},\"teams\":[{\"id\":\"zet\",\"name\":\"ZETA DIVISION\",\"shortName\":\"ZETA\"},{\"id\":\"fav\",\"name\":\"FAV gaming\",\"shortName\":\"FAV\"},{\"id\":\"sol\",\"name\":\"Saishunkan Sol 熊本\",\"shortName\":\"SOL\"},{\"id\":\"ibs\",\"name\":\"FUKUSHIMA IBUSHIGIN\",\"shortName\":\"IBS\"},{\"id\":\"cr\",\"name\":\"Crazy Raccoon\",\"shortName\":\"CR\"},{\"id\":\"ixa\",\"name\":\"広島 TEAM iXA\",\"shortName\":\"iXA\"}]}",
+      "completed": 100000,
+      "nextTrial": 100000,
+      "records": [
+        {
+          "id": "baseline",
+          "lowerRanks": [
+            "2794380",
+            "1526760",
+            "1196160",
+            "409800",
+            "65160",
+            "0",
+            "1761120",
+            "1988700",
+            "1559100",
+            "520620",
+            "164460",
+            "420",
+            "1320960",
+            "1871520",
+            "1748220",
+            "745920",
+            "308520",
+            "120",
+            "108240",
+            "460500",
+            "1036800",
+            "2673120",
+            "1650600",
+            "70260",
+            "11160",
+            "144360",
+            "454620",
+            "1616760",
+            "3480000",
+            "291120",
+            "0",
+            "0",
+            "180",
+            "32340",
+            "329400",
+            "5636760"
+          ],
+          "upperRanks": [
+            "2798220",
+            "1534020",
+            "1199880",
+            "410280",
+            "65340",
+            "0",
+            "1763760",
+            "1993740",
+            "1561920",
+            "521160",
+            "164580",
+            "420",
+            "1322760",
+            "1875300",
+            "1750800",
+            "746880",
+            "308880",
+            "120",
+            "108240",
+            "460620",
+            "1037220",
+            "2673480",
+            "1650660",
+            "70260",
+            "11160",
+            "144480",
+            "454920",
+            "1617300",
+            "3481680",
+            "292440",
+            "0",
+            "0",
+            "180",
+            "32340",
+            "330720",
+            "5638080"
+          ],
+          "poLower": [
+            "5524560",
+            "5313960",
+            "4944480",
+            "1605660",
+            "610260",
+            "180"
+          ],
+          "poUpper": [
+            "5524860",
+            "5314380",
+            "4945080",
+            "1605960",
+            "610440",
+            "180"
+          ],
+          "unresolved": [
+            "7740",
+            "5580",
+            "4740",
+            "480",
+            "1980",
+            "1320"
+          ],
+          "borderTies": [
+            "300",
+            "420",
+            "600",
+            "300",
+            "180",
+            "0"
+          ],
+          "deltaLower": [
+            "-300",
+            "-420",
+            "-600",
+            "-300",
+            "-180",
+            "0"
+          ],
+          "deltaUpper": [
+            "300",
+            "420",
+            "600",
+            "300",
+            "180",
+            "0"
+          ]
+        },
+        {
+          "id": "all-win",
+          "lowerRanks": [
+            "5988720",
+            "11160",
+            "0",
+            "0",
+            "0",
+            "0",
+            "8760",
+            "3080160",
+            "2129280",
+            "600540",
+            "179940",
+            "300",
+            "2400",
+            "2368200",
+            "2426340",
+            "788700",
+            "411060",
+            "420",
+            "0",
+            "208920",
+            "788280",
+            "2564460",
+            "2305860",
+            "131580",
+            "0",
+            "330300",
+            "653220",
+            "1985940",
+            "2750160",
+            "278100",
+            "0",
+            "0",
+            "600",
+            "58680",
+            "351120",
+            "5588280"
+          ],
+          "upperRanks": [
+            "5988840",
+            "11280",
+            "0",
+            "0",
+            "0",
+            "0",
+            "8760",
+            "3080880",
+            "2130240",
+            "600840",
+            "180000",
+            "300",
+            "2520",
+            "2369460",
+            "2428560",
+            "790320",
+            "411600",
+            "420",
+            "0",
+            "209100",
+            "788940",
+            "2565180",
+            "2306100",
+            "131580",
+            "0",
+            "330540",
+            "653940",
+            "1986660",
+            "2751720",
+            "279420",
+            "0",
+            "0",
+            "600",
+            "58680",
+            "352440",
+            "5589600"
+          ],
+          "poLower": [
+            "6000000",
+            "5218920",
+            "4798200",
+            "997380",
+            "983760",
+            "600"
+          ],
+          "poUpper": [
+            "6000000",
+            "5219160",
+            "4799280",
+            "997860",
+            "984240",
+            "600"
+          ],
+          "unresolved": [
+            "120",
+            "1020",
+            "2880",
+            "900",
+            "2280",
+            "1320"
+          ],
+          "borderTies": [
+            "0",
+            "240",
+            "1080",
+            "480",
+            "480",
+            "0"
+          ],
+          "deltaLower": [
+            "475140",
+            "-95460",
+            "-146880",
+            "-608580",
+            "373320",
+            "420"
+          ],
+          "deltaUpper": [
+            "475440",
+            "-94800",
+            "-145200",
+            "-607800",
+            "373980",
+            "420"
+          ]
+        },
+        {
+          "id": "priority",
+          "lowerRanks": [
+            "5953380",
+            "45840",
+            "120",
+            "0",
+            "0",
+            "0",
+            "43680",
+            "5338200",
+            "617040",
+            "0",
+            "0",
+            "0",
+            "2280",
+            "611520",
+            "4309020",
+            "794940",
+            "280440",
+            "0",
+            "0",
+            "3240",
+            "835260",
+            "3443040",
+            "1690740",
+            "26700",
+            "0",
+            "0",
+            "237120",
+            "1746960",
+            "3822540",
+            "191400",
+            "0",
+            "0",
+            "0",
+            "13800",
+            "204300",
+            "5780280"
+          ],
+          "upperRanks": [
+            "5954040",
+            "46500",
+            "120",
+            "0",
+            "0",
+            "0",
+            "44220",
+            "5339280",
+            "617580",
+            "0",
+            "0",
+            "0",
+            "2400",
+            "612180",
+            "4310460",
+            "796080",
+            "280680",
+            "0",
+            "0",
+            "3240",
+            "835980",
+            "3444060",
+            "1691040",
+            "26700",
+            "0",
+            "0",
+            "237300",
+            "1747320",
+            "3824340",
+            "193020",
+            "0",
+            "0",
+            "0",
+            "13800",
+            "205920",
+            "5781900"
+          ],
+          "poLower": [
+            "6000000",
+            "6000000",
+            "4923480",
+            "838500",
+            "237120",
+            "0"
+          ],
+          "poUpper": [
+            "6000000",
+            "6000000",
+            "4924380",
+            "839220",
+            "237300",
+            "0"
+          ],
+          "unresolved": [
+            "660",
+            "1080",
+            "1800",
+            "1020",
+            "1980",
+            "1620"
+          ],
+          "borderTies": [
+            "0",
+            "0",
+            "900",
+            "720",
+            "180",
+            "0"
+          ],
+          "deltaLower": [
+            "475140",
+            "685620",
+            "-21600",
+            "-767460",
+            "-373320",
+            "-180"
+          ],
+          "deltaUpper": [
+            "475440",
+            "686040",
+            "-20100",
+            "-766440",
+            "-372960",
+            "-180"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "divisionId": "F",
+    "mode": "points",
+    "seconds": 0.6961469010000001,
+    "checkpoint": {
+      "kind": "sfl-monte-carlo-checkpoint",
+      "version": 1,
+      "modelVersion": "fair-independent-v1",
+      "rngVersion": "chacha20-sha256-v1",
+      "samplerVersion": "shared-inverse-cdf-v1",
+      "ciVersion": "hoeffding-anytime-alpha-spending-v1",
+      "division": {
+        "id": "F",
+        "teams": [
+          {
+            "id": "rid",
+            "name": "RIDDLE ORDER",
+            "shortName": "RID"
+          },
+          {
+            "id": "g8s",
+            "name": "Good 8 Squad",
+            "shortName": "G8S"
+          },
+          {
+            "id": "rej",
+            "name": "REJECT",
+            "shortName": "REJECT"
+          },
+          {
+            "id": "dfm",
+            "name": "DetonatioN FocusMe",
+            "shortName": "DFM"
+          },
+          {
+            "id": "vl",
+            "name": "VARREL",
+            "shortName": "VARREL"
+          },
+          {
+            "id": "oja",
+            "name": "名古屋NTPOJA",
+            "shortName": "OJA"
+          }
+        ],
+        "fixtures": [
+          {
+            "id": "f-1-g8s-oja",
+            "round": 1,
+            "homeTeamId": "g8s",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-08-28"
+          },
+          {
+            "id": "f-1-rej-vl",
+            "round": 1,
+            "homeTeamId": "rej",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-08-28"
+          },
+          {
+            "id": "f-1-dfm-rid",
+            "round": 1,
+            "homeTeamId": "dfm",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-08-28"
+          },
+          {
+            "id": "f-2-rid-rej",
+            "round": 2,
+            "homeTeamId": "rid",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-09-04"
+          },
+          {
+            "id": "f-2-dfm-oja",
+            "round": 2,
+            "homeTeamId": "dfm",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-09-04"
+          },
+          {
+            "id": "f-2-vl-g8s",
+            "round": 2,
+            "homeTeamId": "vl",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-09-04"
+          },
+          {
+            "id": "f-3-rid-oja",
+            "round": 3,
+            "homeTeamId": "rid",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-10-06"
+          },
+          {
+            "id": "f-3-rej-g8s",
+            "round": 3,
+            "homeTeamId": "rej",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-10-06"
+          },
+          {
+            "id": "f-3-vl-dfm",
+            "round": 3,
+            "homeTeamId": "vl",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-10-06"
+          },
+          {
+            "id": "f-4-rid-g8s",
+            "round": 4,
+            "homeTeamId": "rid",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-10-20"
+          },
+          {
+            "id": "f-4-dfm-rej",
+            "round": 4,
+            "homeTeamId": "dfm",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-10-20"
+          },
+          {
+            "id": "f-4-oja-vl",
+            "round": 4,
+            "homeTeamId": "oja",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-10-20"
+          },
+          {
+            "id": "f-5-g8s-dfm",
+            "round": 5,
+            "homeTeamId": "g8s",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-10-27"
+          },
+          {
+            "id": "f-5-vl-rid",
+            "round": 5,
+            "homeTeamId": "vl",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-10-27"
+          },
+          {
+            "id": "f-5-oja-rej",
+            "round": 5,
+            "homeTeamId": "oja",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-10-27"
+          },
+          {
+            "id": "f-6-rid-dfm",
+            "round": 6,
+            "homeTeamId": "rid",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-11-03"
+          },
+          {
+            "id": "f-6-vl-rej",
+            "round": 6,
+            "homeTeamId": "vl",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-11-03"
+          },
+          {
+            "id": "f-6-oja-g8s",
+            "round": 6,
+            "homeTeamId": "oja",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-11-03"
+          },
+          {
+            "id": "f-7-g8s-vl",
+            "round": 7,
+            "homeTeamId": "g8s",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-11-10"
+          },
+          {
+            "id": "f-7-rej-rid",
+            "round": 7,
+            "homeTeamId": "rej",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-11-10"
+          },
+          {
+            "id": "f-7-oja-dfm",
+            "round": 7,
+            "homeTeamId": "oja",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-11-10"
+          },
+          {
+            "id": "f-8-g8s-rej",
+            "round": 8,
+            "homeTeamId": "g8s",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-11-27"
+          },
+          {
+            "id": "f-8-dfm-vl",
+            "round": 8,
+            "homeTeamId": "dfm",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-11-27"
+          },
+          {
+            "id": "f-8-oja-rid",
+            "round": 8,
+            "homeTeamId": "oja",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-11-27"
+          },
+          {
+            "id": "f-9-g8s-rid",
+            "round": 9,
+            "homeTeamId": "g8s",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-12-04"
+          },
+          {
+            "id": "f-9-rej-dfm",
+            "round": 9,
+            "homeTeamId": "rej",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-12-04"
+          },
+          {
+            "id": "f-9-vl-oja",
+            "round": 9,
+            "homeTeamId": "vl",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-12-04"
+          },
+          {
+            "id": "f-10-rid-vl",
+            "round": 10,
+            "homeTeamId": "rid",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-12-11"
+          },
+          {
+            "id": "f-10-rej-oja",
+            "round": 10,
+            "homeTeamId": "rej",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-12-11"
+          },
+          {
+            "id": "f-10-dfm-g8s",
+            "round": 10,
+            "homeTeamId": "dfm",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-12-11"
+          }
+        ],
+        "baseline": {
+          "asOf": "2026-11-07",
+          "sourceStatus": "secondary-checked",
+          "includedMatchIds": [
+            "f-1-g8s-oja",
+            "f-1-rej-vl",
+            "f-1-dfm-rid",
+            "f-2-rid-rej",
+            "f-2-dfm-oja",
+            "f-2-vl-g8s",
+            "f-3-rid-oja",
+            "f-3-rej-g8s",
+            "f-3-vl-dfm",
+            "f-4-rid-g8s",
+            "f-4-dfm-rej",
+            "f-4-oja-vl",
+            "f-5-g8s-dfm",
+            "f-5-vl-rid",
+            "f-5-oja-rej",
+            "f-6-rid-dfm",
+            "f-6-vl-rej",
+            "f-6-oja-g8s"
+          ],
+          "standings": [
+            {
+              "teamId": "rid",
+              "played": 6,
+              "points": 180,
+              "battleDiff": 10,
+              "roundDiff": 19
+            },
+            {
+              "teamId": "g8s",
+              "played": 6,
+              "points": 150,
+              "battleDiff": 7,
+              "roundDiff": 7
+            },
+            {
+              "teamId": "rej",
+              "played": 6,
+              "points": 140,
+              "battleDiff": 7,
+              "roundDiff": 17
+            },
+            {
+              "teamId": "dfm",
+              "played": 6,
+              "points": 130,
+              "battleDiff": -1,
+              "roundDiff": -1
+            },
+            {
+              "teamId": "vl",
+              "played": 6,
+              "points": 110,
+              "battleDiff": -9,
+              "roundDiff": -19
+            },
+            {
+              "teamId": "oja",
+              "played": 6,
+              "points": 60,
+              "battleDiff": -14,
+              "roundDiff": -23
+            }
+          ]
+        },
+        "results": {},
+        "explorationMode": "points",
+        "cases": [
+          {
+            "id": "all-win",
+            "name": "首位チーム全勝",
+            "conditions": [
+              {
+                "targetTeamId": "rid",
+                "mode": "win"
+              }
+            ]
+          },
+          {
+            "id": "priority",
+            "name": "優先条件付き",
+            "conditions": [
+              {
+                "targetTeamId": "rid",
+                "mode": "win"
+              },
+              {
+                "targetTeamId": "g8s",
+                "mode": "win"
+              }
+            ]
+          }
+        ],
+        "fixedScores": {},
+        "calculationMethod": "monteCarlo",
+        "simulation": {
+          "trials": 100000,
+          "seed": "sfl-2026-verification-v1"
+        }
+      },
+      "fingerprint": "{\"baseline\":{\"asOf\":\"2026-11-07\",\"includedMatchIds\":[\"f-1-g8s-oja\",\"f-1-rej-vl\",\"f-1-dfm-rid\",\"f-2-rid-rej\",\"f-2-dfm-oja\",\"f-2-vl-g8s\",\"f-3-rid-oja\",\"f-3-rej-g8s\",\"f-3-vl-dfm\",\"f-4-rid-g8s\",\"f-4-dfm-rej\",\"f-4-oja-vl\",\"f-5-g8s-dfm\",\"f-5-vl-rid\",\"f-5-oja-rej\",\"f-6-rid-dfm\",\"f-6-vl-rej\",\"f-6-oja-g8s\"],\"sourceStatus\":\"secondary-checked\",\"standings\":[{\"battleDiff\":10,\"played\":6,\"points\":180,\"roundDiff\":19,\"teamId\":\"rid\"},{\"battleDiff\":7,\"played\":6,\"points\":150,\"roundDiff\":7,\"teamId\":\"g8s\"},{\"battleDiff\":7,\"played\":6,\"points\":140,\"roundDiff\":17,\"teamId\":\"rej\"},{\"battleDiff\":-1,\"played\":6,\"points\":130,\"roundDiff\":-1,\"teamId\":\"dfm\"},{\"battleDiff\":-9,\"played\":6,\"points\":110,\"roundDiff\":-19,\"teamId\":\"vl\"},{\"battleDiff\":-14,\"played\":6,\"points\":60,\"roundDiff\":-23,\"teamId\":\"oja\"}]},\"calculationMethod\":\"monteCarlo\",\"cases\":[{\"conditions\":[{\"mode\":\"win\",\"targetTeamId\":\"rid\"}],\"id\":\"all-win\",\"name\":\"首位チーム全勝\"},{\"conditions\":[{\"mode\":\"win\",\"targetTeamId\":\"rid\"},{\"mode\":\"win\",\"targetTeamId\":\"g8s\"}],\"id\":\"priority\",\"name\":\"優先条件付き\"}],\"explorationMode\":\"points\",\"fixedScores\":{},\"fixtures\":[{\"awayTeamId\":\"oja\",\"homeTeamId\":\"g8s\",\"id\":\"f-1-g8s-oja\",\"round\":1,\"scheduledAt\":\"2026-08-28\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"rej\",\"id\":\"f-1-rej-vl\",\"round\":1,\"scheduledAt\":\"2026-08-28\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"dfm\",\"id\":\"f-1-dfm-rid\",\"round\":1,\"scheduledAt\":\"2026-08-28\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"rid\",\"id\":\"f-2-rid-rej\",\"round\":2,\"scheduledAt\":\"2026-09-04\"},{\"awayTeamId\":\"oja\",\"homeTeamId\":\"dfm\",\"id\":\"f-2-dfm-oja\",\"round\":2,\"scheduledAt\":\"2026-09-04\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"vl\",\"id\":\"f-2-vl-g8s\",\"round\":2,\"scheduledAt\":\"2026-09-04\"},{\"awayTeamId\":\"oja\",\"homeTeamId\":\"rid\",\"id\":\"f-3-rid-oja\",\"round\":3,\"scheduledAt\":\"2026-10-06\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"rej\",\"id\":\"f-3-rej-g8s\",\"round\":3,\"scheduledAt\":\"2026-10-06\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"vl\",\"id\":\"f-3-vl-dfm\",\"round\":3,\"scheduledAt\":\"2026-10-06\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"rid\",\"id\":\"f-4-rid-g8s\",\"round\":4,\"scheduledAt\":\"2026-10-20\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"dfm\",\"id\":\"f-4-dfm-rej\",\"round\":4,\"scheduledAt\":\"2026-10-20\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"oja\",\"id\":\"f-4-oja-vl\",\"round\":4,\"scheduledAt\":\"2026-10-20\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"g8s\",\"id\":\"f-5-g8s-dfm\",\"round\":5,\"scheduledAt\":\"2026-10-27\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"vl\",\"id\":\"f-5-vl-rid\",\"round\":5,\"scheduledAt\":\"2026-10-27\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"oja\",\"id\":\"f-5-oja-rej\",\"round\":5,\"scheduledAt\":\"2026-10-27\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"rid\",\"id\":\"f-6-rid-dfm\",\"round\":6,\"scheduledAt\":\"2026-11-03\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"vl\",\"id\":\"f-6-vl-rej\",\"round\":6,\"scheduledAt\":\"2026-11-03\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"oja\",\"id\":\"f-6-oja-g8s\",\"round\":6,\"scheduledAt\":\"2026-11-03\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"g8s\",\"id\":\"f-7-g8s-vl\",\"round\":7,\"scheduledAt\":\"2026-11-10\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"rej\",\"id\":\"f-7-rej-rid\",\"round\":7,\"scheduledAt\":\"2026-11-10\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"oja\",\"id\":\"f-7-oja-dfm\",\"round\":7,\"scheduledAt\":\"2026-11-10\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"g8s\",\"id\":\"f-8-g8s-rej\",\"round\":8,\"scheduledAt\":\"2026-11-27\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"dfm\",\"id\":\"f-8-dfm-vl\",\"round\":8,\"scheduledAt\":\"2026-11-27\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"oja\",\"id\":\"f-8-oja-rid\",\"round\":8,\"scheduledAt\":\"2026-11-27\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"g8s\",\"id\":\"f-9-g8s-rid\",\"round\":9,\"scheduledAt\":\"2026-12-04\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"rej\",\"id\":\"f-9-rej-dfm\",\"round\":9,\"scheduledAt\":\"2026-12-04\"},{\"awayTeamId\":\"oja\",\"homeTeamId\":\"vl\",\"id\":\"f-9-vl-oja\",\"round\":9,\"scheduledAt\":\"2026-12-04\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"rid\",\"id\":\"f-10-rid-vl\",\"round\":10,\"scheduledAt\":\"2026-12-11\"},{\"awayTeamId\":\"oja\",\"homeTeamId\":\"rej\",\"id\":\"f-10-rej-oja\",\"round\":10,\"scheduledAt\":\"2026-12-11\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"dfm\",\"id\":\"f-10-dfm-g8s\",\"round\":10,\"scheduledAt\":\"2026-12-11\"}],\"id\":\"F\",\"results\":{},\"simulation\":{\"seed\":\"sfl-2026-verification-v1\"},\"teams\":[{\"id\":\"rid\",\"name\":\"RIDDLE ORDER\",\"shortName\":\"RID\"},{\"id\":\"g8s\",\"name\":\"Good 8 Squad\",\"shortName\":\"G8S\"},{\"id\":\"rej\",\"name\":\"REJECT\",\"shortName\":\"REJECT\"},{\"id\":\"dfm\",\"name\":\"DetonatioN FocusMe\",\"shortName\":\"DFM\"},{\"id\":\"vl\",\"name\":\"VARREL\",\"shortName\":\"VARREL\"},{\"id\":\"oja\",\"name\":\"名古屋NTPOJA\",\"shortName\":\"OJA\"}]}",
+      "completed": 100000,
+      "nextTrial": 100000,
+      "records": [
+        {
+          "id": "baseline",
+          "lowerRanks": [
+            "3936665",
+            "1268075",
+            "545020",
+            "198980",
+            "50225",
+            "1035",
+            "1110090",
+            "1911605",
+            "1458865",
+            "993335",
+            "505035",
+            "21070",
+            "644855",
+            "1448235",
+            "1670850",
+            "1455930",
+            "707765",
+            "72365",
+            "247475",
+            "1050485",
+            "1523065",
+            "1681495",
+            "1317010",
+            "180470",
+            "60880",
+            "320565",
+            "781380",
+            "1530280",
+            "2705090",
+            "601805",
+            "35",
+            "1035",
+            "20820",
+            "139980",
+            "714875",
+            "5123255"
+          ],
+          "upperRanks": [
+            "3936665",
+            "1268075",
+            "545020",
+            "198980",
+            "50225",
+            "1035",
+            "1110090",
+            "1911605",
+            "1458865",
+            "993335",
+            "505035",
+            "21070",
+            "644855",
+            "1448235",
+            "1670850",
+            "1455930",
+            "707765",
+            "72365",
+            "247475",
+            "1050485",
+            "1523065",
+            "1681495",
+            "1317010",
+            "180470",
+            "60880",
+            "320565",
+            "781380",
+            "1530280",
+            "2705090",
+            "601805",
+            "35",
+            "1035",
+            "20820",
+            "139980",
+            "714875",
+            "5123255"
+          ],
+          "poLower": [
+            "5749760",
+            "4480560",
+            "3763940",
+            "2821025",
+            "1162825",
+            "21890"
+          ],
+          "poUpper": [
+            "5749760",
+            "4480560",
+            "3763940",
+            "2821025",
+            "1162825",
+            "21890"
+          ],
+          "unresolved": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "borderTies": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "deltaLower": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "deltaUpper": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "id": "all-win",
+          "lowerRanks": [
+            "6000000",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "2500525",
+            "1771665",
+            "1177955",
+            "540895",
+            "8960",
+            "0",
+            "1569825",
+            "1843030",
+            "1793830",
+            "746650",
+            "46665",
+            "0",
+            "1743575",
+            "1745890",
+            "1511910",
+            "924520",
+            "74105",
+            "0",
+            "185975",
+            "634585",
+            "1444955",
+            "3203295",
+            "531190",
+            "0",
+            "100",
+            "4830",
+            "71350",
+            "584640",
+            "5339080"
+          ],
+          "upperRanks": [
+            "6000000",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "2500525",
+            "1771665",
+            "1177955",
+            "540895",
+            "8960",
+            "0",
+            "1569825",
+            "1843030",
+            "1793830",
+            "746650",
+            "46665",
+            "0",
+            "1743575",
+            "1745890",
+            "1511910",
+            "924520",
+            "74105",
+            "0",
+            "185975",
+            "634585",
+            "1444955",
+            "3203295",
+            "531190",
+            "0",
+            "100",
+            "4830",
+            "71350",
+            "584640",
+            "5339080"
+          ],
+          "poLower": [
+            "6000000",
+            "4272190",
+            "3412855",
+            "3489465",
+            "820560",
+            "4930"
+          ],
+          "poUpper": [
+            "6000000",
+            "4272190",
+            "3412855",
+            "3489465",
+            "820560",
+            "4930"
+          ],
+          "unresolved": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "borderTies": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "deltaLower": [
+            "250240",
+            "-208370",
+            "-351085",
+            "668440",
+            "-342265",
+            "-16960"
+          ],
+          "deltaUpper": [
+            "250240",
+            "-208370",
+            "-351085",
+            "668440",
+            "-342265",
+            "-16960"
+          ]
+        },
+        {
+          "id": "priority",
+          "lowerRanks": [
+            "6000000",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "5865680",
+            "134150",
+            "170",
+            "0",
+            "0",
+            "0",
+            "40400",
+            "2672085",
+            "2469855",
+            "753715",
+            "63945",
+            "0",
+            "93920",
+            "2826255",
+            "1984795",
+            "978335",
+            "116695",
+            "0",
+            "0",
+            "352625",
+            "1389645",
+            "3429915",
+            "827815",
+            "0",
+            "0",
+            "14885",
+            "155535",
+            "838035",
+            "4991545"
+          ],
+          "upperRanks": [
+            "6000000",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "5865680",
+            "134150",
+            "170",
+            "0",
+            "0",
+            "0",
+            "40400",
+            "2672085",
+            "2469855",
+            "753715",
+            "63945",
+            "0",
+            "93920",
+            "2826255",
+            "1984795",
+            "978335",
+            "116695",
+            "0",
+            "0",
+            "352625",
+            "1389645",
+            "3429915",
+            "827815",
+            "0",
+            "0",
+            "14885",
+            "155535",
+            "838035",
+            "4991545"
+          ],
+          "poLower": [
+            "6000000",
+            "5999830",
+            "2712485",
+            "2920175",
+            "352625",
+            "14885"
+          ],
+          "poUpper": [
+            "6000000",
+            "5999830",
+            "2712485",
+            "2920175",
+            "352625",
+            "14885"
+          ],
+          "unresolved": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "borderTies": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "deltaLower": [
+            "250240",
+            "1519270",
+            "-1051455",
+            "99150",
+            "-810200",
+            "-7005"
+          ],
+          "deltaUpper": [
+            "250240",
+            "1519270",
+            "-1051455",
+            "99150",
+            "-810200",
+            "-7005"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "divisionId": "F",
+    "mode": "battles",
+    "seconds": 0.7364127250000001,
+    "checkpoint": {
+      "kind": "sfl-monte-carlo-checkpoint",
+      "version": 1,
+      "modelVersion": "fair-independent-v1",
+      "rngVersion": "chacha20-sha256-v1",
+      "samplerVersion": "shared-inverse-cdf-v1",
+      "ciVersion": "hoeffding-anytime-alpha-spending-v1",
+      "division": {
+        "id": "F",
+        "teams": [
+          {
+            "id": "rid",
+            "name": "RIDDLE ORDER",
+            "shortName": "RID"
+          },
+          {
+            "id": "g8s",
+            "name": "Good 8 Squad",
+            "shortName": "G8S"
+          },
+          {
+            "id": "rej",
+            "name": "REJECT",
+            "shortName": "REJECT"
+          },
+          {
+            "id": "dfm",
+            "name": "DetonatioN FocusMe",
+            "shortName": "DFM"
+          },
+          {
+            "id": "vl",
+            "name": "VARREL",
+            "shortName": "VARREL"
+          },
+          {
+            "id": "oja",
+            "name": "名古屋NTPOJA",
+            "shortName": "OJA"
+          }
+        ],
+        "fixtures": [
+          {
+            "id": "f-1-g8s-oja",
+            "round": 1,
+            "homeTeamId": "g8s",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-08-28"
+          },
+          {
+            "id": "f-1-rej-vl",
+            "round": 1,
+            "homeTeamId": "rej",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-08-28"
+          },
+          {
+            "id": "f-1-dfm-rid",
+            "round": 1,
+            "homeTeamId": "dfm",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-08-28"
+          },
+          {
+            "id": "f-2-rid-rej",
+            "round": 2,
+            "homeTeamId": "rid",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-09-04"
+          },
+          {
+            "id": "f-2-dfm-oja",
+            "round": 2,
+            "homeTeamId": "dfm",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-09-04"
+          },
+          {
+            "id": "f-2-vl-g8s",
+            "round": 2,
+            "homeTeamId": "vl",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-09-04"
+          },
+          {
+            "id": "f-3-rid-oja",
+            "round": 3,
+            "homeTeamId": "rid",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-10-06"
+          },
+          {
+            "id": "f-3-rej-g8s",
+            "round": 3,
+            "homeTeamId": "rej",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-10-06"
+          },
+          {
+            "id": "f-3-vl-dfm",
+            "round": 3,
+            "homeTeamId": "vl",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-10-06"
+          },
+          {
+            "id": "f-4-rid-g8s",
+            "round": 4,
+            "homeTeamId": "rid",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-10-20"
+          },
+          {
+            "id": "f-4-dfm-rej",
+            "round": 4,
+            "homeTeamId": "dfm",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-10-20"
+          },
+          {
+            "id": "f-4-oja-vl",
+            "round": 4,
+            "homeTeamId": "oja",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-10-20"
+          },
+          {
+            "id": "f-5-g8s-dfm",
+            "round": 5,
+            "homeTeamId": "g8s",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-10-27"
+          },
+          {
+            "id": "f-5-vl-rid",
+            "round": 5,
+            "homeTeamId": "vl",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-10-27"
+          },
+          {
+            "id": "f-5-oja-rej",
+            "round": 5,
+            "homeTeamId": "oja",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-10-27"
+          },
+          {
+            "id": "f-6-rid-dfm",
+            "round": 6,
+            "homeTeamId": "rid",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-11-03"
+          },
+          {
+            "id": "f-6-vl-rej",
+            "round": 6,
+            "homeTeamId": "vl",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-11-03"
+          },
+          {
+            "id": "f-6-oja-g8s",
+            "round": 6,
+            "homeTeamId": "oja",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-11-03"
+          },
+          {
+            "id": "f-7-g8s-vl",
+            "round": 7,
+            "homeTeamId": "g8s",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-11-10"
+          },
+          {
+            "id": "f-7-rej-rid",
+            "round": 7,
+            "homeTeamId": "rej",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-11-10"
+          },
+          {
+            "id": "f-7-oja-dfm",
+            "round": 7,
+            "homeTeamId": "oja",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-11-10"
+          },
+          {
+            "id": "f-8-g8s-rej",
+            "round": 8,
+            "homeTeamId": "g8s",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-11-27"
+          },
+          {
+            "id": "f-8-dfm-vl",
+            "round": 8,
+            "homeTeamId": "dfm",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-11-27"
+          },
+          {
+            "id": "f-8-oja-rid",
+            "round": 8,
+            "homeTeamId": "oja",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-11-27"
+          },
+          {
+            "id": "f-9-g8s-rid",
+            "round": 9,
+            "homeTeamId": "g8s",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-12-04"
+          },
+          {
+            "id": "f-9-rej-dfm",
+            "round": 9,
+            "homeTeamId": "rej",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-12-04"
+          },
+          {
+            "id": "f-9-vl-oja",
+            "round": 9,
+            "homeTeamId": "vl",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-12-04"
+          },
+          {
+            "id": "f-10-rid-vl",
+            "round": 10,
+            "homeTeamId": "rid",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-12-11"
+          },
+          {
+            "id": "f-10-rej-oja",
+            "round": 10,
+            "homeTeamId": "rej",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-12-11"
+          },
+          {
+            "id": "f-10-dfm-g8s",
+            "round": 10,
+            "homeTeamId": "dfm",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-12-11"
+          }
+        ],
+        "baseline": {
+          "asOf": "2026-11-07",
+          "sourceStatus": "secondary-checked",
+          "includedMatchIds": [
+            "f-1-g8s-oja",
+            "f-1-rej-vl",
+            "f-1-dfm-rid",
+            "f-2-rid-rej",
+            "f-2-dfm-oja",
+            "f-2-vl-g8s",
+            "f-3-rid-oja",
+            "f-3-rej-g8s",
+            "f-3-vl-dfm",
+            "f-4-rid-g8s",
+            "f-4-dfm-rej",
+            "f-4-oja-vl",
+            "f-5-g8s-dfm",
+            "f-5-vl-rid",
+            "f-5-oja-rej",
+            "f-6-rid-dfm",
+            "f-6-vl-rej",
+            "f-6-oja-g8s"
+          ],
+          "standings": [
+            {
+              "teamId": "rid",
+              "played": 6,
+              "points": 180,
+              "battleDiff": 10,
+              "roundDiff": 19
+            },
+            {
+              "teamId": "g8s",
+              "played": 6,
+              "points": 150,
+              "battleDiff": 7,
+              "roundDiff": 7
+            },
+            {
+              "teamId": "rej",
+              "played": 6,
+              "points": 140,
+              "battleDiff": 7,
+              "roundDiff": 17
+            },
+            {
+              "teamId": "dfm",
+              "played": 6,
+              "points": 130,
+              "battleDiff": -1,
+              "roundDiff": -1
+            },
+            {
+              "teamId": "vl",
+              "played": 6,
+              "points": 110,
+              "battleDiff": -9,
+              "roundDiff": -19
+            },
+            {
+              "teamId": "oja",
+              "played": 6,
+              "points": 60,
+              "battleDiff": -14,
+              "roundDiff": -23
+            }
+          ]
+        },
+        "results": {},
+        "explorationMode": "battles",
+        "cases": [
+          {
+            "id": "all-win",
+            "name": "首位チーム全勝",
+            "conditions": [
+              {
+                "targetTeamId": "rid",
+                "mode": "win"
+              }
+            ]
+          },
+          {
+            "id": "priority",
+            "name": "優先条件付き",
+            "conditions": [
+              {
+                "targetTeamId": "rid",
+                "mode": "win"
+              },
+              {
+                "targetTeamId": "g8s",
+                "mode": "win"
+              }
+            ]
+          }
+        ],
+        "fixedScores": {},
+        "calculationMethod": "monteCarlo",
+        "simulation": {
+          "trials": 100000,
+          "seed": "sfl-2026-verification-v1"
+        }
+      },
+      "fingerprint": "{\"baseline\":{\"asOf\":\"2026-11-07\",\"includedMatchIds\":[\"f-1-g8s-oja\",\"f-1-rej-vl\",\"f-1-dfm-rid\",\"f-2-rid-rej\",\"f-2-dfm-oja\",\"f-2-vl-g8s\",\"f-3-rid-oja\",\"f-3-rej-g8s\",\"f-3-vl-dfm\",\"f-4-rid-g8s\",\"f-4-dfm-rej\",\"f-4-oja-vl\",\"f-5-g8s-dfm\",\"f-5-vl-rid\",\"f-5-oja-rej\",\"f-6-rid-dfm\",\"f-6-vl-rej\",\"f-6-oja-g8s\"],\"sourceStatus\":\"secondary-checked\",\"standings\":[{\"battleDiff\":10,\"played\":6,\"points\":180,\"roundDiff\":19,\"teamId\":\"rid\"},{\"battleDiff\":7,\"played\":6,\"points\":150,\"roundDiff\":7,\"teamId\":\"g8s\"},{\"battleDiff\":7,\"played\":6,\"points\":140,\"roundDiff\":17,\"teamId\":\"rej\"},{\"battleDiff\":-1,\"played\":6,\"points\":130,\"roundDiff\":-1,\"teamId\":\"dfm\"},{\"battleDiff\":-9,\"played\":6,\"points\":110,\"roundDiff\":-19,\"teamId\":\"vl\"},{\"battleDiff\":-14,\"played\":6,\"points\":60,\"roundDiff\":-23,\"teamId\":\"oja\"}]},\"calculationMethod\":\"monteCarlo\",\"cases\":[{\"conditions\":[{\"mode\":\"win\",\"targetTeamId\":\"rid\"}],\"id\":\"all-win\",\"name\":\"首位チーム全勝\"},{\"conditions\":[{\"mode\":\"win\",\"targetTeamId\":\"rid\"},{\"mode\":\"win\",\"targetTeamId\":\"g8s\"}],\"id\":\"priority\",\"name\":\"優先条件付き\"}],\"explorationMode\":\"battles\",\"fixedScores\":{},\"fixtures\":[{\"awayTeamId\":\"oja\",\"homeTeamId\":\"g8s\",\"id\":\"f-1-g8s-oja\",\"round\":1,\"scheduledAt\":\"2026-08-28\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"rej\",\"id\":\"f-1-rej-vl\",\"round\":1,\"scheduledAt\":\"2026-08-28\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"dfm\",\"id\":\"f-1-dfm-rid\",\"round\":1,\"scheduledAt\":\"2026-08-28\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"rid\",\"id\":\"f-2-rid-rej\",\"round\":2,\"scheduledAt\":\"2026-09-04\"},{\"awayTeamId\":\"oja\",\"homeTeamId\":\"dfm\",\"id\":\"f-2-dfm-oja\",\"round\":2,\"scheduledAt\":\"2026-09-04\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"vl\",\"id\":\"f-2-vl-g8s\",\"round\":2,\"scheduledAt\":\"2026-09-04\"},{\"awayTeamId\":\"oja\",\"homeTeamId\":\"rid\",\"id\":\"f-3-rid-oja\",\"round\":3,\"scheduledAt\":\"2026-10-06\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"rej\",\"id\":\"f-3-rej-g8s\",\"round\":3,\"scheduledAt\":\"2026-10-06\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"vl\",\"id\":\"f-3-vl-dfm\",\"round\":3,\"scheduledAt\":\"2026-10-06\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"rid\",\"id\":\"f-4-rid-g8s\",\"round\":4,\"scheduledAt\":\"2026-10-20\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"dfm\",\"id\":\"f-4-dfm-rej\",\"round\":4,\"scheduledAt\":\"2026-10-20\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"oja\",\"id\":\"f-4-oja-vl\",\"round\":4,\"scheduledAt\":\"2026-10-20\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"g8s\",\"id\":\"f-5-g8s-dfm\",\"round\":5,\"scheduledAt\":\"2026-10-27\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"vl\",\"id\":\"f-5-vl-rid\",\"round\":5,\"scheduledAt\":\"2026-10-27\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"oja\",\"id\":\"f-5-oja-rej\",\"round\":5,\"scheduledAt\":\"2026-10-27\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"rid\",\"id\":\"f-6-rid-dfm\",\"round\":6,\"scheduledAt\":\"2026-11-03\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"vl\",\"id\":\"f-6-vl-rej\",\"round\":6,\"scheduledAt\":\"2026-11-03\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"oja\",\"id\":\"f-6-oja-g8s\",\"round\":6,\"scheduledAt\":\"2026-11-03\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"g8s\",\"id\":\"f-7-g8s-vl\",\"round\":7,\"scheduledAt\":\"2026-11-10\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"rej\",\"id\":\"f-7-rej-rid\",\"round\":7,\"scheduledAt\":\"2026-11-10\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"oja\",\"id\":\"f-7-oja-dfm\",\"round\":7,\"scheduledAt\":\"2026-11-10\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"g8s\",\"id\":\"f-8-g8s-rej\",\"round\":8,\"scheduledAt\":\"2026-11-27\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"dfm\",\"id\":\"f-8-dfm-vl\",\"round\":8,\"scheduledAt\":\"2026-11-27\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"oja\",\"id\":\"f-8-oja-rid\",\"round\":8,\"scheduledAt\":\"2026-11-27\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"g8s\",\"id\":\"f-9-g8s-rid\",\"round\":9,\"scheduledAt\":\"2026-12-04\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"rej\",\"id\":\"f-9-rej-dfm\",\"round\":9,\"scheduledAt\":\"2026-12-04\"},{\"awayTeamId\":\"oja\",\"homeTeamId\":\"vl\",\"id\":\"f-9-vl-oja\",\"round\":9,\"scheduledAt\":\"2026-12-04\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"rid\",\"id\":\"f-10-rid-vl\",\"round\":10,\"scheduledAt\":\"2026-12-11\"},{\"awayTeamId\":\"oja\",\"homeTeamId\":\"rej\",\"id\":\"f-10-rej-oja\",\"round\":10,\"scheduledAt\":\"2026-12-11\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"dfm\",\"id\":\"f-10-dfm-g8s\",\"round\":10,\"scheduledAt\":\"2026-12-11\"}],\"id\":\"F\",\"results\":{},\"simulation\":{\"seed\":\"sfl-2026-verification-v1\"},\"teams\":[{\"id\":\"rid\",\"name\":\"RIDDLE ORDER\",\"shortName\":\"RID\"},{\"id\":\"g8s\",\"name\":\"Good 8 Squad\",\"shortName\":\"G8S\"},{\"id\":\"rej\",\"name\":\"REJECT\",\"shortName\":\"REJECT\"},{\"id\":\"dfm\",\"name\":\"DetonatioN FocusMe\",\"shortName\":\"DFM\"},{\"id\":\"vl\",\"name\":\"VARREL\",\"shortName\":\"VARREL\"},{\"id\":\"oja\",\"name\":\"名古屋NTPOJA\",\"shortName\":\"OJA\"}]}",
+      "completed": 100000,
+      "nextTrial": 100000,
+      "records": [
+        {
+          "id": "baseline",
+          "lowerRanks": [
+            "3751440",
+            "1331760",
+            "585600",
+            "201420",
+            "45360",
+            "1080",
+            "1178220",
+            "1867440",
+            "1441380",
+            "947220",
+            "427620",
+            "15480",
+            "752940",
+            "1511400",
+            "1678080",
+            "1343580",
+            "570480",
+            "51720",
+            "227640",
+            "922260",
+            "1466880",
+            "1816260",
+            "1246200",
+            "192720",
+            "39960",
+            "239040",
+            "664800",
+            "1435380",
+            "2845440",
+            "712620",
+            "60",
+            "1500",
+            "19740",
+            "144960",
+            "799680",
+            "5006220"
+          ],
+          "upperRanks": [
+            "3788820",
+            "1397940",
+            "628740",
+            "218700",
+            "48960",
+            "1200",
+            "1209240",
+            "1945380",
+            "1521060",
+            "991080",
+            "440040",
+            "16740",
+            "770100",
+            "1563900",
+            "1740600",
+            "1380120",
+            "583260",
+            "54720",
+            "240240",
+            "970020",
+            "1542420",
+            "1888320",
+            "1286700",
+            "201240",
+            "41880",
+            "248760",
+            "690360",
+            "1478640",
+            "2881020",
+            "722400",
+            "60",
+            "1560",
+            "21660",
+            "155100",
+            "825660",
+            "5023920"
+          ],
+          "poLower": [
+            "5734740",
+            "4564620",
+            "3994680",
+            "2664300",
+            "953520",
+            "21360"
+          ],
+          "poUpper": [
+            "5748720",
+            "4597380",
+            "4021680",
+            "2704560",
+            "971220",
+            "23220"
+          ],
+          "unresolved": [
+            "83340",
+            "122640",
+            "91800",
+            "128040",
+            "62760",
+            "27840"
+          ],
+          "borderTies": [
+            "13980",
+            "32760",
+            "27000",
+            "40260",
+            "17700",
+            "1860"
+          ],
+          "deltaLower": [
+            "-13980",
+            "-32760",
+            "-27000",
+            "-40260",
+            "-17700",
+            "-1860"
+          ],
+          "deltaUpper": [
+            "13980",
+            "32760",
+            "27000",
+            "40260",
+            "17700",
+            "1860"
+          ]
+        },
+        {
+          "id": "all-win",
+          "lowerRanks": [
+            "6000000",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "2521860",
+            "1770060",
+            "1150200",
+            "454440",
+            "6360",
+            "0",
+            "1727880",
+            "1876860",
+            "1703580",
+            "583680",
+            "30360",
+            "0",
+            "1566600",
+            "1733460",
+            "1656480",
+            "866460",
+            "78600",
+            "0",
+            "124800",
+            "497100",
+            "1320600",
+            "3361980",
+            "642660",
+            "0",
+            "0",
+            "4620",
+            "71160",
+            "677340",
+            "5224740"
+          ],
+          "upperRanks": [
+            "6000000",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "2569020",
+            "1854720",
+            "1199640",
+            "467100",
+            "7200",
+            "0",
+            "1763820",
+            "1943820",
+            "1743840",
+            "594360",
+            "32100",
+            "0",
+            "1597320",
+            "1800480",
+            "1719060",
+            "898080",
+            "84060",
+            "0",
+            "129060",
+            "514020",
+            "1358880",
+            "3398160",
+            "653040",
+            "0",
+            "0",
+            "5460",
+            "77160",
+            "698640",
+            "5240880"
+          ],
+          "poLower": [
+            "6000000",
+            "4338720",
+            "3640380",
+            "3330420",
+            "626100",
+            "4620"
+          ],
+          "poUpper": [
+            "6000000",
+            "4376580",
+            "3671700",
+            "3367080",
+            "638820",
+            "5460"
+          ],
+          "unresolved": [
+            "0",
+            "97080",
+            "77640",
+            "98400",
+            "52860",
+            "22140"
+          ],
+          "borderTies": [
+            "0",
+            "37860",
+            "31320",
+            "36660",
+            "12720",
+            "840"
+          ],
+          "deltaLower": [
+            "251280",
+            "-258660",
+            "-381300",
+            "625860",
+            "-345120",
+            "-18600"
+          ],
+          "deltaUpper": [
+            "265260",
+            "-188040",
+            "-322980",
+            "702780",
+            "-314700",
+            "-15900"
+          ]
+        },
+        {
+          "id": "priority",
+          "lowerRanks": [
+            "6000000",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "5875320",
+            "110160",
+            "180",
+            "0",
+            "0",
+            "0",
+            "48120",
+            "2961780",
+            "2354640",
+            "557460",
+            "38940",
+            "0",
+            "62280",
+            "2627580",
+            "2233920",
+            "885480",
+            "118620",
+            "0",
+            "0",
+            "242100",
+            "1192860",
+            "3542220",
+            "978240",
+            "0",
+            "0",
+            "15060",
+            "155340",
+            "956640",
+            "4840020"
+          ],
+          "upperRanks": [
+            "6000000",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "5889600",
+            "124500",
+            "240",
+            "0",
+            "0",
+            "0",
+            "52980",
+            "2990700",
+            "2386320",
+            "567600",
+            "41460",
+            "0",
+            "71700",
+            "2664000",
+            "2288400",
+            "921180",
+            "126840",
+            "0",
+            "0",
+            "247800",
+            "1221960",
+            "3581100",
+            "993720",
+            "0",
+            "0",
+            "16320",
+            "166140",
+            "988320",
+            "4862160"
+          ],
+          "poLower": [
+            "6000000",
+            "5999760",
+            "3014760",
+            "2699280",
+            "242100",
+            "15060"
+          ],
+          "poUpper": [
+            "6000000",
+            "5999820",
+            "3038820",
+            "2726280",
+            "247800",
+            "16320"
+          ],
+          "unresolved": [
+            "0",
+            "14340",
+            "39060",
+            "72120",
+            "44580",
+            "32940"
+          ],
+          "borderTies": [
+            "0",
+            "60",
+            "24060",
+            "27000",
+            "5700",
+            "1260"
+          ],
+          "deltaLower": [
+            "251280",
+            "1402380",
+            "-1006920",
+            "-5280",
+            "-729120",
+            "-8160"
+          ],
+          "deltaUpper": [
+            "265260",
+            "1435200",
+            "-955860",
+            "61980",
+            "-705720",
+            "-5040"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "divisionId": "F",
+    "mode": "rounds",
+    "seconds": 0.8373902480000002,
+    "checkpoint": {
+      "kind": "sfl-monte-carlo-checkpoint",
+      "version": 1,
+      "modelVersion": "fair-independent-v1",
+      "rngVersion": "chacha20-sha256-v1",
+      "samplerVersion": "shared-inverse-cdf-v1",
+      "ciVersion": "hoeffding-anytime-alpha-spending-v1",
+      "division": {
+        "id": "F",
+        "teams": [
+          {
+            "id": "rid",
+            "name": "RIDDLE ORDER",
+            "shortName": "RID"
+          },
+          {
+            "id": "g8s",
+            "name": "Good 8 Squad",
+            "shortName": "G8S"
+          },
+          {
+            "id": "rej",
+            "name": "REJECT",
+            "shortName": "REJECT"
+          },
+          {
+            "id": "dfm",
+            "name": "DetonatioN FocusMe",
+            "shortName": "DFM"
+          },
+          {
+            "id": "vl",
+            "name": "VARREL",
+            "shortName": "VARREL"
+          },
+          {
+            "id": "oja",
+            "name": "名古屋NTPOJA",
+            "shortName": "OJA"
+          }
+        ],
+        "fixtures": [
+          {
+            "id": "f-1-g8s-oja",
+            "round": 1,
+            "homeTeamId": "g8s",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-08-28"
+          },
+          {
+            "id": "f-1-rej-vl",
+            "round": 1,
+            "homeTeamId": "rej",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-08-28"
+          },
+          {
+            "id": "f-1-dfm-rid",
+            "round": 1,
+            "homeTeamId": "dfm",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-08-28"
+          },
+          {
+            "id": "f-2-rid-rej",
+            "round": 2,
+            "homeTeamId": "rid",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-09-04"
+          },
+          {
+            "id": "f-2-dfm-oja",
+            "round": 2,
+            "homeTeamId": "dfm",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-09-04"
+          },
+          {
+            "id": "f-2-vl-g8s",
+            "round": 2,
+            "homeTeamId": "vl",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-09-04"
+          },
+          {
+            "id": "f-3-rid-oja",
+            "round": 3,
+            "homeTeamId": "rid",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-10-06"
+          },
+          {
+            "id": "f-3-rej-g8s",
+            "round": 3,
+            "homeTeamId": "rej",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-10-06"
+          },
+          {
+            "id": "f-3-vl-dfm",
+            "round": 3,
+            "homeTeamId": "vl",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-10-06"
+          },
+          {
+            "id": "f-4-rid-g8s",
+            "round": 4,
+            "homeTeamId": "rid",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-10-20"
+          },
+          {
+            "id": "f-4-dfm-rej",
+            "round": 4,
+            "homeTeamId": "dfm",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-10-20"
+          },
+          {
+            "id": "f-4-oja-vl",
+            "round": 4,
+            "homeTeamId": "oja",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-10-20"
+          },
+          {
+            "id": "f-5-g8s-dfm",
+            "round": 5,
+            "homeTeamId": "g8s",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-10-27"
+          },
+          {
+            "id": "f-5-vl-rid",
+            "round": 5,
+            "homeTeamId": "vl",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-10-27"
+          },
+          {
+            "id": "f-5-oja-rej",
+            "round": 5,
+            "homeTeamId": "oja",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-10-27"
+          },
+          {
+            "id": "f-6-rid-dfm",
+            "round": 6,
+            "homeTeamId": "rid",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-11-03"
+          },
+          {
+            "id": "f-6-vl-rej",
+            "round": 6,
+            "homeTeamId": "vl",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-11-03"
+          },
+          {
+            "id": "f-6-oja-g8s",
+            "round": 6,
+            "homeTeamId": "oja",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-11-03"
+          },
+          {
+            "id": "f-7-g8s-vl",
+            "round": 7,
+            "homeTeamId": "g8s",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-11-10"
+          },
+          {
+            "id": "f-7-rej-rid",
+            "round": 7,
+            "homeTeamId": "rej",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-11-10"
+          },
+          {
+            "id": "f-7-oja-dfm",
+            "round": 7,
+            "homeTeamId": "oja",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-11-10"
+          },
+          {
+            "id": "f-8-g8s-rej",
+            "round": 8,
+            "homeTeamId": "g8s",
+            "awayTeamId": "rej",
+            "scheduledAt": "2026-11-27"
+          },
+          {
+            "id": "f-8-dfm-vl",
+            "round": 8,
+            "homeTeamId": "dfm",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-11-27"
+          },
+          {
+            "id": "f-8-oja-rid",
+            "round": 8,
+            "homeTeamId": "oja",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-11-27"
+          },
+          {
+            "id": "f-9-g8s-rid",
+            "round": 9,
+            "homeTeamId": "g8s",
+            "awayTeamId": "rid",
+            "scheduledAt": "2026-12-04"
+          },
+          {
+            "id": "f-9-rej-dfm",
+            "round": 9,
+            "homeTeamId": "rej",
+            "awayTeamId": "dfm",
+            "scheduledAt": "2026-12-04"
+          },
+          {
+            "id": "f-9-vl-oja",
+            "round": 9,
+            "homeTeamId": "vl",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-12-04"
+          },
+          {
+            "id": "f-10-rid-vl",
+            "round": 10,
+            "homeTeamId": "rid",
+            "awayTeamId": "vl",
+            "scheduledAt": "2026-12-11"
+          },
+          {
+            "id": "f-10-rej-oja",
+            "round": 10,
+            "homeTeamId": "rej",
+            "awayTeamId": "oja",
+            "scheduledAt": "2026-12-11"
+          },
+          {
+            "id": "f-10-dfm-g8s",
+            "round": 10,
+            "homeTeamId": "dfm",
+            "awayTeamId": "g8s",
+            "scheduledAt": "2026-12-11"
+          }
+        ],
+        "baseline": {
+          "asOf": "2026-11-07",
+          "sourceStatus": "secondary-checked",
+          "includedMatchIds": [
+            "f-1-g8s-oja",
+            "f-1-rej-vl",
+            "f-1-dfm-rid",
+            "f-2-rid-rej",
+            "f-2-dfm-oja",
+            "f-2-vl-g8s",
+            "f-3-rid-oja",
+            "f-3-rej-g8s",
+            "f-3-vl-dfm",
+            "f-4-rid-g8s",
+            "f-4-dfm-rej",
+            "f-4-oja-vl",
+            "f-5-g8s-dfm",
+            "f-5-vl-rid",
+            "f-5-oja-rej",
+            "f-6-rid-dfm",
+            "f-6-vl-rej",
+            "f-6-oja-g8s"
+          ],
+          "standings": [
+            {
+              "teamId": "rid",
+              "played": 6,
+              "points": 180,
+              "battleDiff": 10,
+              "roundDiff": 19
+            },
+            {
+              "teamId": "g8s",
+              "played": 6,
+              "points": 150,
+              "battleDiff": 7,
+              "roundDiff": 7
+            },
+            {
+              "teamId": "rej",
+              "played": 6,
+              "points": 140,
+              "battleDiff": 7,
+              "roundDiff": 17
+            },
+            {
+              "teamId": "dfm",
+              "played": 6,
+              "points": 130,
+              "battleDiff": -1,
+              "roundDiff": -1
+            },
+            {
+              "teamId": "vl",
+              "played": 6,
+              "points": 110,
+              "battleDiff": -9,
+              "roundDiff": -19
+            },
+            {
+              "teamId": "oja",
+              "played": 6,
+              "points": 60,
+              "battleDiff": -14,
+              "roundDiff": -23
+            }
+          ]
+        },
+        "results": {},
+        "explorationMode": "rounds",
+        "cases": [
+          {
+            "id": "all-win",
+            "name": "首位チーム全勝",
+            "conditions": [
+              {
+                "targetTeamId": "rid",
+                "mode": "win"
+              }
+            ]
+          },
+          {
+            "id": "priority",
+            "name": "優先条件付き",
+            "conditions": [
+              {
+                "targetTeamId": "rid",
+                "mode": "win"
+              },
+              {
+                "targetTeamId": "g8s",
+                "mode": "win"
+              }
+            ]
+          }
+        ],
+        "fixedScores": {},
+        "calculationMethod": "monteCarlo",
+        "simulation": {
+          "trials": 100000,
+          "seed": "sfl-2026-verification-v1"
+        }
+      },
+      "fingerprint": "{\"baseline\":{\"asOf\":\"2026-11-07\",\"includedMatchIds\":[\"f-1-g8s-oja\",\"f-1-rej-vl\",\"f-1-dfm-rid\",\"f-2-rid-rej\",\"f-2-dfm-oja\",\"f-2-vl-g8s\",\"f-3-rid-oja\",\"f-3-rej-g8s\",\"f-3-vl-dfm\",\"f-4-rid-g8s\",\"f-4-dfm-rej\",\"f-4-oja-vl\",\"f-5-g8s-dfm\",\"f-5-vl-rid\",\"f-5-oja-rej\",\"f-6-rid-dfm\",\"f-6-vl-rej\",\"f-6-oja-g8s\"],\"sourceStatus\":\"secondary-checked\",\"standings\":[{\"battleDiff\":10,\"played\":6,\"points\":180,\"roundDiff\":19,\"teamId\":\"rid\"},{\"battleDiff\":7,\"played\":6,\"points\":150,\"roundDiff\":7,\"teamId\":\"g8s\"},{\"battleDiff\":7,\"played\":6,\"points\":140,\"roundDiff\":17,\"teamId\":\"rej\"},{\"battleDiff\":-1,\"played\":6,\"points\":130,\"roundDiff\":-1,\"teamId\":\"dfm\"},{\"battleDiff\":-9,\"played\":6,\"points\":110,\"roundDiff\":-19,\"teamId\":\"vl\"},{\"battleDiff\":-14,\"played\":6,\"points\":60,\"roundDiff\":-23,\"teamId\":\"oja\"}]},\"calculationMethod\":\"monteCarlo\",\"cases\":[{\"conditions\":[{\"mode\":\"win\",\"targetTeamId\":\"rid\"}],\"id\":\"all-win\",\"name\":\"首位チーム全勝\"},{\"conditions\":[{\"mode\":\"win\",\"targetTeamId\":\"rid\"},{\"mode\":\"win\",\"targetTeamId\":\"g8s\"}],\"id\":\"priority\",\"name\":\"優先条件付き\"}],\"explorationMode\":\"rounds\",\"fixedScores\":{},\"fixtures\":[{\"awayTeamId\":\"oja\",\"homeTeamId\":\"g8s\",\"id\":\"f-1-g8s-oja\",\"round\":1,\"scheduledAt\":\"2026-08-28\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"rej\",\"id\":\"f-1-rej-vl\",\"round\":1,\"scheduledAt\":\"2026-08-28\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"dfm\",\"id\":\"f-1-dfm-rid\",\"round\":1,\"scheduledAt\":\"2026-08-28\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"rid\",\"id\":\"f-2-rid-rej\",\"round\":2,\"scheduledAt\":\"2026-09-04\"},{\"awayTeamId\":\"oja\",\"homeTeamId\":\"dfm\",\"id\":\"f-2-dfm-oja\",\"round\":2,\"scheduledAt\":\"2026-09-04\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"vl\",\"id\":\"f-2-vl-g8s\",\"round\":2,\"scheduledAt\":\"2026-09-04\"},{\"awayTeamId\":\"oja\",\"homeTeamId\":\"rid\",\"id\":\"f-3-rid-oja\",\"round\":3,\"scheduledAt\":\"2026-10-06\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"rej\",\"id\":\"f-3-rej-g8s\",\"round\":3,\"scheduledAt\":\"2026-10-06\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"vl\",\"id\":\"f-3-vl-dfm\",\"round\":3,\"scheduledAt\":\"2026-10-06\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"rid\",\"id\":\"f-4-rid-g8s\",\"round\":4,\"scheduledAt\":\"2026-10-20\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"dfm\",\"id\":\"f-4-dfm-rej\",\"round\":4,\"scheduledAt\":\"2026-10-20\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"oja\",\"id\":\"f-4-oja-vl\",\"round\":4,\"scheduledAt\":\"2026-10-20\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"g8s\",\"id\":\"f-5-g8s-dfm\",\"round\":5,\"scheduledAt\":\"2026-10-27\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"vl\",\"id\":\"f-5-vl-rid\",\"round\":5,\"scheduledAt\":\"2026-10-27\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"oja\",\"id\":\"f-5-oja-rej\",\"round\":5,\"scheduledAt\":\"2026-10-27\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"rid\",\"id\":\"f-6-rid-dfm\",\"round\":6,\"scheduledAt\":\"2026-11-03\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"vl\",\"id\":\"f-6-vl-rej\",\"round\":6,\"scheduledAt\":\"2026-11-03\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"oja\",\"id\":\"f-6-oja-g8s\",\"round\":6,\"scheduledAt\":\"2026-11-03\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"g8s\",\"id\":\"f-7-g8s-vl\",\"round\":7,\"scheduledAt\":\"2026-11-10\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"rej\",\"id\":\"f-7-rej-rid\",\"round\":7,\"scheduledAt\":\"2026-11-10\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"oja\",\"id\":\"f-7-oja-dfm\",\"round\":7,\"scheduledAt\":\"2026-11-10\"},{\"awayTeamId\":\"rej\",\"homeTeamId\":\"g8s\",\"id\":\"f-8-g8s-rej\",\"round\":8,\"scheduledAt\":\"2026-11-27\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"dfm\",\"id\":\"f-8-dfm-vl\",\"round\":8,\"scheduledAt\":\"2026-11-27\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"oja\",\"id\":\"f-8-oja-rid\",\"round\":8,\"scheduledAt\":\"2026-11-27\"},{\"awayTeamId\":\"rid\",\"homeTeamId\":\"g8s\",\"id\":\"f-9-g8s-rid\",\"round\":9,\"scheduledAt\":\"2026-12-04\"},{\"awayTeamId\":\"dfm\",\"homeTeamId\":\"rej\",\"id\":\"f-9-rej-dfm\",\"round\":9,\"scheduledAt\":\"2026-12-04\"},{\"awayTeamId\":\"oja\",\"homeTeamId\":\"vl\",\"id\":\"f-9-vl-oja\",\"round\":9,\"scheduledAt\":\"2026-12-04\"},{\"awayTeamId\":\"vl\",\"homeTeamId\":\"rid\",\"id\":\"f-10-rid-vl\",\"round\":10,\"scheduledAt\":\"2026-12-11\"},{\"awayTeamId\":\"oja\",\"homeTeamId\":\"rej\",\"id\":\"f-10-rej-oja\",\"round\":10,\"scheduledAt\":\"2026-12-11\"},{\"awayTeamId\":\"g8s\",\"homeTeamId\":\"dfm\",\"id\":\"f-10-dfm-g8s\",\"round\":10,\"scheduledAt\":\"2026-12-11\"}],\"id\":\"F\",\"results\":{},\"simulation\":{\"seed\":\"sfl-2026-verification-v1\"},\"teams\":[{\"id\":\"rid\",\"name\":\"RIDDLE ORDER\",\"shortName\":\"RID\"},{\"id\":\"g8s\",\"name\":\"Good 8 Squad\",\"shortName\":\"G8S\"},{\"id\":\"rej\",\"name\":\"REJECT\",\"shortName\":\"REJECT\"},{\"id\":\"dfm\",\"name\":\"DetonatioN FocusMe\",\"shortName\":\"DFM\"},{\"id\":\"vl\",\"name\":\"VARREL\",\"shortName\":\"VARREL\"},{\"id\":\"oja\",\"name\":\"名古屋NTPOJA\",\"shortName\":\"OJA\"}]}",
+      "completed": 100000,
+      "nextTrial": 100000,
+      "records": [
+        {
+          "id": "baseline",
+          "lowerRanks": [
+            "3772020",
+            "1360380",
+            "608520",
+            "211500",
+            "42660",
+            "1200",
+            "1196700",
+            "1901880",
+            "1473840",
+            "983520",
+            "423240",
+            "16320",
+            "761400",
+            "1550940",
+            "1708800",
+            "1347660",
+            "576360",
+            "51960",
+            "227640",
+            "943200",
+            "1509300",
+            "1848300",
+            "1269420",
+            "195600",
+            "40020",
+            "237600",
+            "671580",
+            "1446000",
+            "2881980",
+            "720180",
+            "0",
+            "1080",
+            "22320",
+            "158220",
+            "803340",
+            "5013600"
+          ],
+          "upperRanks": [
+            "3773760",
+            "1363200",
+            "610320",
+            "212400",
+            "42840",
+            "1200",
+            "1197660",
+            "1904340",
+            "1476540",
+            "985440",
+            "424080",
+            "16440",
+            "762180",
+            "1552560",
+            "1710660",
+            "1348860",
+            "576600",
+            "52020",
+            "228600",
+            "945720",
+            "1513020",
+            "1851780",
+            "1271280",
+            "196140",
+            "40020",
+            "238020",
+            "672780",
+            "1447740",
+            "2883420",
+            "720660",
+            "0",
+            "1080",
+            "22320",
+            "158580",
+            "804780",
+            "5014680"
+          ],
+          "poLower": [
+            "5743740",
+            "4574880",
+            "4022760",
+            "2682660",
+            "949620",
+            "23400"
+          ],
+          "poUpper": [
+            "5744460",
+            "4576080",
+            "4023780",
+            "2684820",
+            "950400",
+            "23400"
+          ],
+          "unresolved": [
+            "3720",
+            "4500",
+            "2880",
+            "6540",
+            "2640",
+            "1440"
+          ],
+          "borderTies": [
+            "720",
+            "1200",
+            "1020",
+            "2160",
+            "780",
+            "0"
+          ],
+          "deltaLower": [
+            "-720",
+            "-1200",
+            "-1020",
+            "-2160",
+            "-780",
+            "0"
+          ],
+          "deltaUpper": [
+            "720",
+            "1200",
+            "1020",
+            "2160",
+            "780",
+            "0"
+          ]
+        },
+        {
+          "id": "all-win",
+          "lowerRanks": [
+            "6000000",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "2549820",
+            "1792200",
+            "1197420",
+            "449640",
+            "7380",
+            "0",
+            "1755480",
+            "1925100",
+            "1702080",
+            "588480",
+            "27120",
+            "0",
+            "1571340",
+            "1765680",
+            "1690440",
+            "887340",
+            "80220",
+            "0",
+            "121620",
+            "507180",
+            "1329060",
+            "3388020",
+            "651960",
+            "0",
+            "120",
+            "5640",
+            "76680",
+            "684000",
+            "5232540"
+          ],
+          "upperRanks": [
+            "6000000",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "2551080",
+            "1795260",
+            "1199700",
+            "450120",
+            "7380",
+            "0",
+            "1756080",
+            "1926600",
+            "1703220",
+            "588720",
+            "27120",
+            "0",
+            "1572480",
+            "1769040",
+            "1694040",
+            "888960",
+            "80460",
+            "0",
+            "121860",
+            "507600",
+            "1330380",
+            "3389760",
+            "652560",
+            "0",
+            "120",
+            "5700",
+            "76980",
+            "684960",
+            "5233260"
+          ],
+          "poLower": [
+            "6000000",
+            "4343280",
+            "3681180",
+            "3338160",
+            "629040",
+            "5760"
+          ],
+          "poUpper": [
+            "6000000",
+            "4345080",
+            "3682080",
+            "3340380",
+            "629220",
+            "5820"
+          ],
+          "unresolved": [
+            "0",
+            "3540",
+            "1740",
+            "4980",
+            "2160",
+            "1020"
+          ],
+          "borderTies": [
+            "0",
+            "1800",
+            "900",
+            "2220",
+            "180",
+            "60"
+          ],
+          "deltaLower": [
+            "255540",
+            "-232800",
+            "-342600",
+            "653340",
+            "-321360",
+            "-17640"
+          ],
+          "deltaUpper": [
+            "256260",
+            "-229800",
+            "-340680",
+            "657720",
+            "-320400",
+            "-17580"
+          ]
+        },
+        {
+          "id": "priority",
+          "lowerRanks": [
+            "6000000",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "5876760",
+            "122340",
+            "60",
+            "0",
+            "0",
+            "0",
+            "50880",
+            "2967000",
+            "2372040",
+            "570360",
+            "38220",
+            "0",
+            "71520",
+            "2650920",
+            "2247060",
+            "906780",
+            "120180",
+            "0",
+            "0",
+            "242580",
+            "1217940",
+            "3544320",
+            "993420",
+            "0",
+            "0",
+            "15120",
+            "160260",
+            "975840",
+            "4846920"
+          ],
+          "upperRanks": [
+            "6000000",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "5877600",
+            "123180",
+            "60",
+            "0",
+            "0",
+            "0",
+            "50940",
+            "2967960",
+            "2373480",
+            "570900",
+            "38220",
+            "0",
+            "72300",
+            "2652900",
+            "2249160",
+            "908340",
+            "120840",
+            "0",
+            "0",
+            "242880",
+            "1218960",
+            "3545760",
+            "994140",
+            "0",
+            "0",
+            "15120",
+            "160980",
+            "977700",
+            "4848060"
+          ],
+          "poLower": [
+            "6000000",
+            "5999940",
+            "3017940",
+            "2723220",
+            "242580",
+            "15120"
+          ],
+          "poUpper": [
+            "6000000",
+            "5999940",
+            "3018840",
+            "2724420",
+            "242880",
+            "15120"
+          ],
+          "unresolved": [
+            "0",
+            "840",
+            "1500",
+            "3540",
+            "1740",
+            "1860"
+          ],
+          "borderTies": [
+            "0",
+            "0",
+            "900",
+            "1200",
+            "300",
+            "0"
+          ],
+          "deltaLower": [
+            "255540",
+            "1423860",
+            "-1005840",
+            "38400",
+            "-707820",
+            "-8280"
+          ],
+          "deltaUpper": [
+            "256260",
+            "1425060",
+            "-1003920",
+            "41760",
+            "-706740",
+            "-8280"
+          ]
+        }
+      ]
+    }
+  }
+]

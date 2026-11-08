@@ -1,0 +1,666 @@
+{
+  "schemaVersion": 1,
+  "title": "SFL 2026 順位確率計算",
+  "season": 2026,
+  "sources": [
+    {
+      "url": "https://sf.esports.capcom.com/sfl2026/schedule/",
+      "label": "公式日程（自動取得403・未照合）"
+    },
+    {
+      "url": "https://kakuge-checker.com/topic/view/09243/",
+      "label": "格ゲーチェッカー：全節の対戦表・日付"
+    },
+    {
+      "url": "https://sf6freak.com/contents/results/sfl-2026/",
+      "label": "SF6 Freak：基準順位表の照合"
+    }
+  ],
+  "divisions": [
+    {
+      "id": "S",
+      "teams": [
+        {
+          "id": "zet",
+          "name": "ZETA DIVISION",
+          "shortName": "ZETA"
+        },
+        {
+          "id": "fav",
+          "name": "FAV gaming",
+          "shortName": "FAV"
+        },
+        {
+          "id": "sol",
+          "name": "Saishunkan Sol 熊本",
+          "shortName": "SOL"
+        },
+        {
+          "id": "ibs",
+          "name": "FUKUSHIMA IBUSHIGIN",
+          "shortName": "IBS"
+        },
+        {
+          "id": "cr",
+          "name": "Crazy Raccoon",
+          "shortName": "CR"
+        },
+        {
+          "id": "ixa",
+          "name": "広島 TEAM iXA",
+          "shortName": "iXA"
+        }
+      ],
+      "fixtures": [
+        {
+          "id": "s-1-fav-ibs",
+          "round": 1,
+          "homeTeamId": "fav",
+          "awayTeamId": "ibs",
+          "scheduledAt": "2026-08-25"
+        },
+        {
+          "id": "s-1-cr-zet",
+          "round": 1,
+          "homeTeamId": "cr",
+          "awayTeamId": "zet",
+          "scheduledAt": "2026-08-25"
+        },
+        {
+          "id": "s-1-ixa-sol",
+          "round": 1,
+          "homeTeamId": "ixa",
+          "awayTeamId": "sol",
+          "scheduledAt": "2026-08-25"
+        },
+        {
+          "id": "s-2-zet-ixa",
+          "round": 2,
+          "homeTeamId": "zet",
+          "awayTeamId": "ixa",
+          "scheduledAt": "2026-09-01"
+        },
+        {
+          "id": "s-2-fav-sol",
+          "round": 2,
+          "homeTeamId": "fav",
+          "awayTeamId": "sol",
+          "scheduledAt": "2026-09-01"
+        },
+        {
+          "id": "s-2-ibs-cr",
+          "round": 2,
+          "homeTeamId": "ibs",
+          "awayTeamId": "cr",
+          "scheduledAt": "2026-09-01"
+        },
+        {
+          "id": "s-3-zet-ibs",
+          "round": 3,
+          "homeTeamId": "zet",
+          "awayTeamId": "ibs",
+          "scheduledAt": "2026-09-08"
+        },
+        {
+          "id": "s-3-sol-cr",
+          "round": 3,
+          "homeTeamId": "sol",
+          "awayTeamId": "cr",
+          "scheduledAt": "2026-09-08"
+        },
+        {
+          "id": "s-3-ixa-fav",
+          "round": 3,
+          "homeTeamId": "ixa",
+          "awayTeamId": "fav",
+          "scheduledAt": "2026-09-08"
+        },
+        {
+          "id": "s-4-fav-cr",
+          "round": 4,
+          "homeTeamId": "fav",
+          "awayTeamId": "cr",
+          "scheduledAt": "2026-10-16"
+        },
+        {
+          "id": "s-4-sol-zet",
+          "round": 4,
+          "homeTeamId": "sol",
+          "awayTeamId": "zet",
+          "scheduledAt": "2026-10-16"
+        },
+        {
+          "id": "s-4-ibs-ixa",
+          "round": 4,
+          "homeTeamId": "ibs",
+          "awayTeamId": "ixa",
+          "scheduledAt": "2026-10-16"
+        },
+        {
+          "id": "s-5-zet-fav",
+          "round": 5,
+          "homeTeamId": "zet",
+          "awayTeamId": "fav",
+          "scheduledAt": "2026-10-23"
+        },
+        {
+          "id": "s-5-ibs-sol",
+          "round": 5,
+          "homeTeamId": "ibs",
+          "awayTeamId": "sol",
+          "scheduledAt": "2026-10-23"
+        },
+        {
+          "id": "s-5-cr-ixa",
+          "round": 5,
+          "homeTeamId": "cr",
+          "awayTeamId": "ixa",
+          "scheduledAt": "2026-10-23"
+        },
+        {
+          "id": "s-6-zet-cr",
+          "round": 6,
+          "homeTeamId": "zet",
+          "awayTeamId": "cr",
+          "scheduledAt": "2026-10-30"
+        },
+        {
+          "id": "s-6-sol-ixa",
+          "round": 6,
+          "homeTeamId": "sol",
+          "awayTeamId": "ixa",
+          "scheduledAt": "2026-10-30"
+        },
+        {
+          "id": "s-6-ibs-fav",
+          "round": 6,
+          "homeTeamId": "ibs",
+          "awayTeamId": "fav",
+          "scheduledAt": "2026-10-30"
+        },
+        {
+          "id": "s-7-sol-fav",
+          "round": 7,
+          "homeTeamId": "sol",
+          "awayTeamId": "fav",
+          "scheduledAt": "2026-11-06"
+        },
+        {
+          "id": "s-7-cr-ibs",
+          "round": 7,
+          "homeTeamId": "cr",
+          "awayTeamId": "ibs",
+          "scheduledAt": "2026-11-06"
+        },
+        {
+          "id": "s-7-ixa-zet",
+          "round": 7,
+          "homeTeamId": "ixa",
+          "awayTeamId": "zet",
+          "scheduledAt": "2026-11-06"
+        },
+        {
+          "id": "s-8-fav-ixa",
+          "round": 8,
+          "homeTeamId": "fav",
+          "awayTeamId": "ixa",
+          "scheduledAt": "2026-11-13"
+        },
+        {
+          "id": "s-8-ibs-zet",
+          "round": 8,
+          "homeTeamId": "ibs",
+          "awayTeamId": "zet",
+          "scheduledAt": "2026-11-13"
+        },
+        {
+          "id": "s-8-cr-sol",
+          "round": 8,
+          "homeTeamId": "cr",
+          "awayTeamId": "sol",
+          "scheduledAt": "2026-11-13"
+        },
+        {
+          "id": "s-9-zet-sol",
+          "round": 9,
+          "homeTeamId": "zet",
+          "awayTeamId": "sol",
+          "scheduledAt": "2026-12-01"
+        },
+        {
+          "id": "s-9-cr-fav",
+          "round": 9,
+          "homeTeamId": "cr",
+          "awayTeamId": "fav",
+          "scheduledAt": "2026-12-01"
+        },
+        {
+          "id": "s-9-ixa-ibs",
+          "round": 9,
+          "homeTeamId": "ixa",
+          "awayTeamId": "ibs",
+          "scheduledAt": "2026-12-01"
+        },
+        {
+          "id": "s-10-fav-zet",
+          "round": 10,
+          "homeTeamId": "fav",
+          "awayTeamId": "zet",
+          "scheduledAt": "2026-12-08"
+        },
+        {
+          "id": "s-10-sol-ibs",
+          "round": 10,
+          "homeTeamId": "sol",
+          "awayTeamId": "ibs",
+          "scheduledAt": "2026-12-08"
+        },
+        {
+          "id": "s-10-ixa-cr",
+          "round": 10,
+          "homeTeamId": "ixa",
+          "awayTeamId": "cr",
+          "scheduledAt": "2026-12-08"
+        }
+      ],
+      "baseline": {
+        "asOf": "2026-11-07",
+        "sourceStatus": "secondary-checked",
+        "includedMatchIds": [
+          "s-1-fav-ibs",
+          "s-1-cr-zet",
+          "s-1-ixa-sol",
+          "s-2-zet-ixa",
+          "s-2-fav-sol",
+          "s-2-ibs-cr",
+          "s-3-zet-ibs",
+          "s-3-sol-cr",
+          "s-3-ixa-fav",
+          "s-4-fav-cr",
+          "s-4-sol-zet",
+          "s-4-ibs-ixa",
+          "s-5-zet-fav",
+          "s-5-ibs-sol",
+          "s-5-cr-ixa",
+          "s-6-zet-cr",
+          "s-6-sol-ixa",
+          "s-6-ibs-fav",
+          "s-7-sol-fav",
+          "s-7-cr-ibs",
+          "s-7-ixa-zet"
+        ],
+        "standings": [
+          {
+            "teamId": "zet",
+            "played": 7,
+            "points": 190,
+            "battleDiff": 12,
+            "roundDiff": 16
+          },
+          {
+            "teamId": "fav",
+            "played": 7,
+            "points": 180,
+            "battleDiff": 12,
+            "roundDiff": 15
+          },
+          {
+            "teamId": "sol",
+            "played": 7,
+            "points": 180,
+            "battleDiff": 5,
+            "roundDiff": 5
+          },
+          {
+            "teamId": "ibs",
+            "played": 7,
+            "points": 150,
+            "battleDiff": -9,
+            "roundDiff": -16
+          },
+          {
+            "teamId": "cr",
+            "played": 7,
+            "points": 130,
+            "battleDiff": -4,
+            "roundDiff": 0
+          },
+          {
+            "teamId": "ixa",
+            "played": 7,
+            "points": 70,
+            "battleDiff": -16,
+            "roundDiff": -20
+          }
+        ]
+      },
+      "results": {},
+      "scenario": {
+        "mode": "normal",
+        "targetTeamId": "zet",
+        "fixedScores": {}
+      }
+    },
+    {
+      "id": "F",
+      "teams": [
+        {
+          "id": "rid",
+          "name": "RIDDLE ORDER",
+          "shortName": "RID"
+        },
+        {
+          "id": "g8s",
+          "name": "Good 8 Squad",
+          "shortName": "G8S"
+        },
+        {
+          "id": "rej",
+          "name": "REJECT",
+          "shortName": "REJECT"
+        },
+        {
+          "id": "dfm",
+          "name": "DetonatioN FocusMe",
+          "shortName": "DFM"
+        },
+        {
+          "id": "vl",
+          "name": "VARREL",
+          "shortName": "VARREL"
+        },
+        {
+          "id": "oja",
+          "name": "名古屋NTPOJA",
+          "shortName": "OJA"
+        }
+      ],
+      "fixtures": [
+        {
+          "id": "f-1-g8s-oja",
+          "round": 1,
+          "homeTeamId": "g8s",
+          "awayTeamId": "oja",
+          "scheduledAt": "2026-08-28"
+        },
+        {
+          "id": "f-1-rej-vl",
+          "round": 1,
+          "homeTeamId": "rej",
+          "awayTeamId": "vl",
+          "scheduledAt": "2026-08-28"
+        },
+        {
+          "id": "f-1-dfm-rid",
+          "round": 1,
+          "homeTeamId": "dfm",
+          "awayTeamId": "rid",
+          "scheduledAt": "2026-08-28"
+        },
+        {
+          "id": "f-2-rid-rej",
+          "round": 2,
+          "homeTeamId": "rid",
+          "awayTeamId": "rej",
+          "scheduledAt": "2026-09-04"
+        },
+        {
+          "id": "f-2-dfm-oja",
+          "round": 2,
+          "homeTeamId": "dfm",
+          "awayTeamId": "oja",
+          "scheduledAt": "2026-09-04"
+        },
+        {
+          "id": "f-2-vl-g8s",
+          "round": 2,
+          "homeTeamId": "vl",
+          "awayTeamId": "g8s",
+          "scheduledAt": "2026-09-04"
+        },
+        {
+          "id": "f-3-rid-oja",
+          "round": 3,
+          "homeTeamId": "rid",
+          "awayTeamId": "oja",
+          "scheduledAt": "2026-10-06"
+        },
+        {
+          "id": "f-3-rej-g8s",
+          "round": 3,
+          "homeTeamId": "rej",
+          "awayTeamId": "g8s",
+          "scheduledAt": "2026-10-06"
+        },
+        {
+          "id": "f-3-vl-dfm",
+          "round": 3,
+          "homeTeamId": "vl",
+          "awayTeamId": "dfm",
+          "scheduledAt": "2026-10-06"
+        },
+        {
+          "id": "f-4-rid-g8s",
+          "round": 4,
+          "homeTeamId": "rid",
+          "awayTeamId": "g8s",
+          "scheduledAt": "2026-10-20"
+        },
+        {
+          "id": "f-4-dfm-rej",
+          "round": 4,
+          "homeTeamId": "dfm",
+          "awayTeamId": "rej",
+          "scheduledAt": "2026-10-20"
+        },
+        {
+          "id": "f-4-oja-vl",
+          "round": 4,
+          "homeTeamId": "oja",
+          "awayTeamId": "vl",
+          "scheduledAt": "2026-10-20"
+        },
+        {
+          "id": "f-5-g8s-dfm",
+          "round": 5,
+          "homeTeamId": "g8s",
+          "awayTeamId": "dfm",
+          "scheduledAt": "2026-10-27"
+        },
+        {
+          "id": "f-5-vl-rid",
+          "round": 5,
+          "homeTeamId": "vl",
+          "awayTeamId": "rid",
+          "scheduledAt": "2026-10-27"
+        },
+        {
+          "id": "f-5-oja-rej",
+          "round": 5,
+          "homeTeamId": "oja",
+          "awayTeamId": "rej",
+          "scheduledAt": "2026-10-27"
+        },
+        {
+          "id": "f-6-rid-dfm",
+          "round": 6,
+          "homeTeamId": "rid",
+          "awayTeamId": "dfm",
+          "scheduledAt": "2026-11-03"
+        },
+        {
+          "id": "f-6-vl-rej",
+          "round": 6,
+          "homeTeamId": "vl",
+          "awayTeamId": "rej",
+          "scheduledAt": "2026-11-03"
+        },
+        {
+          "id": "f-6-oja-g8s",
+          "round": 6,
+          "homeTeamId": "oja",
+          "awayTeamId": "g8s",
+          "scheduledAt": "2026-11-03"
+        },
+        {
+          "id": "f-7-g8s-vl",
+          "round": 7,
+          "homeTeamId": "g8s",
+          "awayTeamId": "vl",
+          "scheduledAt": "2026-11-10"
+        },
+        {
+          "id": "f-7-rej-rid",
+          "round": 7,
+          "homeTeamId": "rej",
+          "awayTeamId": "rid",
+          "scheduledAt": "2026-11-10"
+        },
+        {
+          "id": "f-7-oja-dfm",
+          "round": 7,
+          "homeTeamId": "oja",
+          "awayTeamId": "dfm",
+          "scheduledAt": "2026-11-10"
+        },
+        {
+          "id": "f-8-g8s-rej",
+          "round": 8,
+          "homeTeamId": "g8s",
+          "awayTeamId": "rej",
+          "scheduledAt": "2026-11-27"
+        },
+        {
+          "id": "f-8-dfm-vl",
+          "round": 8,
+          "homeTeamId": "dfm",
+          "awayTeamId": "vl",
+          "scheduledAt": "2026-11-27"
+        },
+        {
+          "id": "f-8-oja-rid",
+          "round": 8,
+          "homeTeamId": "oja",
+          "awayTeamId": "rid",
+          "scheduledAt": "2026-11-27"
+        },
+        {
+          "id": "f-9-g8s-rid",
+          "round": 9,
+          "homeTeamId": "g8s",
+          "awayTeamId": "rid",
+          "scheduledAt": "2026-12-04"
+        },
+        {
+          "id": "f-9-rej-dfm",
+          "round": 9,
+          "homeTeamId": "rej",
+          "awayTeamId": "dfm",
+          "scheduledAt": "2026-12-04"
+        },
+        {
+          "id": "f-9-vl-oja",
+          "round": 9,
+          "homeTeamId": "vl",
+          "awayTeamId": "oja",
+          "scheduledAt": "2026-12-04"
+        },
+        {
+          "id": "f-10-rid-vl",
+          "round": 10,
+          "homeTeamId": "rid",
+          "awayTeamId": "vl",
+          "scheduledAt": "2026-12-11"
+        },
+        {
+          "id": "f-10-rej-oja",
+          "round": 10,
+          "homeTeamId": "rej",
+          "awayTeamId": "oja",
+          "scheduledAt": "2026-12-11"
+        },
+        {
+          "id": "f-10-dfm-g8s",
+          "round": 10,
+          "homeTeamId": "dfm",
+          "awayTeamId": "g8s",
+          "scheduledAt": "2026-12-11"
+        }
+      ],
+      "baseline": {
+        "asOf": "2026-11-07",
+        "sourceStatus": "secondary-checked",
+        "includedMatchIds": [
+          "f-1-g8s-oja",
+          "f-1-rej-vl",
+          "f-1-dfm-rid",
+          "f-2-rid-rej",
+          "f-2-dfm-oja",
+          "f-2-vl-g8s",
+          "f-3-rid-oja",
+          "f-3-rej-g8s",
+          "f-3-vl-dfm",
+          "f-4-rid-g8s",
+          "f-4-dfm-rej",
+          "f-4-oja-vl",
+          "f-5-g8s-dfm",
+          "f-5-vl-rid",
+          "f-5-oja-rej",
+          "f-6-rid-dfm",
+          "f-6-vl-rej",
+          "f-6-oja-g8s"
+        ],
+        "standings": [
+          {
+            "teamId": "rid",
+            "played": 6,
+            "points": 180,
+            "battleDiff": 10,
+            "roundDiff": 19
+          },
+          {
+            "teamId": "g8s",
+            "played": 6,
+            "points": 150,
+            "battleDiff": 7,
+            "roundDiff": 7
+          },
+          {
+            "teamId": "rej",
+            "played": 6,
+            "points": 140,
+            "battleDiff": 7,
+            "roundDiff": 17
+          },
+          {
+            "teamId": "dfm",
+            "played": 6,
+            "points": 130,
+            "battleDiff": -1,
+            "roundDiff": -1
+          },
+          {
+            "teamId": "vl",
+            "played": 6,
+            "points": 110,
+            "battleDiff": -9,
+            "roundDiff": -19
+          },
+          {
+            "teamId": "oja",
+            "played": 6,
+            "points": 60,
+            "battleDiff": -14,
+            "roundDiff": -23
+          }
+        ]
+      },
+      "results": {},
+      "scenario": {
+        "mode": "normal",
+        "targetTeamId": "rid",
+        "fixedScores": {}
+      }
+    }
+  ]
+}

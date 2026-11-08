@@ -1,0 +1,1307 @@
+{
+  "seconds": 0.471770097,
+  "result": {
+    "kind": "sfl-condition-search-result",
+    "version": 1,
+    "modelVersion": "fair-independent-v1",
+    "complete": true,
+    "mode": "points",
+    "targetTeamId": "zet",
+    "goal": "po",
+    "initial": {
+      "teamIds": [
+        "zet",
+        "fav",
+        "sol",
+        "ibs",
+        "cr",
+        "ixa"
+      ],
+      "points": [
+        190,
+        180,
+        180,
+        150,
+        130,
+        70
+      ],
+      "battleDiffs": [
+        12,
+        12,
+        5,
+        -9,
+        -4,
+        -16
+      ],
+      "roundDiffs": [
+        16,
+        15,
+        5,
+        -16,
+        0,
+        -20
+      ]
+    },
+    "matches": [
+      {
+        "id": "s-8-fav-ixa",
+        "home": 1,
+        "away": 5,
+        "outcomeSet": 0
+      },
+      {
+        "id": "s-8-ibs-zet",
+        "home": 3,
+        "away": 0,
+        "outcomeSet": 0
+      },
+      {
+        "id": "s-8-cr-sol",
+        "home": 4,
+        "away": 2,
+        "outcomeSet": 0
+      },
+      {
+        "id": "s-9-zet-sol",
+        "home": 0,
+        "away": 2,
+        "outcomeSet": 0
+      },
+      {
+        "id": "s-9-cr-fav",
+        "home": 4,
+        "away": 1,
+        "outcomeSet": 0
+      },
+      {
+        "id": "s-9-ixa-ibs",
+        "home": 5,
+        "away": 3,
+        "outcomeSet": 0
+      },
+      {
+        "id": "s-10-fav-zet",
+        "home": 1,
+        "away": 0,
+        "outcomeSet": 0
+      },
+      {
+        "id": "s-10-sol-ibs",
+        "home": 2,
+        "away": 3,
+        "outcomeSet": 0
+      },
+      {
+        "id": "s-10-ixa-cr",
+        "home": 5,
+        "away": 4,
+        "outcomeSet": 0
+      }
+    ],
+    "outcomeSets": [
+      [
+        [
+          40,
+          0,
+          1
+        ],
+        [
+          30,
+          10,
+          2
+        ],
+        [
+          30,
+          20,
+          1
+        ],
+        [
+          20,
+          30,
+          1
+        ],
+        [
+          10,
+          30,
+          2
+        ],
+        [
+          0,
+          40,
+          1
+        ]
+      ]
+    ],
+    "witnessPaths": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        5,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        5,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        5,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        5,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        1,
+        5,
+        5
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        2,
+        5,
+        5
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        1,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        4,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        4,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        5,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        5,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        2,
+        1,
+        5,
+        3,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        3,
+        3,
+        5,
+        5,
+        5,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        5,
+        2,
+        2,
+        5,
+        3,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        5,
+        2,
+        5,
+        5,
+        5,
+        3,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        5,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        3
+      ],
+      [
+        0,
+        1,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        5
+      ],
+      [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        5,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        5
+      ],
+      [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        5,
+        0,
+        0
+      ],
+      [
+        0,
+        3,
+        0,
+        1,
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      [
+        0,
+        5,
+        0,
+        0,
+        0,
+        0,
+        5,
+        0,
+        0
+      ]
+    ],
+    "cells": [
+      {
+        "points": 0,
+        "wins": 0,
+        "success": null,
+        "failure": 26,
+        "unresolved": 27
+      },
+      {
+        "points": 10,
+        "wins": 0,
+        "success": 25,
+        "failure": 23,
+        "unresolved": 24
+      },
+      {
+        "points": 20,
+        "wins": 0,
+        "success": 22,
+        "failure": 15,
+        "unresolved": 14
+      },
+      {
+        "points": 30,
+        "wins": 0,
+        "success": 16,
+        "failure": 18,
+        "unresolved": 17
+      },
+      {
+        "points": 30,
+        "wins": 1,
+        "success": 10,
+        "failure": 12,
+        "unresolved": 11
+      },
+      {
+        "points": 40,
+        "wins": 0,
+        "success": 19,
+        "failure": 21,
+        "unresolved": 20
+      },
+      {
+        "points": 40,
+        "wins": 1,
+        "success": 0,
+        "failure": 6,
+        "unresolved": 1
+      },
+      {
+        "points": 50,
+        "wins": 0,
+        "success": 34,
+        "failure": 36,
+        "unresolved": 35
+      },
+      {
+        "points": 50,
+        "wins": 1,
+        "success": 2,
+        "failure": 8,
+        "unresolved": 7
+      },
+      {
+        "points": 60,
+        "wins": 0,
+        "success": 39,
+        "failure": null,
+        "unresolved": 40
+      },
+      {
+        "points": 60,
+        "wins": 1,
+        "success": 3,
+        "failure": 29,
+        "unresolved": 9
+      },
+      {
+        "points": 60,
+        "wins": 2,
+        "success": 13,
+        "failure": 30,
+        "unresolved": 28
+      },
+      {
+        "points": 70,
+        "wins": 1,
+        "success": 32,
+        "failure": null,
+        "unresolved": null
+      },
+      {
+        "points": 70,
+        "wins": 2,
+        "success": 4,
+        "failure": null,
+        "unresolved": 31
+      },
+      {
+        "points": 80,
+        "wins": 1,
+        "success": 37,
+        "failure": null,
+        "unresolved": null
+      },
+      {
+        "points": 80,
+        "wins": 2,
+        "success": 5,
+        "failure": null,
+        "unresolved": null
+      },
+      {
+        "points": 90,
+        "wins": 2,
+        "success": 33,
+        "failure": null,
+        "unresolved": null
+      },
+      {
+        "points": 90,
+        "wins": 3,
+        "success": 43,
+        "failure": null,
+        "unresolved": null
+      },
+      {
+        "points": 100,
+        "wins": 2,
+        "success": 38,
+        "failure": null,
+        "unresolved": null
+      },
+      {
+        "points": 100,
+        "wins": 3,
+        "success": 41,
+        "failure": null,
+        "unresolved": null
+      },
+      {
+        "points": 110,
+        "wins": 3,
+        "success": 42,
+        "failure": null,
+        "unresolved": null
+      },
+      {
+        "points": 120,
+        "wins": 3,
+        "success": 44,
+        "failure": null,
+        "unresolved": null
+      }
+    ],
+    "analysis": {
+      "status": "conditional",
+      "points": {
+        "necessary": 0,
+        "sufficient": 80,
+        "maxPossible": 120,
+        "maximumNotGuaranteed": 70,
+        "necessaryWitness": 27,
+        "sufficientWitness": 37,
+        "counterexample": 31
+      },
+      "wins": {
+        "necessary": 0,
+        "sufficient": 3,
+        "maxPossible": 3,
+        "maximumNotGuaranteed": 2,
+        "necessaryWitness": 27,
+        "sufficientWitness": 43,
+        "counterexample": 30
+      }
+    },
+    "processed": "10077696",
+    "total": "10077696",
+    "visited": "1071571",
+    "collapsed": "421664",
+    "input": {
+      "id": "S",
+      "teams": [
+        {
+          "id": "zet",
+          "name": "ZETA DIVISION",
+          "shortName": "ZETA"
+        },
+        {
+          "id": "fav",
+          "name": "FAV gaming",
+          "shortName": "FAV"
+        },
+        {
+          "id": "sol",
+          "name": "Saishunkan Sol 熊本",
+          "shortName": "SOL"
+        },
+        {
+          "id": "ibs",
+          "name": "FUKUSHIMA IBUSHIGIN",
+          "shortName": "IBS"
+        },
+        {
+          "id": "cr",
+          "name": "Crazy Raccoon",
+          "shortName": "CR"
+        },
+        {
+          "id": "ixa",
+          "name": "広島 TEAM iXA",
+          "shortName": "iXA"
+        }
+      ],
+      "fixtures": [
+        {
+          "id": "s-1-fav-ibs",
+          "round": 1,
+          "homeTeamId": "fav",
+          "awayTeamId": "ibs",
+          "scheduledAt": "2026-08-25"
+        },
+        {
+          "id": "s-1-cr-zet",
+          "round": 1,
+          "homeTeamId": "cr",
+          "awayTeamId": "zet",
+          "scheduledAt": "2026-08-25"
+        },
+        {
+          "id": "s-1-ixa-sol",
+          "round": 1,
+          "homeTeamId": "ixa",
+          "awayTeamId": "sol",
+          "scheduledAt": "2026-08-25"
+        },
+        {
+          "id": "s-2-zet-ixa",
+          "round": 2,
+          "homeTeamId": "zet",
+          "awayTeamId": "ixa",
+          "scheduledAt": "2026-09-01"
+        },
+        {
+          "id": "s-2-fav-sol",
+          "round": 2,
+          "homeTeamId": "fav",
+          "awayTeamId": "sol",
+          "scheduledAt": "2026-09-01"
+        },
+        {
+          "id": "s-2-ibs-cr",
+          "round": 2,
+          "homeTeamId": "ibs",
+          "awayTeamId": "cr",
+          "scheduledAt": "2026-09-01"
+        },
+        {
+          "id": "s-3-zet-ibs",
+          "round": 3,
+          "homeTeamId": "zet",
+          "awayTeamId": "ibs",
+          "scheduledAt": "2026-09-08"
+        },
+        {
+          "id": "s-3-sol-cr",
+          "round": 3,
+          "homeTeamId": "sol",
+          "awayTeamId": "cr",
+          "scheduledAt": "2026-09-08"
+        },
+        {
+          "id": "s-3-ixa-fav",
+          "round": 3,
+          "homeTeamId": "ixa",
+          "awayTeamId": "fav",
+          "scheduledAt": "2026-09-08"
+        },
+        {
+          "id": "s-4-fav-cr",
+          "round": 4,
+          "homeTeamId": "fav",
+          "awayTeamId": "cr",
+          "scheduledAt": "2026-10-16"
+        },
+        {
+          "id": "s-4-sol-zet",
+          "round": 4,
+          "homeTeamId": "sol",
+          "awayTeamId": "zet",
+          "scheduledAt": "2026-10-16"
+        },
+        {
+          "id": "s-4-ibs-ixa",
+          "round": 4,
+          "homeTeamId": "ibs",
+          "awayTeamId": "ixa",
+          "scheduledAt": "2026-10-16"
+        },
+        {
+          "id": "s-5-zet-fav",
+          "round": 5,
+          "homeTeamId": "zet",
+          "awayTeamId": "fav",
+          "scheduledAt": "2026-10-23"
+        },
+        {
+          "id": "s-5-ibs-sol",
+          "round": 5,
+          "homeTeamId": "ibs",
+          "awayTeamId": "sol",
+          "scheduledAt": "2026-10-23"
+        },
+        {
+          "id": "s-5-cr-ixa",
+          "round": 5,
+          "homeTeamId": "cr",
+          "awayTeamId": "ixa",
+          "scheduledAt": "2026-10-23"
+        },
+        {
+          "id": "s-6-zet-cr",
+          "round": 6,
+          "homeTeamId": "zet",
+          "awayTeamId": "cr",
+          "scheduledAt": "2026-10-30"
+        },
+        {
+          "id": "s-6-sol-ixa",
+          "round": 6,
+          "homeTeamId": "sol",
+          "awayTeamId": "ixa",
+          "scheduledAt": "2026-10-30"
+        },
+        {
+          "id": "s-6-ibs-fav",
+          "round": 6,
+          "homeTeamId": "ibs",
+          "awayTeamId": "fav",
+          "scheduledAt": "2026-10-30"
+        },
+        {
+          "id": "s-7-sol-fav",
+          "round": 7,
+          "homeTeamId": "sol",
+          "awayTeamId": "fav",
+          "scheduledAt": "2026-11-06"
+        },
+        {
+          "id": "s-7-cr-ibs",
+          "round": 7,
+          "homeTeamId": "cr",
+          "awayTeamId": "ibs",
+          "scheduledAt": "2026-11-06"
+        },
+        {
+          "id": "s-7-ixa-zet",
+          "round": 7,
+          "homeTeamId": "ixa",
+          "awayTeamId": "zet",
+          "scheduledAt": "2026-11-06"
+        },
+        {
+          "id": "s-8-fav-ixa",
+          "round": 8,
+          "homeTeamId": "fav",
+          "awayTeamId": "ixa",
+          "scheduledAt": "2026-11-13"
+        },
+        {
+          "id": "s-8-ibs-zet",
+          "round": 8,
+          "homeTeamId": "ibs",
+          "awayTeamId": "zet",
+          "scheduledAt": "2026-11-13"
+        },
+        {
+          "id": "s-8-cr-sol",
+          "round": 8,
+          "homeTeamId": "cr",
+          "awayTeamId": "sol",
+          "scheduledAt": "2026-11-13"
+        },
+        {
+          "id": "s-9-zet-sol",
+          "round": 9,
+          "homeTeamId": "zet",
+          "awayTeamId": "sol",
+          "scheduledAt": "2026-12-01"
+        },
+        {
+          "id": "s-9-cr-fav",
+          "round": 9,
+          "homeTeamId": "cr",
+          "awayTeamId": "fav",
+          "scheduledAt": "2026-12-01"
+        },
+        {
+          "id": "s-9-ixa-ibs",
+          "round": 9,
+          "homeTeamId": "ixa",
+          "awayTeamId": "ibs",
+          "scheduledAt": "2026-12-01"
+        },
+        {
+          "id": "s-10-fav-zet",
+          "round": 10,
+          "homeTeamId": "fav",
+          "awayTeamId": "zet",
+          "scheduledAt": "2026-12-08"
+        },
+        {
+          "id": "s-10-sol-ibs",
+          "round": 10,
+          "homeTeamId": "sol",
+          "awayTeamId": "ibs",
+          "scheduledAt": "2026-12-08"
+        },
+        {
+          "id": "s-10-ixa-cr",
+          "round": 10,
+          "homeTeamId": "ixa",
+          "awayTeamId": "cr",
+          "scheduledAt": "2026-12-08"
+        }
+      ],
+      "baseline": {
+        "asOf": "2026-11-07",
+        "sourceStatus": "secondary-checked",
+        "includedMatchIds": [
+          "s-1-fav-ibs",
+          "s-1-cr-zet",
+          "s-1-ixa-sol",
+          "s-2-zet-ixa",
+          "s-2-fav-sol",
+          "s-2-ibs-cr",
+          "s-3-zet-ibs",
+          "s-3-sol-cr",
+          "s-3-ixa-fav",
+          "s-4-fav-cr",
+          "s-4-sol-zet",
+          "s-4-ibs-ixa",
+          "s-5-zet-fav",
+          "s-5-ibs-sol",
+          "s-5-cr-ixa",
+          "s-6-zet-cr",
+          "s-6-sol-ixa",
+          "s-6-ibs-fav",
+          "s-7-sol-fav",
+          "s-7-cr-ibs",
+          "s-7-ixa-zet"
+        ],
+        "standings": [
+          {
+            "teamId": "zet",
+            "played": 7,
+            "points": 190,
+            "battleDiff": 12,
+            "roundDiff": 16
+          },
+          {
+            "teamId": "fav",
+            "played": 7,
+            "points": 180,
+            "battleDiff": 12,
+            "roundDiff": 15
+          },
+          {
+            "teamId": "sol",
+            "played": 7,
+            "points": 180,
+            "battleDiff": 5,
+            "roundDiff": 5
+          },
+          {
+            "teamId": "ibs",
+            "played": 7,
+            "points": 150,
+            "battleDiff": -9,
+            "roundDiff": -16
+          },
+          {
+            "teamId": "cr",
+            "played": 7,
+            "points": 130,
+            "battleDiff": -4,
+            "roundDiff": 0
+          },
+          {
+            "teamId": "ixa",
+            "played": 7,
+            "points": 70,
+            "battleDiff": -16,
+            "roundDiff": -20
+          }
+        ]
+      },
+      "results": {},
+      "explorationMode": "points",
+      "cases": [
+        {
+          "id": "case-1",
+          "name": "ケース1",
+          "conditions": []
+        }
+      ],
+      "fixedScores": {},
+      "calculationMethod": "exact",
+      "simulation": {
+        "trials": 100000,
+        "seed": ""
+      }
+    },
+    "config": {
+      "targetTeamId": "zet",
+      "goal": "po",
+      "mode": "points",
+      "caseId": "@normal"
+    },
+    "fingerprint": "{\"teams\":[{\"id\":\"zet\",\"name\":\"ZETA DIVISION\",\"shortName\":\"ZETA\"},{\"id\":\"fav\",\"name\":\"FAV gaming\",\"shortName\":\"FAV\"},{\"id\":\"sol\",\"name\":\"Saishunkan Sol 熊本\",\"shortName\":\"SOL\"},{\"id\":\"ibs\",\"name\":\"FUKUSHIMA IBUSHIGIN\",\"shortName\":\"IBS\"},{\"id\":\"cr\",\"name\":\"Crazy Raccoon\",\"shortName\":\"CR\"},{\"id\":\"ixa\",\"name\":\"広島 TEAM iXA\",\"shortName\":\"iXA\"}],\"fixtures\":[{\"id\":\"s-1-fav-ibs\",\"round\":1,\"homeTeamId\":\"fav\",\"awayTeamId\":\"ibs\",\"scheduledAt\":\"2026-08-25\"},{\"id\":\"s-1-cr-zet\",\"round\":1,\"homeTeamId\":\"cr\",\"awayTeamId\":\"zet\",\"scheduledAt\":\"2026-08-25\"},{\"id\":\"s-1-ixa-sol\",\"round\":1,\"homeTeamId\":\"ixa\",\"awayTeamId\":\"sol\",\"scheduledAt\":\"2026-08-25\"},{\"id\":\"s-2-zet-ixa\",\"round\":2,\"homeTeamId\":\"zet\",\"awayTeamId\":\"ixa\",\"scheduledAt\":\"2026-09-01\"},{\"id\":\"s-2-fav-sol\",\"round\":2,\"homeTeamId\":\"fav\",\"awayTeamId\":\"sol\",\"scheduledAt\":\"2026-09-01\"},{\"id\":\"s-2-ibs-cr\",\"round\":2,\"homeTeamId\":\"ibs\",\"awayTeamId\":\"cr\",\"scheduledAt\":\"2026-09-01\"},{\"id\":\"s-3-zet-ibs\",\"round\":3,\"homeTeamId\":\"zet\",\"awayTeamId\":\"ibs\",\"scheduledAt\":\"2026-09-08\"},{\"id\":\"s-3-sol-cr\",\"round\":3,\"homeTeamId\":\"sol\",\"awayTeamId\":\"cr\",\"scheduledAt\":\"2026-09-08\"},{\"id\":\"s-3-ixa-fav\",\"round\":3,\"homeTeamId\":\"ixa\",\"awayTeamId\":\"fav\",\"scheduledAt\":\"2026-09-08\"},{\"id\":\"s-4-fav-cr\",\"round\":4,\"homeTeamId\":\"fav\",\"awayTeamId\":\"cr\",\"scheduledAt\":\"2026-10-16\"},{\"id\":\"s-4-sol-zet\",\"round\":4,\"homeTeamId\":\"sol\",\"awayTeamId\":\"zet\",\"scheduledAt\":\"2026-10-16\"},{\"id\":\"s-4-ibs-ixa\",\"round\":4,\"homeTeamId\":\"ibs\",\"awayTeamId\":\"ixa\",\"scheduledAt\":\"2026-10-16\"},{\"id\":\"s-5-zet-fav\",\"round\":5,\"homeTeamId\":\"zet\",\"awayTeamId\":\"fav\",\"scheduledAt\":\"2026-10-23\"},{\"id\":\"s-5-ibs-sol\",\"round\":5,\"homeTeamId\":\"ibs\",\"awayTeamId\":\"sol\",\"scheduledAt\":\"2026-10-23\"},{\"id\":\"s-5-cr-ixa\",\"round\":5,\"homeTeamId\":\"cr\",\"awayTeamId\":\"ixa\",\"scheduledAt\":\"2026-10-23\"},{\"id\":\"s-6-zet-cr\",\"round\":6,\"homeTeamId\":\"zet\",\"awayTeamId\":\"cr\",\"scheduledAt\":\"2026-10-30\"},{\"id\":\"s-6-sol-ixa\",\"round\":6,\"homeTeamId\":\"sol\",\"awayTeamId\":\"ixa\",\"scheduledAt\":\"2026-10-30\"},{\"id\":\"s-6-ibs-fav\",\"round\":6,\"homeTeamId\":\"ibs\",\"awayTeamId\":\"fav\",\"scheduledAt\":\"2026-10-30\"},{\"id\":\"s-7-sol-fav\",\"round\":7,\"homeTeamId\":\"sol\",\"awayTeamId\":\"fav\",\"scheduledAt\":\"2026-11-06\"},{\"id\":\"s-7-cr-ibs\",\"round\":7,\"homeTeamId\":\"cr\",\"awayTeamId\":\"ibs\",\"scheduledAt\":\"2026-11-06\"},{\"id\":\"s-7-ixa-zet\",\"round\":7,\"homeTeamId\":\"ixa\",\"awayTeamId\":\"zet\",\"scheduledAt\":\"2026-11-06\"},{\"id\":\"s-8-fav-ixa\",\"round\":8,\"homeTeamId\":\"fav\",\"awayTeamId\":\"ixa\",\"scheduledAt\":\"2026-11-13\"},{\"id\":\"s-8-ibs-zet\",\"round\":8,\"homeTeamId\":\"ibs\",\"awayTeamId\":\"zet\",\"scheduledAt\":\"2026-11-13\"},{\"id\":\"s-8-cr-sol\",\"round\":8,\"homeTeamId\":\"cr\",\"awayTeamId\":\"sol\",\"scheduledAt\":\"2026-11-13\"},{\"id\":\"s-9-zet-sol\",\"round\":9,\"homeTeamId\":\"zet\",\"awayTeamId\":\"sol\",\"scheduledAt\":\"2026-12-01\"},{\"id\":\"s-9-cr-fav\",\"round\":9,\"homeTeamId\":\"cr\",\"awayTeamId\":\"fav\",\"scheduledAt\":\"2026-12-01\"},{\"id\":\"s-9-ixa-ibs\",\"round\":9,\"homeTeamId\":\"ixa\",\"awayTeamId\":\"ibs\",\"scheduledAt\":\"2026-12-01\"},{\"id\":\"s-10-fav-zet\",\"round\":10,\"homeTeamId\":\"fav\",\"awayTeamId\":\"zet\",\"scheduledAt\":\"2026-12-08\"},{\"id\":\"s-10-sol-ibs\",\"round\":10,\"homeTeamId\":\"sol\",\"awayTeamId\":\"ibs\",\"scheduledAt\":\"2026-12-08\"},{\"id\":\"s-10-ixa-cr\",\"round\":10,\"homeTeamId\":\"ixa\",\"awayTeamId\":\"cr\",\"scheduledAt\":\"2026-12-08\"}],\"baseline\":{\"asOf\":\"2026-11-07\",\"sourceStatus\":\"secondary-checked\",\"includedMatchIds\":[\"s-1-fav-ibs\",\"s-1-cr-zet\",\"s-1-ixa-sol\",\"s-2-zet-ixa\",\"s-2-fav-sol\",\"s-2-ibs-cr\",\"s-3-zet-ibs\",\"s-3-sol-cr\",\"s-3-ixa-fav\",\"s-4-fav-cr\",\"s-4-sol-zet\",\"s-4-ibs-ixa\",\"s-5-zet-fav\",\"s-5-ibs-sol\",\"s-5-cr-ixa\",\"s-6-zet-cr\",\"s-6-sol-ixa\",\"s-6-ibs-fav\",\"s-7-sol-fav\",\"s-7-cr-ibs\",\"s-7-ixa-zet\"],\"standings\":[{\"teamId\":\"zet\",\"played\":7,\"points\":190,\"battleDiff\":12,\"roundDiff\":16},{\"teamId\":\"fav\",\"played\":7,\"points\":180,\"battleDiff\":12,\"roundDiff\":15},{\"teamId\":\"sol\",\"played\":7,\"points\":180,\"battleDiff\":5,\"roundDiff\":5},{\"teamId\":\"ibs\",\"played\":7,\"points\":150,\"battleDiff\":-9,\"roundDiff\":-16},{\"teamId\":\"cr\",\"played\":7,\"points\":130,\"battleDiff\":-4,\"roundDiff\":0},{\"teamId\":\"ixa\",\"played\":7,\"points\":70,\"battleDiff\":-16,\"roundDiff\":-20}]},\"results\":{},\"config\":{\"targetTeamId\":\"zet\",\"goal\":\"po\",\"mode\":\"points\",\"caseId\":\"@normal\"},\"caseDefinition\":null,\"fixedScores\":{}}",
+    "resolution": [
+      {
+        "matchId": "s-8-fav-ixa",
+        "round": 8,
+        "homeTeamId": "fav",
+        "awayTeamId": "ixa",
+        "audit": [],
+        "allowedScores": [
+          "40-0",
+          "30-10",
+          "30-20",
+          "20-30",
+          "10-30",
+          "0-40"
+        ]
+      },
+      {
+        "matchId": "s-8-ibs-zet",
+        "round": 8,
+        "homeTeamId": "ibs",
+        "awayTeamId": "zet",
+        "audit": [],
+        "allowedScores": [
+          "40-0",
+          "30-10",
+          "30-20",
+          "20-30",
+          "10-30",
+          "0-40"
+        ]
+      },
+      {
+        "matchId": "s-8-cr-sol",
+        "round": 8,
+        "homeTeamId": "cr",
+        "awayTeamId": "sol",
+        "audit": [],
+        "allowedScores": [
+          "40-0",
+          "30-10",
+          "30-20",
+          "20-30",
+          "10-30",
+          "0-40"
+        ]
+      },
+      {
+        "matchId": "s-9-zet-sol",
+        "round": 9,
+        "homeTeamId": "zet",
+        "awayTeamId": "sol",
+        "audit": [],
+        "allowedScores": [
+          "40-0",
+          "30-10",
+          "30-20",
+          "20-30",
+          "10-30",
+          "0-40"
+        ]
+      },
+      {
+        "matchId": "s-9-cr-fav",
+        "round": 9,
+        "homeTeamId": "cr",
+        "awayTeamId": "fav",
+        "audit": [],
+        "allowedScores": [
+          "40-0",
+          "30-10",
+          "30-20",
+          "20-30",
+          "10-30",
+          "0-40"
+        ]
+      },
+      {
+        "matchId": "s-9-ixa-ibs",
+        "round": 9,
+        "homeTeamId": "ixa",
+        "awayTeamId": "ibs",
+        "audit": [],
+        "allowedScores": [
+          "40-0",
+          "30-10",
+          "30-20",
+          "20-30",
+          "10-30",
+          "0-40"
+        ]
+      },
+      {
+        "matchId": "s-10-fav-zet",
+        "round": 10,
+        "homeTeamId": "fav",
+        "awayTeamId": "zet",
+        "audit": [],
+        "allowedScores": [
+          "40-0",
+          "30-10",
+          "30-20",
+          "20-30",
+          "10-30",
+          "0-40"
+        ]
+      },
+      {
+        "matchId": "s-10-sol-ibs",
+        "round": 10,
+        "homeTeamId": "sol",
+        "awayTeamId": "ibs",
+        "audit": [],
+        "allowedScores": [
+          "40-0",
+          "30-10",
+          "30-20",
+          "20-30",
+          "10-30",
+          "0-40"
+        ]
+      },
+      {
+        "matchId": "s-10-ixa-cr",
+        "round": 10,
+        "homeTeamId": "ixa",
+        "awayTeamId": "cr",
+        "audit": [],
+        "allowedScores": [
+          "40-0",
+          "30-10",
+          "30-20",
+          "20-30",
+          "10-30",
+          "0-40"
+        ]
+      }
+    ],
+    "caseDefinition": {
+      "id": "baseline",
+      "name": "基準（チーム条件なし）",
+      "conditions": []
+    },
+    "outcomeExamples": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "playerExamples": []
+  }
+}

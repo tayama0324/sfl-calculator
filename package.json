@@ -1,0 +1,10 @@
+{
+  "name": "sfl-rank-probability",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-isolation=none tests/*.test.js",
+    "build": "node scripts/build.js"
+  }
+}
