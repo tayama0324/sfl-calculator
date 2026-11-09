@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {analyzeMatchConditions} from '../site/js/match-conditions.js';
-import {searchPrepared,runConditionSearch,reconstructExample,verifySearchResult} from '../site/js/condition-search.js';
-import {SCORES,migrateData,remaining} from '../site/js/model.js';
-import {conditionedOutcomes} from '../site/js/distributions.js';
-import {renderSearchResult} from '../site/js/condition-search-ui.js';
+import {analyzeMatchConditions} from '../docs/js/match-conditions.js';
+import {searchPrepared,runConditionSearch,reconstructExample,verifySearchResult} from '../docs/js/condition-search.js';
+import {SCORES,migrateData,remaining} from '../docs/js/model.js';
+import {conditionedOutcomes} from '../docs/js/distributions.js';
+import {renderSearchResult} from '../docs/js/condition-search-ui.js';
 const scores=SCORES.map(([h,a])=>`${h}-${a}`);
 const source=(mode,games,points=[0,10,40,60,80,100])=>({mode,teamIds:['a','b','c','d','e','f'],points,battleDiffs:[0,0,0,0,0,0],roundDiffs:[0,0,0,0,0,0],matches:games});
 const flags=cells=>cells.map(c=>({points:c.points,success:c.success!==null,failure:c.failure!==null,unresolved:c.unresolved!==null}));
@@ -80,7 +80,7 @@ test('no remaining matches, impossible goals, unresolved ties and unobservable s
   assert.deepEqual(analyzeMatchConditions(cells,1).sufficient,[]);
 });
 test('exported match witnesses replay, corrupt vectors are rejected, and legacy results remain verifiable',async()=>{
-  const data=migrateData(JSON.parse(await readFile(new URL('../site/data/default.json',import.meta.url))));const d=data.divisions[0];
+  const data=migrateData(JSON.parse(await readFile(new URL('../docs/data/default.json',import.meta.url))));const d=data.divisions[0];
   for(const m of remaining(d).slice(0,-2))d.results[m.id]={homePoints:40,awayPoints:0,homeBattleDiffDelta:7,homeRoundDiffDelta:14};
   const own=remaining(d)[0];d.fixedScores[own.id]='30-20';d.fixedDetails={[own.id]:{battleDiff:null,roundDiff:0}};d.cases=[];
   const c={targetTeamId:own.awayTeamId,goal:'all',mode:'battles',caseId:'@input'};

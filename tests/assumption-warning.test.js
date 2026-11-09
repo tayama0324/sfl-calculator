@@ -1,8 +1,8 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';
-import {migrateData,remaining} from '../site/js/model.js';
-import {renderAssumptionWarning,resultAssumptions} from '../site/js/assumption-warning.js';
-import {runConditionSearch} from '../site/js/condition-search.js';import {renderSearchResult} from '../site/js/condition-search-ui.js';
-const raw=JSON.parse(await readFile(new URL('../site/data/default.json',import.meta.url)));
+import {migrateData,remaining} from '../docs/js/model.js';
+import {renderAssumptionWarning,resultAssumptions} from '../docs/js/assumption-warning.js';
+import {runConditionSearch} from '../docs/js/condition-search.js';import {renderSearchResult} from '../docs/js/condition-search-ui.js';
+const raw=JSON.parse(await readFile(new URL('../docs/data/default.json',import.meta.url)));
 test('warning lists calculation-time score/difference assumptions, escapes names, and excludes normal searches',()=>{
  const d=migrateData(raw).divisions[0],matches=remaining(d);d.fixedScores={[matches[0].id]:'30-20',[matches[1].id]:'40-0'};d.fixedDetails={[matches[0].id]:{battleDiff:1,roundDiff:0}};
  d.teams.find(t=>t.id===matches[0].homeTeamId).shortName='<script>x</script>';

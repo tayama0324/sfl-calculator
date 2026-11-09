@@ -1,9 +1,9 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';
-import {migrateData,remaining,prepare,BASE_CASE} from '../site/js/model.js';
-import {exhaustiveCost,renderCost} from '../site/js/exhaustive-cost.js';
-import {runConditionSearch} from '../site/js/condition-search.js';
-import {calculate} from '../site/js/engine.js';
-const raw=JSON.parse(await readFile(new URL('../site/data/default.json',import.meta.url)));
+import {migrateData,remaining,prepare,BASE_CASE} from '../docs/js/model.js';
+import {exhaustiveCost,renderCost} from '../docs/js/exhaustive-cost.js';
+import {runConditionSearch} from '../docs/js/condition-search.js';
+import {calculate} from '../docs/js/engine.js';
+const raw=JSON.parse(await readFile(new URL('../docs/data/default.json',import.meta.url)));
 test('cost shares score and detailed assumption filtering with progress in every ranking mode',()=>{
   const d=migrateData(raw).divisions[0];d.cases=[];
   const matches=remaining(d);for(const m of matches.slice(1))d.results[m.id]={homePoints:40,awayPoints:0,homeBattleDiffDelta:7,homeRoundDiffDelta:14};

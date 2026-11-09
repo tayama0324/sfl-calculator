@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {searchPrepared,verifySearchResult} from '../site/js/condition-search.js';
-import {analyzeRankingCondition} from '../site/js/ranking-condition.js';
-import {renderSearchResult} from '../site/js/condition-search-ui.js';
+import {searchPrepared,verifySearchResult} from '../docs/js/condition-search.js';
+import {analyzeRankingCondition} from '../docs/js/ranking-condition.js';
+import {renderSearchResult} from '../docs/js/condition-search-ui.js';
 const cmp=(a,b)=>a.reduce((n,v,i)=>n||v-b[i],0);
 function enumerate(input,target,cutoff){
   const initial=input.points.map((p,i)=>[p,input.battleDiffs[i],input.roundDiffs[i]].slice(0,input.mode==='rounds'?3:2));

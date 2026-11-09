@@ -311,3 +311,13 @@ Chromium 158.0.8127.18 headlessでは以下を実操作した。
 - 旧設定JSONの移行、必要条件転記後のバトル探索、仮定警告・条件件数、転記元の表示と全解除を確認。実データのiXA PO進出で非確定のポイント下限がgteとして転記され、任意スコアへ置換されないことを確認。
 - 初期状態の日程折りたたみ・計算設定が最初のフォームであること、390px幅の入力ダイアログに横あふれがないこと、ページのJavaScriptエラー0件を確認。
 - Playwright手順：`/tmp/sfl-browser-check/and-assumptions.mjs`。画像・検証用結果JSON：`test-results/and-assumptions/`（git対象外）。
+
+## GitHub Pages /docs公開用の構成変更（2026-11-09）
+
+- 公開ソースを`site/`から`docs/`へ移動し、旧`docs/`内の内部資料を`documentation/`へ移動。`docs/.nojekyll`を追加。
+- テスト・検証スクリプト・README・引き継ぎ資料の参照パスを更新。ビルドは`docs/`から`dist/`へのコピーに変更。
+- 独自Pagesデプロイworkflowをテスト・ビルド専用CIへ変更。公開元はGitHubのPages設定で`main`と`/docs`を指定する。
+- 97テスト成功、ビルド成功、差分の空白チェック成功。
+- 実ブラウザで`docs/`を`/sfl-calculator/`配下として配信し、画面・CSS・JS・標準データ・確率と条件探索のWorker動作を確認。JavaScriptエラー0件。
+- 公開URL配下の仕様書・検証記録・documentationへのアクセスは404。内部資料がPages配信対象に入っていないことを確認。
+- 検証手順：`/tmp/sfl-browser-check/pages-directory.mjs`。GitHub上のPages設定変更・本番公開確認は未実施。

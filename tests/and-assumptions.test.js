@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {migrateData,validate,remaining,resolveMatch,prepare,BASE_CASE,boundsOf} from '../site/js/model.js';
-import {rulesFor,setMatchRules,mergeMatchRules,clearMatchRules,filterRuleOutcomes} from '../site/js/match-assumptions.js';
-import {conditionedOutcomes} from '../site/js/distributions.js';
-import {calculate} from '../site/js/engine.js';
-import {exhaustiveCost} from '../site/js/exhaustive-cost.js';
-import {necessaryMatchRules} from '../site/js/necessary-assumptions.js';
-import {runConditionSearch,searchFingerprint} from '../site/js/condition-search.js';
-import {createMonteCarlo,checkpointResults} from '../site/js/monte-carlo.js';
-const raw=JSON.parse(await readFile(new URL('../site/data/default.json',import.meta.url)));
+import {migrateData,validate,remaining,resolveMatch,prepare,BASE_CASE,boundsOf} from '../docs/js/model.js';
+import {rulesFor,setMatchRules,mergeMatchRules,clearMatchRules,filterRuleOutcomes} from '../docs/js/match-assumptions.js';
+import {conditionedOutcomes} from '../docs/js/distributions.js';
+import {calculate} from '../docs/js/engine.js';
+import {exhaustiveCost} from '../docs/js/exhaustive-cost.js';
+import {necessaryMatchRules} from '../docs/js/necessary-assumptions.js';
+import {runConditionSearch,searchFingerprint} from '../docs/js/condition-search.js';
+import {createMonteCarlo,checkpointResults} from '../docs/js/monte-carlo.js';
+const raw=JSON.parse(await readFile(new URL('../docs/data/default.json',import.meta.url)));
 const rule=(metric,value,operator='gte')=>({id:`${metric}-${operator}-${value}`,metric,value,operator,source:'manual'});
 const fresh=()=>migrateData(raw);
 function small(){const d=fresh().divisions[0];d.cases=[];for(const m of remaining(d).slice(1))d.results[m.id]={homePoints:40,awayPoints:0,homeBattleDiffDelta:7,homeRoundDiffDelta:14};return d;}

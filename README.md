@@ -12,7 +12,7 @@ GitHub Pagesで公開できる、日本語の非公式順位確率計算ツー�
 必要条件からの引き継ぎは、一意のスコアだけでなく「X点以上」も保持します。
 手動仮定は維持し、同一条件の重複を避けてバトル探索へ切り替えます。
 探索規模・条件探索・厳密確率・モンテカルロは共通の絞り込みを使い、得失条件による確率の重みも反映します。
-[データ形式・仕様](docs/and-match-assumptions-proposal.md)
+[データ形式・仕様](documentation/and-match-assumptions-proposal.md)
 
 ## v0.12.0：残り日程の統合と仮定入力
 
@@ -84,7 +84,7 @@ AND条件の拡張はv0.13.0で実装しました。
 対象チームの残り試合ごとの条件を表示します。
 「第n節 A vs. B でAがx点以上」を「かつ」で接続し、十分条件が複数あれば
 いずれか1つを満たせば確定します。成立例と、条件を緩めた際の反例も確認できます。
-[マッチ条件の仕様](docs/match-conditions-proposal.md)を参照してください。
+[マッチ条件の仕様](documentation/match-conditions-proposal.md)を参照してください。
 
 ## v0.5.0 の画面
 
@@ -96,7 +96,7 @@ AND条件の拡張はv0.13.0で実装しました。
 必要・十分条件は、入力した仮定のもとで1位・PO進出を一度に探索します。
 シナリオ比較は画面から隠し、新規計算には適用しません。既存のケース定義と計算エンジンは保持しています。
 
-以降にある旧画面・単独目標・シナリオ前提の説明より、[最新の画面・入力仕様](docs/ui-inputs.md)を優先してください。
+以降にある旧画面・単独目標・シナリオ前提の説明より、[最新の画面・入力仕様](documentation/ui-inputs.md)を優先してください。
 
 ## できること
 
@@ -119,7 +119,7 @@ AND条件の拡張はv0.13.0で実装しました。
 
 ## モデル
 
-各プレイヤーマッチの勝率は双方50%、独立。最終スコア40–0 / 30–10 / 30–20 / 20–30 / 10–30 / 0–40の重みは1 / 2 / 1 / 1 / 2 / 1です。同ポイントは占有する順位へ均等配分します。バトル差・ラウンド差はデータとして保存しますが、ポイントモードの順位計算には使いません。バトルモードはポイント→バトル差、ラウンドモードはポイント→バトル差→ラウンド差で比較します。バトルモードは各バトル、ラウンドモードは各ラウンドの勝率を50%・独立と仮定します。延長も含め、ポイントと得失点差を同じ試合結果から導出します。3項目完全一致時には、競技細則に従って追加タイブレーク戦で順位を決めます。ユーザーが公式細則を確認した報告を根拠に確定ルールとして扱います（[出典記録](docs/rules-source.md)）。追加戦の勝敗・勝率は生成しません。実力差を考慮した予測ではありません。
+各プレイヤーマッチの勝率は双方50%、独立。最終スコア40–0 / 30–10 / 30–20 / 20–30 / 10–30 / 0–40の重みは1 / 2 / 1 / 1 / 2 / 1です。同ポイントは占有する順位へ均等配分します。バトル差・ラウンド差はデータとして保存しますが、ポイントモードの順位計算には使いません。バトルモードはポイント→バトル差、ラウンドモードはポイント→バトル差→ラウンド差で比較します。バトルモードは各バトル、ラウンドモードは各ラウンドの勝率を50%・独立と仮定します。延長も含め、ポイントと得失点差を同じ試合結果から導出します。3項目完全一致時には、競技細則に従って追加タイブレーク戦で順位を決めます。ユーザーが公式細則を確認した報告を根拠に確定ルールとして扱います（[出典記録](documentation/rules-source.md)）。追加戦の勝敗・勝率は生成しません。実力差を考慮した予測ではありません。
 
 厳密全探索を選んだ場合は、全組み合わせの重み付き列挙です。モンテカルロを選んだ場合は同じ条件付き分布から抽選します。自動的に近似へ切り替えることはありません。ポイントモードは小さい整数バッファとBigIntで整数を正確に保持し、同点配分の分母も保持します。詳細モードは試合の同一集計状態を厳密に統合し、BigIntの整数重みで列挙します。全チーム間の順位が変わらないと上下界で証明できる部分木は、その全確率を一括集計します。表示時のみ丸めます。実行時間は端末・ブラウザ・残り試合数に依存し、制限は設けていません。タブを閉じると計算は停止します。
 
@@ -145,7 +145,7 @@ npm test
 npm run build
 ```
 
-`dist/`が公開用の静的成果物です。ローカルで確認する場合は、任意のHTTPサーバーで`dist/`を配信してください。例：
+`docs/`が公開用サイト本体です。`npm run build`は配布・ローカル確認用に同じ内容を`dist/`へコピーします。ローカルで確認する場合は、任意のHTTPサーバーで`dist/`を配信してください。例：
 
 ```sh
 python -m http.server 8000 --directory dist
@@ -161,40 +161,43 @@ node scripts/verify-default.js
 
 ## GitHub Pagesへの公開
 
-1. このプロジェクトのファイル一式をGitHubリポジトリのルートに置きます。
-2. リポジトリのSettings → Pages → Build and deployment → Sourceで「GitHub Actions」を選びます。
-3. `main`ブランチへpushするか、Actionsの「Publish GitHub Pages」を手動実行します。
-4. テスト・静的成果物の生成・Pagesへのデプロイが順に実行されます。
+1. この構成を`main`ブランチへpushします。
+2. リポジトリのSettings → Pages → Build and deployment → Sourceで「Deploy from a branch」を選びます。
+3. Branchに`main`、フォルダーに`/docs`を選び、Saveを押します。
+4. GitHub Pagesの公開処理が完了すると、`https://tayama0324.github.io/sfl-calculator/`で閲覧できます。
 
-デフォルトブランチが`main`以外なら`.github/workflows/pages.yml`のbranchesを変更してください。相対パスを使用しているため、`https://ユーザー名.github.io/リポジトリ名/`の形式にも対応します。
-
-ソース転送先は https://github.com/tayama0324/sfl-calculator の sfl-handoff-20261109 ブランチです。GitHub Pagesは未公開です。mainのユーザー作成の初期コミットは維持し、.devcontainer設定を引き継ぎます。ソース一式は専用ブランチから取得してください。
+`docs/`には、そのまま配信できるHTML・CSS・JavaScript・標準データを配置しています。
+公開前のビルドや生成物のコピーは不要です。`.nojekyll`によりJekyll変換を無効にします。
+内部の仕様書・検証記録は`documentation/`へ分離し、Pagesの配信対象に含めません。
+`.github/workflows/ci.yml`はテストとビルドの確認のみを行います。公開はGitHubのブランチ公開機能が担当します。
+相対パスを使用しているため、リポジトリ名を含むURLでも動作します。
+[GitHub公式の公開元設定手順](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 
 ## ファイル構成
 
-- `site/`：ページ本体、CSS、JavaScript、標準データ。
-- `site/js/model.js`：データ検証、条件適用、現在値の再計算、表示精度。
-- `site/js/engine.js`：ポイントモードと探索モードの振り分け。
-- `site/js/detailed-engine.js`：得失点差を含む厳密列挙、証明可能な部分木集約、順位・PO上下限。
-- `site/js/distributions.js`：プレイヤーマッチ・チームマッチの厳密な同時分布。
-- `site/js/comparison-ui.js`：比較ケース編集・適用条件・比較結果の表示。
-- `site/js/monte-carlo.js`：試行・チェックポイント検証・再開・反復確認対応の95%区間。
-- `site/js/random.js`：シード・試行番号・試合に対応したChaCha20乱数と、偏りを避けた重み付き抽選。
-- `site/js/condition-search.js`：成績別の達成可能性・保証の探索、しきい値、反例の再構成。
-- `site/js/condition-search-ui.js`：条件探索の設定・結果・具体例。
-- `site/js/ranking.js`：順位比較・目標境界の分類。
-- `site/js/exhaustive-cost.js`：条件未適用の組合せ数と規模警告。
-- `site/js/monte-carlo-ui.js`：推定値・同点による幅・統計的な区間の表示。
-- `site/js/worker.js`：計算スレッド。
-- `site/data/default.json`：初期順位表と全対戦日程。
+- `docs/`：ページ本体、CSS、JavaScript、標準データ。
+- `docs/js/model.js`：データ検証、条件適用、現在値の再計算、表示精度。
+- `docs/js/engine.js`：ポイントモードと探索モードの振り分け。
+- `docs/js/detailed-engine.js`：得失点差を含む厳密列挙、証明可能な部分木集約、順位・PO上下限。
+- `docs/js/distributions.js`：プレイヤーマッチ・チームマッチの厳密な同時分布。
+- `docs/js/comparison-ui.js`：比較ケース編集・適用条件・比較結果の表示。
+- `docs/js/monte-carlo.js`：試行・チェックポイント検証・再開・反復確認対応の95%区間。
+- `docs/js/random.js`：シード・試行番号・試合に対応したChaCha20乱数と、偏りを避けた重み付き抽選。
+- `docs/js/condition-search.js`：成績別の達成可能性・保証の探索、しきい値、反例の再構成。
+- `docs/js/condition-search-ui.js`：条件探索の設定・結果・具体例。
+- `docs/js/ranking.js`：順位比較・目標境界の分類。
+- `docs/js/exhaustive-cost.js`：条件未適用の組合せ数と規模警告。
+- `docs/js/monte-carlo-ui.js`：推定値・同点による幅・統計的な区間の表示。
+- `docs/js/worker.js`：計算スレッド。
+- `docs/data/default.json`：初期順位表と全対戦日程。
 - `tests/`：独立した小規模列挙との照合、確率の保存則、条件・入力・更新の検証。
-- `docs/specification.md`：仕様。
+- `documentation/specification.md`：仕様。
 
 ## 毎節の更新
 
 「残り日程・登録結果」から実結果を登録します。仮定用のスコア選択とは別操作です。バトル差・ラウンド差を空欄にした場合、0ではなく不明として扱います。登録した試合の仮定は削除されます。設定はブラウザ単位で保存されるため、別の端末へ移す場合はJSONを書き出してください。
 
-標準状態を全閲覧者向けに更新する場合は、設定JSONを`site/data/default.json`へ反映して公開し直します。閲覧者の保存済み設定は自動上書きしません。「初期データに戻す」で公開版の標準状態へ戻せます。
+標準状態を全閲覧者向けに更新する場合は、設定JSONを`docs/data/default.json`へ反映して公開し直します。閲覧者の保存済み設定は自動上書きしません。「初期データに戻す」で公開版の標準状態へ戻せます。
 
 ## 設定の移行と詳細モードの入力
 
@@ -202,7 +205,7 @@ node scripts/verify-default.js
 
 バトルモードには全チームの現在のバトル差、ラウンドモードにはラウンド差も必要です。登録した結果の差分が不明なら、個別結果を補完してください。現在の累計だけが判明している場合は、「基準となる集計値を編集」の「入力を現在の累計として再設定する」を選択し、現在値を補完できます。この操作は登録済み結果を基準へ統合するため、以後その過去分の訂正は基準値の編集で行います。
 
-仕様は[シナリオ比較](docs/scenario-comparison.md)と[全探索モード](docs/exhaustive-modes.md)、検証状況は[検証記録](docs/verification.md)を参照してください。
+仕様は[シナリオ比較](documentation/scenario-comparison.md)と[全探索モード](documentation/exhaustive-modes.md)、検証状況は[検証記録](documentation/verification.md)を参照してください。
 
 ## モンテカルロの使用方法
 
@@ -226,7 +229,7 @@ node scripts/verify-default.js
 node scripts/verify-monte-carlo.js
 ```
 
-詳細は[モンテカルロ仕様](docs/monte-carlo.md)を参照してください。
+詳細は[モンテカルロ仕様](documentation/monte-carlo.md)を参照してください。
 
 ## 必要・十分条件の探索
 
@@ -245,4 +248,4 @@ node scripts/verify-monte-carlo.js
 
 厳密全探索と条件探索には、条件を無視した組合せ数（6^残試合数／36^残試合数／426^残試合数）を表示します。確率計算は基準を含むケース数を掛けた参考上限も表示します。1億以上で注意、1兆以上で強い警告を出しますが、禁止や追加確認、自動切替はしません。実際の処理量は条件や部分木集約で減る場合があり、所要時間の上限ではありません。
 
-詳細な条件探索は依然として非常に大規模になり得ます。初期日程全体のラウンドまでの条件探索が実用時間内に完了することは保証しません。仕様と検証記録はdocs/condition-search.mdおよびdocs/verification.mdを参照してください。
+詳細な条件探索は依然として非常に大規模になり得ます。初期日程全体のラウンドまでの条件探索が実用時間内に完了することは保証しません。仕様と検証記録はdocumentation/condition-search.mdおよびdocumentation/verification.mdを参照してください。

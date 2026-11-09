@@ -1,7 +1,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { prepare, verifyFractions, formatPercent } from '../site/js/model.js';
-import { calculate } from '../site/js/engine.js';
-const data = JSON.parse(await readFile(new URL('../site/data/default.json', import.meta.url)));
+import { prepare, verifyFractions, formatPercent } from '../docs/js/model.js';
+import { calculate } from '../docs/js/engine.js';
+const data = JSON.parse(await readFile(new URL('../docs/data/default.json', import.meta.url)));
 const reports = [];
 for (const d of data.divisions) {
   const started = performance.now(); let last = started;

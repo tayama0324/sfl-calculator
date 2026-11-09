@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {searchPrepared,verifySearchResult,reconstructExample,runConditionSearch} from '../site/js/condition-search.js';
-import {analyzeSingleMatchConditions} from '../site/js/single-match-conditions.js';
-import {renderSearchResult} from '../site/js/condition-search-ui.js';
+import {searchPrepared,verifySearchResult,reconstructExample,runConditionSearch} from '../docs/js/condition-search.js';
+import {analyzeSingleMatchConditions} from '../docs/js/single-match-conditions.js';
+import {renderSearchResult} from '../docs/js/condition-search-ui.js';
 import {readFile} from 'node:fs/promises';
-import {migrateData} from '../site/js/model.js';
+import {migrateData} from '../docs/js/model.js';
 const base={teamIds:['a','b','c','d','e','f'],battleDiffs:[0,0,0,0,0,0],roundDiffs:[0,0,0,0,0,0]};
 const cmp=(a,b)=>a.reduce((n,v,i)=>n||v-b[i],0);
 function oracle(input,cutoff){
@@ -85,7 +85,7 @@ test('marginal bounds deliberately do not claim to find conjunction-only guarant
   }
 });
 test('real input exports new conditions, keeps own conjunctions, and explains empty marginal results',async()=>{
-  const data=migrateData(JSON.parse(await readFile(new URL('../site/data/default.json',import.meta.url))));
+  const data=migrateData(JSON.parse(await readFile(new URL('../docs/data/default.json',import.meta.url))));
   const d=data.divisions[0];d.cases=[];
   // Keep a small real fixture with fixed scores, including an extension score.
   for(const m of d.fixtures)if(!d.baseline.includedMatchIds.includes(m.id)&&!d.results[m.id])d.fixedScores[m.id]='30-20';

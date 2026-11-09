@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {migrateData,prepare,remaining,current,validate,BASE_CASE,validDifferences} from '../site/js/model.js';
-import {conditionedOutcomes} from '../site/js/distributions.js';
-import {createMonteCarlo} from '../site/js/monte-carlo.js';
-const raw=JSON.parse(await readFile(new URL('../site/data/default.json',import.meta.url)));
+import {migrateData,prepare,remaining,current,validate,BASE_CASE,validDifferences} from '../docs/js/model.js';
+import {conditionedOutcomes} from '../docs/js/distributions.js';
+import {createMonteCarlo} from '../docs/js/monte-carlo.js';
+const raw=JSON.parse(await readFile(new URL('../docs/data/default.json',import.meta.url)));
 const setup=()=>{const data=migrateData(raw),d=data.divisions[0],m=remaining(d)[0];d.fixedScores={[m.id]:'30-20'};d.fixedDetails={[m.id]:{battleDiff:1,roundDiff:0}};return {data,d,m};};
 test('hypothetical differences filter joint outcomes without changing current standings or remaining fixtures',()=>{
   const {data,d,m}=setup(),before=current(d),count=remaining(d).length;

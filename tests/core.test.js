@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { SCORES, candidates, prepare, remaining, current, validate, verifyFractions, formatPercent, validDifferences } from '../site/js/model.js';
-import { calculate } from '../site/js/engine.js';
+import { SCORES, candidates, prepare, remaining, current, validate, verifyFractions, formatPercent, validDifferences } from '../docs/js/model.js';
+import { calculate } from '../docs/js/engine.js';
 
-const initial = JSON.parse(await readFile(new URL('../site/data/default.json', import.meta.url)));
+const initial = JSON.parse(await readFile(new URL('../docs/data/default.json', import.meta.url)));
 const clone = () => structuredClone(initial);
 const baseInput = (points = [0,0,0,0,0,0], matches = []) => ({ points, matches, teamIds: ['a','b','c','d','e','f'] });
 const match = (home, away, outcomes = SCORES) => ({ home, away, outcomes });

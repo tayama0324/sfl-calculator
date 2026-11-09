@@ -1,7 +1,7 @@
 import {readFile,writeFile} from 'node:fs/promises';
-import {migrateData} from '../site/js/model.js';
-import {createMonteCarlo,validateCheckpoint,checkpointResults} from '../site/js/monte-carlo.js';
-const original=JSON.parse(await readFile(new URL('../site/data/default.json',import.meta.url)));
+import {migrateData} from '../docs/js/model.js';
+import {createMonteCarlo,validateCheckpoint,checkpointResults} from '../docs/js/monte-carlo.js';
+const original=JSON.parse(await readFile(new URL('../docs/data/default.json',import.meta.url)));
 const reports=[];
 for(const id of ['S','F'])for(const mode of ['points','battles','rounds']){
   const d=migrateData(original).divisions.find(d=>d.id===id);
@@ -15,4 +15,4 @@ for(const id of ['S','F'])for(const mode of ['points','battles','rounds']){
   console.log(`${id} ${mode}: 100000 paired trials × ${checkpoint.records.length} cases, ${seconds.toFixed(3)}s; all conservation checks passed`);
   if(checkpointResults(checkpoint).length!==3)throw new Error('Missing results');
 }
-await writeFile(new URL('../docs/monte-carlo-verification.json',import.meta.url),JSON.stringify(reports,null,2)+'\n');
+await writeFile(new URL('../documentation/monte-carlo-verification.json',import.meta.url),JSON.stringify(reports,null,2)+'\n');

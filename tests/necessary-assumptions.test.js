@@ -1,9 +1,9 @@
-import {mergeMatchRules} from '../site/js/match-assumptions.js';
+import {mergeMatchRules} from '../docs/js/match-assumptions.js';
 import test from 'node:test';import assert from 'node:assert/strict';
-import {necessaryMatchGroups,necessaryAssumptions,necessaryMatchRules} from '../site/js/necessary-assumptions.js';
-import {SCORES,migrateData} from '../site/js/model.js';
-import {runConditionSearch,prepareSearch,verifySearchResult,reconstructExample} from '../site/js/condition-search.js';
-import {renderSearchResult} from '../site/js/condition-search-ui.js';
+import {necessaryMatchGroups,necessaryAssumptions,necessaryMatchRules} from '../docs/js/necessary-assumptions.js';
+import {SCORES,migrateData} from '../docs/js/model.js';
+import {runConditionSearch,prepareSearch,verifySearchResult,reconstructExample} from '../docs/js/condition-search.js';
+import {renderSearchResult} from '../docs/js/condition-search-ui.js';
 import {readFile} from 'node:fs/promises';
 function fixture(home,away,scores=SCORES){return {initial:{teamIds:['a','b']},matches:[{id:'m',home:0,away:1,outcomeSet:0}],outcomeSets:[scores],singleMatchConditions:{analysis:{necessary:[...(home?[{matchId:'m',teamId:'a',points:home}]:[]),...(away?[{matchId:'m',teamId:'b',points:away}]:[])]}}};}
 test('score contraction only replaces a conjunction with its unique legal outcome',()=>{
@@ -33,7 +33,7 @@ test('applying conditions fixes only forced scores and never chooses arbitrary 3
   const impossible=fixture(0,0);impossible.singleMatchConditions.analysis.necessary=null;assert.throws(()=>necessaryAssumptions(impossible));
 });
 test('necessary clauses are unabridged, contracted, button-free per clause, and only point mode offers apply',async()=>{
-  const data=migrateData(JSON.parse(await readFile(new URL('../site/data/default.json',import.meta.url))));
+  const data=migrateData(JSON.parse(await readFile(new URL('../docs/data/default.json',import.meta.url))));
   const d=data.divisions[0];d.cases=[];
   for(const m of d.fixtures)if(!d.baseline.includedMatchIds.includes(m.id)&&!d.results[m.id])d.fixedScores[m.id]='30-20';
   const c={mode:'points',goal:'all',targetTeamId:d.teams[0].id,caseId:'@input'},r=runConditionSearch(d,c);
@@ -49,7 +49,7 @@ test('necessary clauses are unabridged, contracted, button-free per clause, and 
 });
 
 test('iXA second-place regression: preserve its unique points case and find a battle-qualified outcome',async()=>{
-  const data=migrateData(JSON.parse(await readFile(new URL('../site/data/default.json',import.meta.url))));
+  const data=migrateData(JSON.parse(await readFile(new URL('../docs/data/default.json',import.meta.url))));
   const d=data.divisions[0];d.cases=[];
   const c={mode:'points',goal:'all',targetTeamId:'ixa',caseId:'@input'};
   // Independent enumeration of the nine matches, with no engine pruning,
