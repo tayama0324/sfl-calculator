@@ -6,6 +6,7 @@
 import { calculateDetailed } from './detailed-engine.js';
 export function calculate(input, onProgress = () => {}) {
   if (input.mode && input.mode !== 'points') return calculateDetailed(input, onProgress);
+  if(input.matches.some(m=>m.outcomes.some(([, ,w])=>![1,2].includes(w))))return calculateWeightedPoints(input,onProgress);
   return calculatePoints(input, onProgress);
 }
 function calculatePoints(input, onProgress = () => {}) {
@@ -62,4 +63,19 @@ function calculatePoints(input, onProgress = () => {}) {
     teamIds, denominator: denominator.toString(), processed: processed.toString(),
     ranks: Array.from({ length: 6 }, (_, t) => ranks.slice(t * 6, t * 6 + 6).map(String)),
   };
+}
+
+function calculateWeightedPoints(input,onProgress){
+  const {matches,teamIds}=input,points=[...input.points],ranks=Array(36).fill(0n);
+  if(points.length!==6||points.some(p=>!Number.isSafeInteger(p)||p<0||p>400)||matches.length>30)throw new Error('計算入力が不正です。');
+  for(const m of matches)if(!Number.isInteger(m.home)||!Number.isInteger(m.away)||m.home<0||m.home>5||m.away<0||m.away>5||m.home===m.away||!m.outcomes.length||m.outcomes.some(([h,a,w])=>!Number.isInteger(h)||!Number.isInteger(a)||BigInt(w)<=0n))throw new Error('試合候補が不正です。');
+  const total=matches.reduce((n,m)=>n*BigInt(m.outcomes.length),1n),denominator=matches.reduce((n,m)=>n*m.outcomes.reduce((s,o)=>s+BigInt(o[2]),0n),1n)*60n;
+  let processed=0n,last=performance.now();
+  function visit(depth,weight){
+    if(depth<matches.length){const m=matches[depth];for(const [h,a,w]of m.outcomes){points[m.home]+=h;points[m.away]+=a;visit(depth+1,weight*BigInt(w));points[m.home]-=h;points[m.away]-=a;}return;}
+    for(let i=0;i<6;i++){let higher=0,tied=0;for(const p of points){if(p>points[i])higher++;else if(p===points[i])tied++;}for(let r=higher;r<higher+tied;r++)ranks[i*6+r]+=weight*(60n/BigInt(tied));}
+    processed++;if(performance.now()-last>250){onProgress({processed:String(processed),total:String(total)});last=performance.now();}
+  }
+  onProgress({processed:'0',total:String(total)});visit(0,1n);onProgress({processed:String(processed),total:String(total)});
+  return {kind:'allocated',mode:'points',teamIds,denominator:String(denominator),processed:String(processed),ranks:Array.from({length:6},(_,i)=>ranks.slice(i*6,i*6+6).map(String))};
 }

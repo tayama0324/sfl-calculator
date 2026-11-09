@@ -135,17 +135,17 @@ test('target vs other teams cutoff vector agrees with rank-group classification'
     }
   }
 });
-test('cost uses unconditional aggregate states and BigInt across modes and warning boundaries',()=>{
+test('cost reflects assumptions with BigInt across modes and warning boundaries',()=>{
   const x=data(),s=x.divisions[0],f=x.divisions[1];
   assert.equal(exhaustiveCost(s,'points',1).perCase,'10077696');assert.equal(exhaustiveCost(f,'points',1).perCase,'2176782336');
   assert.equal(exhaustiveCost(s,'battles',1).perCase,'101559956668416');assert.equal(exhaustiveCost(s,'rounds',1).perCase,'462047252296310925912576');
-  const old=exhaustiveCost(s,'rounds',2);for(const m of remaining(s))s.fixedScores[m.id]='40-0';s.cases[0].conditions=[{targetTeamId:s.teams[0].id,mode:'win'}];assert.deepEqual(exhaustiveCost(s,'rounds',2),old);
+  const old=exhaustiveCost(s,'rounds',2);for(const m of remaining(s))s.fixedScores[m.id]='40-0';s.cases[0].conditions=[{targetTeamId:s.teams[0].id,mode:'win'}];assert(BigInt(exhaustiveCost(s,'rounds',2).total)<BigInt(old.total));assert.equal(exhaustiveCost(s,'points',2).total,'2');
   const m=remaining(s)[0];s.results[m.id]={homePoints:40,awayPoints:0,homeBattleDiffDelta:7,homeRoundDiffDelta:14};assert.equal(exhaustiveCost(s,'points',1).matches,8);
   assert.equal(costLevel(99999999n),'normal');assert.equal(costLevel(100000000n),'notice');assert.equal(costLevel(999999999999n),'notice');assert.equal(costLevel(1000000000000n),'warning');
-  assert(!renderCost(s,{mode:'rounds',cases:1,conditionSearch:true}).includes('cost-to-mc'));assert(renderCost(s,{mode:'rounds',cases:1}).includes('cost-to-mc'));
+  assert(!renderCost(s,{mode:'rounds',cases:1,conditionSearch:true}).includes('cost-to-mc'));assert(renderCost(f,{mode:'rounds',cases:1}).includes('cost-to-mc'));
 });
 test('condition UI does not show thresholds for incomplete searches and distinguishes complete ties',()=>{
-  const x=data(),d=x.divisions[0],c=x.conditionSearch.S;assert(!renderSearchControls(d,c,null,'').includes('calculation-method'));assert(renderSearchControls(d,c,null,'').includes('通常状態'));
+  const x=data(),d=x.divisions[0],c=x.conditionSearch.S;assert(!renderSearchControls(d,c,null,'').includes('calculation-method'));assert(renderSearchControls(d,c,null,'').includes('1回の探索'));
   const saved={status:'cancelled',input:d,config:c,fingerprint:searchFingerprint(d,c)};
   assert(renderSearchResult(saved,d,c).includes('未完了'));assert(!renderSearchResult(saved,d,c).includes('<th>十分条件</th>'));
   for(const m of remaining(d))d.results[m.id]={homePoints:40,awayPoints:0,homeBattleDiffDelta:7,homeRoundDiffDelta:14};
@@ -160,4 +160,65 @@ test('real worker returns only complete condition results with verified witnesse
     const messages=await new Promise((resolve,reject)=>{const all=[],timeout=setTimeout(()=>reject(new Error('worker timeout')),10000);worker.on('error',error=>{clearTimeout(timeout);reject(error);});worker.on('message',m=>{all.push(m);if(m.type==='error'){clearTimeout(timeout);reject(new Error(m.message));}if(m.type==='search-done'){clearTimeout(timeout);resolve(all);}});worker.postMessage({type:'condition-search',division:d,config:x.conditionSearch.S});});
     assert(messages.some(m=>m.type==='search-progress'));const r=messages.at(-1).result;assert(r.complete);assert(verifySearchResult(r));assert.equal(r.processed,r.total);
   }finally{await worker.terminate();}
+});
+
+test('combined first and PO search matches independent enumeration with and without pruning',()=>{
+  for(const mode of ['points','battles','rounds'])for(let seed=0;seed<12;seed++){
+    const rows=outcomes(mode),subset=[rows[seed%rows.length],rows[(seed*7+3)%rows.length],rows[(seed*11+5)%rows.length]];
+    const source=input(mode,[game(0,1,subset),game(2,3,subset),game(0,4,subset)],[seed*10,40,60,80,20,0]);
+    for(const optimize of [true,false]){
+      const both=searchPrepared(source,{targetTeamId:'a',goal:'both',optimize});
+      assert(verifySearchResult(both));
+      for(const [goal,cutoff]of [['first',1],['po',3]]){
+        assert.deepEqual(flags(both.results[goal]),oracle(source,0,cutoff));
+        assert.deepEqual(metricNumbers(both.results[goal]),metricNumbers(searchPrepared(source,{targetTeamId:'a',goal,optimize})));
+      }
+      assert.equal(both.processed,both.total);
+    }
+  }
+});
+test('combined boundary ties distinguish guaranteed PO from undecided first and verify exported examples',()=>{
+  const source=input('rounds',[],[80,80,80,20,10,0]);
+  const both=searchPrepared(source,{targetTeamId:'a',goal:'both'});
+  assert.equal(both.results.po.analysis.status,'certain');
+  assert.equal(both.results.first.analysis.status,'possible-not-guaranteed');
+  assert(verifySearchResult(JSON.parse(JSON.stringify(both))));
+  both.results.first.cells[0].success=0;
+  assert(!verifySearchResult(both));
+});
+test('input-based combined search applies fixed differences and ignores stored comparison cases',()=>{
+  const x=data(),d=x.divisions[0];
+  for(const m of remaining(d))d.results[m.id]={homePoints:40,awayPoints:0,homeBattleDiffDelta:7,homeRoundDiffDelta:14};
+  const m=d.fixtures.at(-1);delete d.results[m.id];d.fixedScores={[m.id]:'30-20'};d.fixedDetails={[m.id]:{battleDiff:1,roundDiff:0}};
+  d.cases=[{id:'hidden',name:'Hidden',conditions:[{targetTeamId:m.homeTeamId,mode:'swept'}]}];
+  const c={targetTeamId:m.homeTeamId,mode:'rounds',goal:'both',caseId:'@input'};
+  const both=runConditionSearch(d,c);
+  assert(verifySearchResult(both));
+  for(const goal of ['first','po']){
+    const r=both.results[goal],e=reconstructExample(r,0);
+    assert.equal(e.games.length,1);assert.equal(e.games[0].homePoints,30);
+    assert.equal(e.games[0].battleDiff,1);assert.equal(e.games[0].roundDiff,0);
+  }
+  assert(verifySearchResult(JSON.parse(JSON.stringify(both))));
+  const changed=structuredClone(d);changed.fixedDetails[m.id].roundDiff=1;
+  assert.notEqual(searchFingerprint(d,c),searchFingerprint(changed,c));
+  const normal={...c,caseId:'@normal'};assert.equal(searchFingerprint(d,normal),searchFingerprint(changed,normal));
+});
+
+test('first, top two and PO share traversal and agree with independent rank-cutoff enumeration',()=>{
+  for(const mode of ['points','battles','rounds'])for(let seed=0;seed<8;seed++){
+    const rows=outcomes(mode),subset=[rows[seed%rows.length],rows[(seed*7+3)%rows.length],rows[(seed*11+5)%rows.length]];
+    const source=input(mode,[game(0,1,subset),game(2,3,subset),game(0,4,subset)],[seed*10,40,60,80,20,0]);
+    for(const optimize of [true,false]){
+      const all=searchPrepared(source,{targetTeamId:'a',goal:'all',optimize});
+      assert(verifySearchResult(JSON.parse(JSON.stringify(all))));
+      for(const [goal,cutoff]of [['first',1],['second',2],['po',3]])assert.deepEqual(flags(all.results[goal]),oracle(source,0,cutoff));
+    }
+  }
+  const tied=input('rounds',[],[100,80,80,30,20,0]);
+  const all=searchPrepared(tied,{targetTeamId:'b',goal:'all'});
+  assert.equal(all.results.first.analysis.status,'impossible');
+  assert.equal(all.results.second.analysis.status,'possible-not-guaranteed');
+  assert.equal(all.results.po.analysis.status,'certain');
+  assert.equal(reconstructExample(all.results.second,0).classification.status,'unresolved');
 });

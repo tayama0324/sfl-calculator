@@ -16,12 +16,12 @@
       <div><div class="eyebrow"><span class="live-dot"></span> SFL 2026 · 非公式分析ツール</div><h1>最後の一戦まで、<br><em>可能性を計算する。</em></h1><p>残りの対戦、もしもの結果。その先の順位を、確率で見る。</p></div>
       <div class="hero-number" aria-hidden="true">TOP<span>3</span><small>ROAD TO PLAYOFFS</small></div>
     </section>
-    <div class="model-notice"><span class="notice-icon" aria-hidden="true">i</span><p><b>ポイントのみの簡易モデル</b>　各プレイヤーマッチの勝率は50%。同ポイントは占有順位に均等配分します。公式のバトル差・ラウンド差による順位は反映しません。</p></div>
+    <div class="model-notice"><span class="notice-icon" aria-hidden="true">i</span><details><summary>計算モデル・同点の扱いについて</summary><p><b>ポイントのみの簡易モデル</b>　各プレイヤーマッチの勝率は50%。同ポイントは占有順位に均等配分します。公式のバトル差・ラウンド差による順位は反映しません。</p></details></div>
     <div id="message" class="message" role="status" hidden></div>
     <div id="app"><p class="loading">大会データを読み込んでいます…</p></div>
     <noscript><p>計算にはJavaScriptを有効にしてください。</p></noscript>
     <footer><div><b>SFL RANK PROBABILITY LAB</b><p>非公式ファンツール。株式会社カプコンおよび大会主催者とは関係ありません。</p></div><div><a href="https://sf.esports.capcom.com/sfl2026/schedule/" target="_blank" rel="noreferrer">公式日程 ↗</a><a href="https://kakuge-checker.com/topic/view/09243/" target="_blank" rel="noreferrer">日程の参照元 ↗</a></div></footer>
   </main>
-  <dialog id="result-dialog"><form id="result-form"><div class="section-heading"><h2>確定結果を登録</h2><button type="button" class="icon-button" id="close-dialog" aria-label="閉じる">×</button></div><p id="match-title"></p><p id="dialog-error" class="message error" role="alert" hidden></p><p class="muted">仮定ではなく、実際に終了した試合を登録します。増分はホーム側の値を入力してください。</p><label>最終スコア（ホーム – アウェイ）<select name="score" required></select></label><div class="two-fields"><label>バトル差の増分<input name="battle" type="number" step="1" min="-9" max="9" placeholder="不明なら空欄"></label><label>ラウンド差の増分<input name="round" type="number" step="1" min="-60" max="60" placeholder="不明なら空欄"></label></div><p class="muted">未入力は不明として保存します。ポイントから差分は推定しません。</p><div class="dialog-actions"><button type="button" id="delete-result" class="danger-button">登録を取り消す</button><button type="submit" class="primary-button">結果を保存</button></div></form></dialog>
+  <dialog id="result-dialog"><form id="result-form"><div class="section-heading"><h2>試合の条件を入力</h2><button type="button" class="icon-button" id="close-dialog" aria-label="閉じる">×</button></div><p id="match-title"></p><p id="dialog-error" class="message error" role="alert" hidden></p><p id="result-hint" class="muted">将来の仮定です。すべての条件を「かつ（AND）」で適用します。現在の累計は変わりません。得失はホーム側の獲得数−失った数です。</p><div id="rule-editor"></div><button type="button" id="add-rule" class="secondary-button">条件を追加 ＋</button><p id="rule-preview" class="rule-preview" role="status"></p><div class="dialog-actions"><button type="button" id="delete-result" class="danger-button">この入力を解除</button><button type="submit" id="save-rules" class="primary-button">条件を保存</button></div></form></dialog>
 </body>
 </html>

@@ -1,5 +1,8 @@
-import { SCORES, EXPLORATION_MODES, CALCULATION_METHODS, rankingLabel, prepare, scoreKey, remaining, current, validate, verifyFractions, migrateData, BASE_CASE } from './model.js';
-import { escape, modeNotice, renderCases, renderComparison } from './comparison-ui.js';
+import {rulesFor,setMatchRules,mergeMatchRules,clearMatchRules,ruleErrors,ruleText,exactRuleScore,ASSUMPTION_METRICS,ASSUMPTION_OPERATORS,filterRuleOutcomes} from './match-assumptions.js';
+import {resultAssumptions,renderAssumptionWarning} from './assumption-warning.js';
+import {necessaryMatchRules} from './necessary-assumptions.js';
+import { SCORES, EXPLORATION_MODES, CALCULATION_METHODS, rankingLabel, prepare, scoreKey, remaining, current, validate, verifyFractions, migrateData, BASE_CASE,resolveMatch } from './model.js';
+import { escape, modeNotice, renderProbability } from './comparison-ui.js';
 import { simulationFingerprint, validateCheckpoint, emptyCheckpoint } from './monte-carlo.js';
 import { newSeed } from './random.js';
 import {prepareSearch,searchFingerprint,verifySearchResult} from './condition-search.js';
@@ -12,11 +15,14 @@ const STORE = 'sfl-rank-probability:v3';
 const teamColors = ['#c0adff', '#ff9355', '#ffd270', '#91cdb0', '#eb7c87', '#7cb9e7'];
 const signed = n => n === null ? '不明' : `${n > 0 ? '+' : ''}${n}`;
 let defaults, data, active = 'S', storageStatus = 'このブラウザに自動保存', editingMatch = null;
+let draftRules=[];
 let run = null, lastRunStatus = '', timer, feature='probability';
 const searchResults=new Map();
-const searchConfig=()=>data.conditionSearch[active];
+const searchConfig=()=>({...data.conditionSearch[active],goal:'all',caseId:'@input'});
 const results = new Map();
 const division = () => data.divisions.find(d => d.id === active);
+// Keep legacy comparison cases in settings, but do not apply hidden conditions.
+const inputDivision = () => ({...division(),cases:[]});
 const fingerprint = d => JSON.stringify(d);
 const team = (d, id) => d.teams.find(t => t.id === id);
 const notice = (text, error = false) => {
@@ -42,21 +48,66 @@ function change(mutator, renderPage = true) {
 function scoreOptions(selected = '', placeholder = '指定なし · 通常の確率分布') {
   return `<option value="">${placeholder}</option>` + SCORES.map(([h, a]) => `<option value="${scoreKey(h, a)}" ${selected === scoreKey(h, a) ? 'selected' : ''}>${h} – ${a}${h + a === 50 ? '（延長）' : ''}</option>`).join('');
 }
-function renderResult(d) { return feature==='conditions'?renderSearchResult(searchResults.get(d.id),d,searchConfig()):renderComparison(results.get(d.id),d); }
-function bindExampleButtons(){document.querySelectorAll('[data-search-example]').forEach(button=>button.onclick=()=>{const saved=searchResults.get(active);if(saved?.status==='done'){saved.exampleIndex=Number(button.dataset.searchExample);renderOutput();}});}
+function currentSavedResult(){return (feature==='conditions'?searchResults:results).get(active);}
+function renderResult(d) {
+  const saved=currentSavedResult();
+  return renderAssumptionWarning(saved,{disabled:!!run,conditions:feature==='conditions'})+(feature==='conditions'?renderSearchResult(saved,d,searchConfig()):renderProbability(saved,{...d,cases:[]}));
+}
+function bindExampleButtons(){
+  document.querySelectorAll('[data-clear-assumptions-rerun]').forEach(button=>button.onclick=()=>{
+    if(run)return;
+    if(change(d=>{clearMatchRules(d);})){
+      if(feature==='conditions')startConditionSearch();else startCalculation(false);
+    }
+  });
+  document.querySelectorAll('[data-apply-necessary]').forEach(button=>button.onclick=()=>{
+    const saved=searchResults.get(active);
+    if(run||saved?.status!=='done')return;
+    if(saved.fingerprint!==searchFingerprint(inputDivision(),searchConfig()))return notice('入力が変更されています。必要条件を再探索してください。',true);
+    try{
+      const r=saved.result.results[button.dataset.applyNecessary];
+      const additions=necessaryMatchRules(r);
+      if(change((d,next)=>{
+        mergeMatchRules(d,additions);
+        d.explorationMode='battles';
+        next.conditionSearch[active].mode='battles';
+      })){
+        notice('必要条件を既存の仮定にANDで追加し、バトル探索へ切り替えました。点数の上下限は条件のまま引き継いでいます。探索ボタンで計算できます。');
+        $('#search-mode')?.scrollIntoView({block:'center'});
+      }
+    }catch(error){notice(error.message,true);}
+  });
+  document.querySelectorAll('[data-search-example]').forEach(button=>button.onclick=()=>{
+    const saved=searchResults.get(active);if(saved?.status!=='done')return;
+    const goal=button.dataset.searchGoal,showMatch=button.hasAttribute('data-match-witness');
+    if(saved.result.kind==='sfl-condition-search-results'){
+      saved.exampleIndices??={};saved.exampleIndices[goal]=Number(button.dataset.searchExample);
+      saved.exampleLabels??={};saved.exampleLabels[goal]=button.textContent.trim();
+    }else {saved.exampleIndex=Number(button.dataset.searchExample);saved.exampleLabel=button.textContent.trim();}
+    renderOutput();
+    if(showMatch){const details=document.getElementById(`examples-${goal}`);details.open=true;details.scrollIntoView({block:'nearest'});}
+  });
+}
 function renderOutput() {
   const target=$('#result-content');
   if (!target) return;
   const open=[...target.querySelectorAll('details[open]')].map(el=>el.id).filter(Boolean);
   target.innerHTML=renderResult(division());
+  target.closest('.result-panel').classList.toggle('has-assumptions',resultAssumptions(currentSavedResult()).length>0);
   updateResumeAvailability();bindExampleButtons();
   for (const id of open) target.querySelector(`#${CSS.escape(id)}`)?.setAttribute('open','');
 }
 function renderFixture(d, m) {
-  const result = d.results[m.id];
-  return `<article class="fixture ${result ? 'done' : ''}"><div class="fixture-top"><span>${escape(m.scheduledAt || '日付未設定')}</span><span>${result ? '結果登録済み' : '未消化'}</span></div><div class="fixture-teams"><span><small>H</small>${escape(team(d, m.homeTeamId).shortName)}</span><span class="versus">VS</span><span><small>A</small>${escape(team(d, m.awayTeamId).shortName)}</span></div>${result ? `<div class="fixture-score">${result.homePoints} – ${result.awayPoints}</div>` : `<label class="sr-label"><span class="muted" style="font-size:10px;margin-top:10px">仮定スコア（ホーム – アウェイ）</span><select data-fixed="${escape(m.id)}" aria-label="第${m.round}節 ${escape(team(d,m.homeTeamId).name)} 対 ${escape(team(d,m.awayTeamId).name)} の仮定">${scoreOptions(d.fixedScores[m.id])}</select></label>`}<div class="fixture-actions"><button class="tiny-button secondary-button" data-result="${escape(m.id)}">${result ? '訂正・取り消し' : '実結果を登録 ↗'}</button></div></article>`;
+  const rules=rulesFor(d,m.id),fixed=exactRuleScore(rules);
+  return `<article class="fixture ${rules.length?'assumed':''}"><div class="fixture-top"><span>${escape(m.scheduledAt || '日付未設定')}</span><span class="tag">${rules.length?`条件${rules.length}件`:'未指定'}</span></div><div class="fixture-teams"><span><small>H</small>${escape(team(d,m.homeTeamId).shortName)}</span><span class="versus">対</span><span><small>A</small>${escape(team(d,m.awayTeamId).shortName)}</span></div><label class="sr-label"><span>仮定スコア（H – A）</span><select data-fixed="${escape(m.id)}" aria-label="第${m.round}節 ${escape(team(d,m.homeTeamId).name)} 対 ${escape(team(d,m.awayTeamId).name)} の仮定">${!fixed&&rules.length?'<option value="@rules" selected>条件で指定</option>':''}${scoreOptions(fixed??(rules.length?'@rules':''),'未指定（すべての結果を探索）')}</select></label>${rules.length?`<p class="fixture-differences">${rules.map(r=>escape(ruleText(r,team(d,m.homeTeamId).shortName,team(d,m.awayTeamId).shortName))).join('<br>かつ ')}<br><small>すべてANDで適用</small></p>`:''}<div class="fixture-actions"><button class="tiny-button secondary-button" data-result="${escape(m.id)}">詳細を入力</button></div></article>`;
+}
+function renderSchedule(d,editable) {
+  const rounds=[...new Set(editable.map(m=>m.round))],assumed=editable.filter(m=>rulesFor(d,m.id).length).length;
+  return `<details class="schedule-panel" id="schedule"><summary>残り日程・将来の仮定 <span class="schedule-count">${editable.length}試合${assumed?` · 仮定${assumed}試合・条件${editable.reduce((n,m)=>n+rulesFor(d,m.id).length,0)}件を適用中`:''}</span></summary><div class="section-heading"><p class="section-intro">「この試合がこの結果なら」を指定できます。空欄の試合はすべての結果を探索します。</p><button class="tiny-button secondary-button" id="clear-fixed">仮定を解除</button></div><p class="input-note">「詳細を入力」でポイントの上下限や得失点差も指定できます。仮定は現在の累計を変えず、両方の探索に反映されます。</p>${rounds.map((r,i)=>`<details class="schedule-round" id="round-${d.id}-${r}" ${i===0?'open':''}><summary>第${r}節 <span>${editable.filter(m=>m.round===r).length}試合${editable.some(m=>m.round===r&&rulesFor(d,m.id).length)?' · 仮定あり':''}</span></summary><div class="fixtures">${editable.filter(m=>m.round===r).map(m=>renderFixture(d,m)).join('')}</div></details>`).join('')}${editable.length?'':'<p class="input-note">残り試合はありません。</p>'}</details>`;
 }
 function render() {
+  const openDetails=[...document.querySelectorAll('#app details[id][open]')].map(el=>el.id);
+  const closedDetails=[...document.querySelectorAll('#app details[id]:not([open])')].map(el=>el.id);
   const focused = document.activeElement;
   const focusId = focused?.id;
   const focusFixed = focused?.dataset?.fixed;
@@ -64,21 +115,21 @@ function render() {
   const c=searchConfig(),visibleMode=feature==='conditions'?c.mode:d.explorationMode;
   $('.model-notice p').innerHTML = feature==='conditions'?searchNotice(c):modeNotice(d.explorationMode,d.calculationMethod);
   const included = new Set(d.baseline.includedMatchIds);
-  const editable = d.fixtures.filter(m => !included.has(m.id));
+  const editable = pending;
   const sorted = rows.toSorted((a, b) => b.points - a.points);
   $('#app').innerHTML = `
   <nav class="feature-nav" aria-label="機能"><button data-feature="probability" aria-pressed="${feature==='probability'}" class="${feature==='probability'?'selected':''}">順位確率</button><button data-feature="conditions" aria-pressed="${feature==='conditions'}" class="${feature==='conditions'?'selected':''}">必要・十分条件の探索</button></nav>
   <div class="division-nav"><div class="tabs" role="tablist" aria-label="ディビジョン"><button role="tab" aria-selected="${active === 'S'}" class="tab ${active === 'S' ? 'active' : ''}" data-division="S">Division <span>S</span></button><button role="tab" aria-selected="${active === 'F'}" class="tab ${active === 'F' ? 'active' : ''}" data-division="F">Division <span>F</span></button></div><span class="baseline-date">基準日 ${escape(d.baseline.asOf)}<br>日程：二次資料参照・公式未照合</span></div>
   <div class="stats"><div class="stat"><span class="label">REMAINING / 残り試合</span><strong>${pending.length}<small>/ 30試合</small></strong></div><div class="stat"><span class="label">PLAYOFF SPOTS / 進出枠</span><strong>3<small>/ 6チーム</small></strong></div><div class="stat"><span class="label">METHOD / 計算方法</span><strong style="font-size:19px">${feature==='conditions'?'条件探索':d.calculationMethod==='monteCarlo'?'推定':'厳密集計'}<small>${visibleMode === 'points' ? 'ポイント' : visibleMode === 'battles' ? 'バトル' : 'ラウンド'}</small></strong></div></div>
   <div class="layout">
-    <section class="panel"><div class="section-heading"><div><div class="kicker">01 / STANDINGS</div><h2>現在のチーム状況</h2></div><span class="tag">ポイント順</span></div><div class="scroll-table"><table aria-label="現在の順位表"><thead><tr><th>チーム</th><th>消化</th><th>ポイント</th><th>バトル差</th><th>ラウンド差</th></tr></thead><tbody>${sorted.map(t => `<tr><td class="team-name"><span class="team-code" style="--team-color:${teamColors[d.teams.findIndex(x => x.id === t.teamId)]}"></span>${escape(team(d, t.teamId).name)}</td><td class="muted">${t.played}/10</td><td class="points">${t.points}</td><td class="muted">${signed(t.battleDiff)}</td><td class="muted">${signed(t.roundDiff)}</td></tr>`).join('')}</tbody></table></div><div class="panel-foot">同ポイントの行の表示順は順位を意味しません。比較に使用する得失点差は探索モードで決まります。</div>
-    <details><summary>基準となる集計値を編集</summary><p class="muted">基準日までの累計です。下で登録する実結果は、この値に追加されます。基準に含む日程を変える場合はJSON編集を使用してください。</p><form id="baseline-form" class="editor"><label>基準日<input type="date" name="asOf" value="${escape(d.baseline.asOf)}" required></label><div class="scroll-table"><table><thead><tr><th>チーム</th><th>ポイント</th><th>バトル差</th><th>ラウンド差</th></tr></thead><tbody>${d.baseline.standings.map(t => `<tr><td>${escape(team(d,t.teamId).shortName)}</td>${['points','battleDiff','roundDiff'].map(field => `<td><input type="number" step="${field === 'points' ? 10 : 1}" ${field === 'points' ? 'min="0" required' : ''} name="${t.teamId}:${field}" value="${t[field] === null ? '' : t[field]}" aria-label="${escape(team(d,t.teamId).name)} ${field}"></td>`).join('')}</tr>`).join('')}</tbody></table></div><label class="rebase-choice"><input id="rebase-current" type="checkbox">入力を現在の累計として再設定する（登録結果を基準へ統合）</label><p class="muted">チェックすると現在値を入力欄へ反映します。不明な累計差を補完し、基準日を確認して保存してください。統合後は個別結果の訂正ではなく基準値を編集します。</p><button type="submit" class="tiny-button">基準値を保存</button></form></details></section>
-    ${feature==='probability'?`<aside class="panel condition-panel"><div class="section-heading"><div><div class="kicker">02 / EXPLORATION</div><h2>計算方式・順位判定</h2></div></div><div class="condition-body"><label>計算方式<select id="calculation-method">${Object.entries(CALCULATION_METHODS).map(([id,name])=>`<option value="${id}" ${d.calculationMethod===id?'selected':''}>${name}</option>`).join('')}</select></label><label>順位判定<select id="exploration-mode">${Object.entries(EXPLORATION_MODES).map(([id,name])=>`<option value="${id}" ${d.explorationMode===id?'selected':''}>${rankingLabel(id,d.calculationMethod)}</option>`).join('')}</select></label>${renderSimulationSettings(d)}${d.calculationMethod==='exact'?renderCost(d):''}<p class="condition-note">詳細モードは各バトル／ラウンドの勝率50%・独立を仮定します。計算時間に上限はありません。${d.calculationMethod==='monteCarlo'?'全ケースを同じ試行番号で計算します。同点による範囲と、有限試行の95%区間を分けて表示します。':'モードによっては非常に多くの状態を探索します。'}</p><div class="run-area"><div class="calc-actions"><button class="primary-button run-button" id="calculate" ${run?'disabled':''}>${run?'計算実行中':'順位確率を計算'} <span aria-hidden="true">→</span></button><button id="cancel" ${run?'':'hidden'} ${run?.stopping?'disabled':''}>${run?.stopping?'停止待ち':'中止'}</button></div><button id="extend" class="tiny-button secondary-button" ${d.calculationMethod==='monteCarlo'?'':'hidden'} ${canResume(d)?'':'disabled'}>指定回数を追加試行</button><progress id="progress" max="100" value="0" ${run?'':'hidden'} aria-label="計算の進捗"></progress><div id="run-status" class="run-status" role="status">${escape(lastRunStatus || `基準＋${d.cases.length}ケースを順に計算`)}</div></div></div></aside>`:renderSearchControls(d,c,run,lastRunStatus)}
-    ${feature==='probability'?renderCases(d):''}
-    <section class="panel result-panel"><div class="section-heading"><div><div class="kicker">03 / PROBABILITY</div><h2>${feature==='conditions'?'必要条件・十分条件':'最終順位の確率'}</h2></div><div class="result-toolbar"><span class="tag">${feature==='conditions'?'厳密条件探索':escape(rankingLabel(results.get(d.id)?.input.explorationMode ?? d.explorationMode,results.get(d.id)?.input.calculationMethod ?? d.calculationMethod))}</span>${(feature==='conditions'?searchResults.has(d.id):results.has(d.id)) ? '<button class="tiny-button secondary-button" id="export-result">結果JSON ↗</button>' : ''}</div></div><div id="result-content">${renderResult(d)}</div></section>
+    <section class="panel team-status-panel"><div class="section-heading"><div><div class="kicker">01 / INPUT</div><h2>現在のチーム状況</h2><p class="section-intro">計算の出発点となる累計です。</p></div><span class="tag">ポイント順</span></div><div class="scroll-table"><table aria-label="現在の順位表"><thead><tr><th>チーム</th><th>消化</th><th>ポイント</th><th>バトル差</th><th>ラウンド差</th></tr></thead><tbody>${sorted.map(t => `<tr><td class="team-name"><span class="team-code" style="--team-color:${teamColors[d.teams.findIndex(x => x.id === t.teamId)]}"></span>${escape(team(d, t.teamId).name)}</td><td class="muted">${t.played}/10</td><td class="points">${t.points}</td><td class="muted">${signed(t.battleDiff)}</td><td class="muted">${signed(t.roundDiff)}</td></tr>`).join('')}</tbody></table></div><div class="panel-foot">同ポイントの行の表示順は順位を意味しません。比較に使用する得失点差は探索モードで決まります。</div>
+    <details><summary>基準に含まれる過去の試合（${included.size}試合）</summary><p class="muted">基準日までの結果は現在の累計に含まれています。日程は二次資料参照・公式未照合です。</p><div class="scroll-table"><table><thead><tr><th>節</th><th>ホーム</th><th>アウェイ</th></tr></thead><tbody>${d.fixtures.filter(m=>included.has(m.id)).map(m=>`<tr><td>第${m.round}節</td><td>${escape(team(d,m.homeTeamId).name)}</td><td>${escape(team(d,m.awayTeamId).name)}</td></tr>`).join('')}</tbody></table></div></details>${renderSchedule(d,editable)}</section>
+    ${feature==='probability'?`<aside class="panel condition-panel"><div class="section-heading"><div><div class="kicker">03 / CALCULATE</div><h2>計算方式・順位判定</h2><p class="section-intro">上の入力をもとに、各チームの1位・PO進出の確率を求めます。</p></div></div><div class="condition-body"><label>計算方式<select id="calculation-method">${Object.entries(CALCULATION_METHODS).map(([id,name])=>`<option value="${id}" ${d.calculationMethod===id?'selected':''}>${name}</option>`).join('')}</select></label><label>順位判定<select id="exploration-mode">${Object.entries(EXPLORATION_MODES).map(([id,name])=>`<option value="${id}" ${d.explorationMode===id?'selected':''}>${rankingLabel(id,d.calculationMethod)}</option>`).join('')}</select></label>${renderSimulationSettings(d)}${d.calculationMethod==='exact'?renderCost({...d,cases:[]}):''}<p class="condition-note">詳細モードは各バトル／ラウンドの勝率50%・独立を仮定します。計算時間に上限はありません。${d.calculationMethod==='monteCarlo'?'試行回数を増やすと、推定の統計的な幅が小さくなります。':'モードによっては非常に多くの状態を探索します。'}</p><div class="run-area"><div class="calc-actions"><button class="primary-button run-button" id="calculate" ${run?'disabled':''}>${run?'計算実行中':'順位確率を計算'} <span aria-hidden="true">→</span></button><button id="cancel" ${run?'':'hidden'} ${run?.stopping?'disabled':''}>${run?.stopping?'停止待ち':'中止'}</button></div><button id="extend" class="tiny-button secondary-button" ${d.calculationMethod==='monteCarlo'?'':'hidden'} ${canResume(d)?'':'disabled'}>指定回数を追加試行</button><progress id="progress" max="100" value="0" ${run?'':'hidden'} aria-label="計算の進捗"></progress><div id="run-status" class="run-status" role="status">${escape(lastRunStatus || '入力した仮定のもとで計算します')}</div></div></div></aside>`:renderSearchControls(d,c,run,lastRunStatus)}
+    <section class="panel result-panel ${resultAssumptions(currentSavedResult()).length?'has-assumptions':''}"><div class="section-heading"><div><div class="kicker">04 / RESULTS</div><h2>${feature==='conditions'?'1位・2位以内・PO進出に必要な成績':'1位・PO進出の確率'}</h2><p class="section-intro">${feature==='conditions'?'必要条件は可能性を残す最低成績、十分条件は達成を保証する成績です。':'入力した仮定のもとで、どこまで進めるかを読み取れます。'}</p></div><div class="result-toolbar"><span class="tag">${feature==='conditions'?'厳密条件探索':escape(rankingLabel(results.get(d.id)?.input.explorationMode ?? d.explorationMode,results.get(d.id)?.input.calculationMethod ?? d.calculationMethod))}</span>${(feature==='conditions'?searchResults.has(d.id):results.has(d.id)) ? '<button class="tiny-button secondary-button" id="export-result">結果JSON ↗</button>' : ''}</div></div><div id="result-content">${renderResult(d)}</div></section>
   </div>
-  <section class="panel"><div class="section-heading"><div><div class="kicker">04 / FIXTURES & RESULTS</div><h2>残り日程・登録結果</h2></div><button class="tiny-button secondary-button" id="clear-fixed">仮定をすべて解除</button></div><div class="data-note">全日程は格ゲーチェッカーの対戦表を参照。公式ページとの直接照合は未完了です。H＝ホーム、A＝アウェイ。スコアの向きに注意してください。</div>${[...new Set(editable.map(m => m.round))].map(r => `<h3 class="round-title" style="margin-top:16px">第${r}節</h3><div class="fixtures">${editable.filter(m => m.round === r).map(m => renderFixture(d,m)).join('')}</div>`).join('')}<details><summary>基準に含まれる過去の試合（${included.size}試合）</summary><p class="muted">個別の実結果は保持していません。累計値として基準順位表に含まれています。</p><div class="scroll-table"><table><thead><tr><th>節</th><th>ホーム</th><th>アウェイ</th></tr></thead><tbody>${d.fixtures.filter(m => included.has(m.id)).map(m => `<tr><td>第${m.round}節</td><td>${escape(team(d,m.homeTeamId).name)}</td><td>${escape(team(d,m.awayTeamId).name)}</td></tr>`).join('')}</tbody></table></div></details></section>
-  <section class="panel"><div class="data-tools"><div><h3>データの保存・読み込み</h3><p class="storage-status">${escape(storageStatus)}</p></div><div class="data-tools-buttons"><button class="tiny-button" id="export">設定JSONを書き出す ↗</button><button class="tiny-button" id="import">JSONを読み込む</button><input id="import-file" type="file" accept=".json,application/json" hidden><button class="tiny-button secondary-button" id="reset">初期データに戻す</button></div></div><details id="advanced"><summary>日程・大会データをJSONで編集（詳細設定）</summary><p class="muted">両ディビジョンのデータを編集します。変更は「検証して適用」を押すまで反映されません。対戦日程・チーム名・基準に含む試合も変更できます。</p><div class="json-editor"><label for="json-data">大会データJSON</label><textarea id="json-data" spellcheck="false">${escape(JSON.stringify(data,null,2))}</textarea><button class="tiny-button" id="apply-json">検証して適用</button></div></details><details><summary>計算モデルと精度について</summary><p class="muted">40–0 / 30–10 / 30–20 / 20–30 / 10–30 / 0–40 の重みは1 / 2 / 1 / 1 / 2 / 1です。6通りは等確率ではありません。条件で残った候補を正規化します。厳密方式は全組み合わせを整数の重みで集計し、モンテカルロは同じ分布から抽選して寄与を集計します。ポイントモードは同ポイントを均等配分し、詳細モードは未解決同点を上下限で表示します。各比較ケースは、試合別固定→先行条件の順に優先します。計算時間の上限は設けていません。厳密計算はタブを閉じると停止します。モンテカルロは中止・完了時のチェックポイント、または書き出したJSONから追加試行できます。詳細モードではバトル／ラウンドの勝率も50%・独立と仮定し、延長を含む整合した試合結果を集計します。未解決同点とPO境界の同点の確率、厳密な分数、計算時の入力、スキップ理由は結果JSONから保存できます。</p></details></section>`;
+  <section class="panel"><div class="data-tools"><div><h3>データの保存・読み込み</h3><p class="storage-status">${escape(storageStatus)}</p></div><div class="data-tools-buttons"><button class="tiny-button" id="export">設定JSONを書き出す ↗</button><button class="tiny-button" id="import">JSONを読み込む</button><input id="import-file" type="file" accept=".json,application/json" hidden><button class="tiny-button secondary-button" id="reset">初期データに戻す</button></div></div><details id="advanced"><summary>日程・大会データをJSONで編集（詳細設定）</summary><p class="muted">両ディビジョンのデータを編集します。変更は「検証して適用」を押すまで反映されません。対戦日程・チーム名・基準に含む試合も変更できます。</p><div class="json-editor"><label for="json-data">大会データJSON</label><textarea id="json-data" spellcheck="false">${escape(JSON.stringify(data,null,2))}</textarea><button class="tiny-button" id="apply-json">検証して適用</button></div></details><details><summary>計算モデルと精度について</summary><p class="muted">40–0 / 30–10 / 30–20 / 20–30 / 10–30 / 0–40 の重みは1 / 2 / 1 / 1 / 2 / 1です。6通りは等確率ではありません。条件で残った候補を正規化します。厳密方式は全組み合わせを整数の重みで集計し、モンテカルロは同じ分布から抽選して寄与を集計します。ポイントモードは同ポイントを均等配分し、詳細モードは未解決同点を上下限で表示します。入力した仮定はすべてANDで適用します。計算時間の上限は設けていません。厳密計算はタブを閉じると停止します。モンテカルロは中止・完了時のチェックポイント、または書き出したJSONから追加試行できます。詳細モードではバトル／ラウンドの勝率も50%・独立と仮定し、延長を含む整合した試合結果を集計します。未解決同点とPO境界の同点の確率、厳密な分数、計算時の入力、スキップ理由は結果JSONから保存できます。</p></details></section>`;
+  for(const id of openDetails)document.getElementById(id)?.setAttribute('open','');
+  for(const id of closedDetails)document.getElementById(id)?.removeAttribute('open');
   bind(); bindExampleButtons(); updateRunStatus(); updateResumeAvailability();
   if (focusId && $(`#${CSS.escape(focusId)}`)) $(`#${CSS.escape(focusId)}`).focus({ preventScroll: true });
   else if (focusFixed) $(`[data-fixed="${CSS.escape(focusFixed)}"]`)?.focus({ preventScroll: true });
@@ -90,7 +141,7 @@ function renderSimulationSettings(d) {
 }
 function canResume(d) {
   const saved=results.get(d.id);
-  return !run&&d.calculationMethod==='monteCarlo'&&saved?.method==='monteCarlo'&&saved.checkpoint.fingerprint===simulationFingerprint(d);
+  return !run&&d.calculationMethod==='monteCarlo'&&saved?.method==='monteCarlo'&&saved.checkpoint.fingerprint===simulationFingerprint({...d,cases:[]});
 }
 function updateResumeAvailability(){if($('#extend'))$('#extend').disabled=!canResume(division());}
 function updateRunStatus() {
@@ -121,7 +172,7 @@ function startCalculation(additional=false) {
   const errors=validate(data);
   if (errors.length) return notice(errors.join('\n'),true);
   if(division().calculationMethod==='monteCarlo'){if(!$('#mc-trials').reportValidity())return;if(!division().simulation.seed){change(d=>{d.simulation.seed=newSeed();},false);$('#mc-seed').value=division().simulation.seed;}}
-  const snapshot=structuredClone(division());
+  const snapshot=structuredClone(inputDivision());
   const fields=snapshot.explorationMode==='rounds'?['battleDiff','roundDiff']:snapshot.explorationMode==='battles'?['battleDiff']:[];
   const missing=current(snapshot).flatMap(t=>fields.filter(f=>t[f]===null).map(f=>`${team(snapshot,t.teamId).name}：${f==='battleDiff'?'バトル差':'ラウンド差'}`));
   if (missing.length) return notice(`現在の集計値を補完してください。${missing.join('、')}`,true);
@@ -142,7 +193,7 @@ function startCalculation(additional=false) {
       if (!verifyFractions(message.result).ok) { stopRun('検算エラー',true);notice('確率の検算に失敗したため、このケースの結果を表示しません。',true);return; }
       Object.assign(entry,{status:'done',result:message.result,resolution:message.resolution,modelVersion:message.modelVersion,reused:message.reused,seconds:message.seconds});renderOutput();
     }
-    if (message.type==='comparison-done') { const seconds=(performance.now()-run.started)/1000;stopRun(`Division ${snapshot.id} · 全ケース完了 ${seconds.toFixed(2)}秒`); }
+    if (message.type==='comparison-done') { const seconds=(performance.now()-run.started)/1000;stopRun(`Division ${snapshot.id} · 計算完了 ${seconds.toFixed(2)}秒`); }
   };
   worker.onerror=event=>{event.preventDefault();stopRun('計算用Workerでエラー',true);notice('計算用Workerが停止しました。HTTP(S)で開いているか確認してください。',true);};
   worker.postMessage({type:'comparison',division:snapshot});
@@ -150,7 +201,7 @@ function startCalculation(additional=false) {
 function startConditionSearch(){
   if(run)return;
   const errors=validate(data);if(errors.length)return notice(errors.join('\n'),true);
-  const snapshot=structuredClone(division()),config=structuredClone(searchConfig());
+  const snapshot=structuredClone(inputDivision()),config=structuredClone(searchConfig());
   try{prepareSearch(snapshot,config);}catch(error){notice(error.message,true);return;}
   let worker;try{worker=new Worker(new URL('./worker.js',import.meta.url),{type:'module'});}catch{notice('探索用Workerを起動できません。',true);return;}
   const saved={status:'running',input:snapshot,config,fingerprint:searchFingerprint(snapshot,config),result:null,exampleIndex:null};
@@ -163,7 +214,8 @@ function startConditionSearch(){
     if(message.type==='search-done'){
       if(!verifySearchResult(message.result)||message.result.fingerprint!==saved.fingerprint){stopRun('条件探索の集計検証に失敗しました。',true);notice('結果が入力・代表例と一致しないため表示しません。',true);return;}
       saved.status='done';saved.result=message.result;saved.seconds=(performance.now()-run.started)/1000;
-      saved.exampleIndex=message.result.analysis.points.counterexample??message.result.analysis.points.necessaryWitness??0;
+      saved.exampleIndices={};
+      saved.exampleLabels={}; // Rendering selects the first available named example.
       stopRun(`条件探索が完了しました · ${saved.seconds.toFixed(2)}秒`);
     }
   };
@@ -240,20 +292,19 @@ function replaceData(value) {
   data=migrated;results.clear();searchResults.clear();persist();render();notice('データを検証して読み込みました。');return true;
 }
 function openResult(id) {
+  if(!remaining(division()).some(m=>m.id===id))return;
   editingMatch = id;
   $('#dialog-error').hidden = true;
-  const d = division(), m = d.fixtures.find(m => m.id === id), r = d.results[id];
+  const d = division(), m = d.fixtures.find(m => m.id === id);
   $('#match-title').textContent = `第${m.round}節：${team(d,m.homeTeamId).name}（H） vs ${team(d,m.awayTeamId).name}（A）`;
-  const form = $('#result-form');
-  form.elements.score.innerHTML = scoreOptions(r ? scoreKey(r.homePoints,r.awayPoints) : '', 'スコアを選択');
-  form.elements.battle.value = r?.homeBattleDiffDelta ?? '';
-  form.elements.round.value = r?.homeRoundDiffDelta ?? '';
-  $('#delete-result').hidden = !r;
+  draftRules=structuredClone(rulesFor(d,id));
+  $('#delete-result').hidden=!draftRules.length;
+  renderRuleEditor();
   $('#result-dialog').showModal();
 }
 function bind() {
   document.querySelectorAll('[data-feature]').forEach(button=>button.onclick=()=>{feature=button.dataset.feature;render();});
-  if($('#search-team'))for(const [id,key]of [['search-team','targetTeamId'],['search-goal','goal'],['search-mode','mode'],['search-context','caseId']])$(`#${id}`).onchange=event=>change((d,next)=>{next.conditionSearch[active][key]=event.target.value;});
+  if($('#search-team'))for(const [id,key]of [['search-team','targetTeamId'],['search-mode','mode']])$(`#${id}`).onchange=event=>change((d,next)=>{next.conditionSearch[active][key]=event.target.value;});
   if($('#cost-to-mc'))$('#cost-to-mc').onclick=()=>change(d=>{d.calculationMethod='monteCarlo';if(!d.simulation.seed)d.simulation.seed=newSeed();});
   document.querySelectorAll('[data-division]').forEach(b => b.onclick = () => { active = b.dataset.division; render(); });
   if($('#calculation-method'))$('#calculation-method').onchange=e=>change(d=>{d.calculationMethod=e.target.value;if(e.target.value==='monteCarlo'&&!d.simulation.seed)d.simulation.seed=newSeed();});
@@ -274,28 +325,18 @@ function bind() {
   document.querySelectorAll('[data-condition-mode]').forEach(el=>el.onchange=()=>change(d=>{findCase(d,el.dataset.conditionMode).conditions[Number(el.dataset.index)].mode=el.value;}));
   document.querySelectorAll('[data-delete-condition]').forEach(el=>el.onclick=()=>change(d=>{findCase(d,el.dataset.deleteCondition).conditions.splice(Number(el.dataset.index),1);}));
   document.querySelectorAll('[data-move-condition]').forEach(el=>el.onclick=()=>change(d=>{const list=findCase(d,el.dataset.moveCondition).conditions,i=Number(el.dataset.index),j=i+Number(el.dataset.direction);[list[i],list[j]]=[list[j],list[i]];}));
-  document.querySelectorAll('[data-fixed]').forEach(s => s.onchange = () => change(d => { if (s.value) d.fixedScores[s.dataset.fixed] = s.value; else delete d.fixedScores[s.dataset.fixed]; }));
+  document.querySelectorAll('[data-fixed]').forEach(select=>select.onchange=()=>{
+    const id=select.dataset.fixed;
+    if(select.value==='@rules')return;
+    if(!select.value){change(d=>setMatchRules(d,id,[]));return;}
+    const [home,away]=select.value.split('-').map(Number);
+    const additions=[['homePoints',home],['awayPoints',away]].map(([metric,value])=>({id:crypto.randomUUID(),metric,operator:'eq',value,source:'manual'}));
+    if(!change(d=>mergeMatchRules(d,{[id]:additions})))select.value=exactRuleScore(rulesFor(division(),id))??(rulesFor(division(),id).length?'@rules':'');
+  });
   document.querySelectorAll('[data-result]').forEach(b => b.onclick = () => openResult(b.dataset.result));
   $('#calculate').onclick = ()=>feature==='conditions'?startConditionSearch():startCalculation(false);
   $('#cancel').onclick = requestStop;
-  $('#clear-fixed').onclick = () => change(d => { d.fixedScores = {}; for (const c of d.cases) c.conditions=[]; });
-  $('#rebase-current').onchange=event=>{const rows=event.target.checked?current(division()):division().baseline.standings,form=$('#baseline-form');for(const row of rows)for(const field of ['points','battleDiff','roundDiff'])form.elements[`${row.teamId}:${field}`].value=row[field]??'';};
-  $('#baseline-form').onsubmit = event => {
-    event.preventDefault(); const form = event.target;
-    change(d => {
-      if ($('#rebase-current').checked) {
-        const rows=current(d);
-        d.baseline.includedMatchIds.push(...Object.keys(d.results));
-        d.baseline.standings=rows;
-        d.results={};
-      }
-      d.baseline.asOf = form.elements.asOf.value;
-      for (const row of d.baseline.standings) for (const field of ['points','battleDiff','roundDiff']) {
-        const value = form.elements[`${row.teamId}:${field}`].value;
-        row[field] = value === '' ? null : Number(value);
-      }
-    });
-  };
+  $('#clear-fixed').onclick = () => change(d => { clearMatchRules(d); });
   $('#export').onclick = () => download('sfl-2026-settings.json', data);
   if($('#export-result'))$('#export-result').onclick=()=>{if(feature==='conditions'){const saved=searchResults.get(active);download(`sfl-2026-${active}-conditions.json`,saved.status==='done'?saved.result:{kind:'sfl-condition-search-incomplete',complete:false,input:saved.input,config:saved.config,status:saved.status,progress:saved.progress});}else download(`sfl-2026-division-${active}-result.json`,results.get(active).method==='monteCarlo'?results.get(active).checkpoint:results.get(active));};
   $('#import').onclick = () => $('#import-file').click();
@@ -308,17 +349,33 @@ function bind() {
   $('#apply-json').onclick = () => { try { replaceData(JSON.parse($('#json-data').value)); } catch { notice('JSONの書式が不正です。元のデータは保持しています。', true); } };
   $('#reset').onclick = () => { if (confirm('両ディビジョンの編集内容と仮定を初期データに戻しますか？必要なら先にJSONを書き出してください。')) replaceData(defaults); };
 }
-$('#close-dialog').onclick = () => $('#result-dialog').close();
-$('#result-form').onsubmit = event => {
-  event.preventDefault(); const form = event.target;
-  const [h, a] = form.elements.score.value.split('-').map(Number);
-  const ok = change(d => {
-    d.results[editingMatch] = { homePoints: h, awayPoints: a, homeBattleDiffDelta: form.elements.battle.value === '' ? null : Number(form.elements.battle.value), homeRoundDiffDelta: form.elements.round.value === '' ? null : Number(form.elements.round.value) };
-    delete d.fixedScores[editingMatch];
+function renderRuleEditor(){
+  const d=division(),m=d.fixtures.find(m=>m.id===editingMatch),names={...ASSUMPTION_METRICS,homePoints:`${team(d,m.homeTeamId).shortName}（H）の獲得ポイント`,awayPoints:`${team(d,m.awayTeamId).shortName}（A）の獲得ポイント`};
+  $('#rule-editor').innerHTML=draftRules.map((r,i)=>`<div class="assumption-rule">${i?'<span class="rule-and">かつ</span>':''}<label>対象・指標<select data-rule-field="metric" data-rule-index="${i}">${Object.entries(names).map(([key,name])=>`<option value="${key}" ${key===r.metric?'selected':''}>${escape(name)}</option>`).join('')}</select></label><label>条件<select data-rule-field="operator" data-rule-index="${i}">${Object.entries(ASSUMPTION_OPERATORS).map(([key,name])=>`<option value="${key}" ${key===r.operator?'selected':''}>${name}</option>`).join('')}</select></label><label>値<input data-rule-field="value" data-rule-index="${i}" type="number" required step="${r.metric.endsWith('Points')?10:1}" min="${r.metric.endsWith('Points')?0:r.metric==='battleDiff'?-9:-60}" max="${r.metric.endsWith('Points')?40:r.metric==='battleDiff'?9:60}" value="${r.value}"></label><button type="button" class="tiny-button secondary-button" data-remove-rule="${i}">削除</button>${r.source==='necessary'?'<small class="rule-source">必要条件から追加</small>':''}</div>`).join('')||'<p class="muted">条件なし：すべての結果を探索します。</p>';
+  document.querySelectorAll('[data-rule-field]').forEach(el=>el.oninput=()=>{
+    const r=draftRules[Number(el.dataset.ruleIndex)],key=el.dataset.ruleField;r[key]=key==='value'?(el.value===''?NaN:Number(el.value)):el.value;
+    if(key==='metric'){r.value=0;renderRuleEditor();}else previewRules();
   });
-  if (ok) $('#result-dialog').close();
+  document.querySelectorAll('[data-remove-rule]').forEach(el=>el.onclick=()=>{draftRules.splice(Number(el.dataset.removeRule),1);renderRuleEditor();});
+  previewRules();
+}
+function previewRules(){
+  const d=division(),m=d.fixtures.find(m=>m.id===editingMatch),resolved=resolveMatch(m,{},[]);
+  try{
+    const errors=ruleErrors(draftRules);if(errors.length)throw new Error(errors.join(' '));
+    const full=filterRuleOutcomes('rounds',resolved,draftRules);
+    const allowed=new Set(full.map(([h,a])=>`${h}-${a}`)),scores=SCORES.filter(([h,a])=>allowed.has(`${h}-${a}`)).map(([h,a])=>`${h}–${a}`);
+    $('#rule-preview').textContent=`許されるスコア（H–A）：${scores.join(' / ')}。バトル ${filterRuleOutcomes('battles',resolved,draftRules).length}状態・ラウンド ${full.length}状態。`;
+    $('#rule-preview').classList.remove('error');$('#save-rules').disabled=false;$('#dialog-error').hidden=true;
+  }catch(error){$('#rule-preview').textContent=`${error.message} ${draftRules.map((r,i)=>`条件${i+1}：${ruleText(r,team(d,m.homeTeamId).shortName,team(d,m.awayTeamId).shortName)}`).join(' ／ ')}`;$('#rule-preview').classList.add('error');$('#save-rules').disabled=true;}
+}
+$('#add-rule').onclick=()=>{draftRules.push({id:crypto.randomUUID(),metric:'homePoints',operator:'gte',value:0,source:'manual'});renderRuleEditor();};
+$('#close-dialog').onclick=()=>$('#result-dialog').close();
+$('#result-form').onsubmit=event=>{
+  event.preventDefault();previewRules();if($('#save-rules').disabled)return;
+  if(change(d=>setMatchRules(d,editingMatch,draftRules)))$('#result-dialog').close();
 };
-$('#delete-result').onclick = () => { if (change(d => { delete d.results[editingMatch]; })) $('#result-dialog').close(); };
+$('#delete-result').onclick=()=>{if(change(d=>setMatchRules(d,editingMatch,[])))$('#result-dialog').close();};
 
 try {
   const response = await fetch(new URL('../data/default.json', import.meta.url));

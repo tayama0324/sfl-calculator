@@ -1,3 +1,4 @@
+import {rulesFor,setMatchRules,ruleErrors,filterRuleOutcomes,ruleText} from './match-assumptions.js';
 import { conditionedOutcomes, MODEL_VERSION } from './distributions.js';
 import { defaultSearchConfig, searchConfigErrors } from './search-config.js';
 export const EXPLORATION_MODES = { points:'ポイントのみ（簡易）', battles:'バトルまで全探索', rounds:'ラウンドまで全探索' };
@@ -87,12 +88,35 @@ export function prepare(division, caseDefinition = comparisonCases(division)[0] 
   const indexes = new Map(rows.map((t, i) => [t.teamId, i]));
   const resolution = [];
   const matches = remaining(division).map(m => {
-    const resolved = resolveMatch(m, fixedScores(division), caseDefinition.conditions);
-    resolution.push({ matchId:m.id, round:m.round, homeTeamId:m.homeTeamId, awayTeamId:m.awayTeamId, ...resolved, outcomes:undefined });
-    const outcomes = mode === 'points' ? resolved.outcomes : conditionedOutcomes(mode,resolved.allowedScores);
+    const resolved=assumedMatch(division,m,mode,caseDefinition.conditions);
+    resolution.push({ matchId:m.id,round:m.round,homeTeamId:m.homeTeamId,awayTeamId:m.awayTeamId,...resolved,outcomes:undefined });
+    const outcomes=resolved.outcomes;
     return { id: m.id, home: indexes.get(m.homeTeamId), away: indexes.get(m.awayTeamId), outcomes };
   });
   return { mode, modelVersion:MODEL_VERSION, teamIds: rows.map(t => t.teamId), points: rows.map(t => t.points), battleDiffs:rows.map(t => t.battleDiff), roundDiffs:rows.map(t => t.roundDiff), matches, resolution };
+}
+export function assumedMatch(d,m,mode=d.explorationMode,conditions=[]){
+  const resolved=resolveMatch(m,fixedScores(d),conditions),rules=rulesFor(d,m.id);
+  const modern=(d.matchAssumptions?.[m.id]?.length??0)>0;
+  const outcomes=modern?filterRuleOutcomes(mode,resolved,rules):hypotheticalOutcomes(mode,resolved,d.fixedDetails?.[m.id]);
+  return {...resolved,outcomes,allowedScores:[...new Set(outcomes.map(([h,a])=>scoreKey(h,a)))],fixedDetails:d.fixedDetails?.[m.id],rules};
+}
+// Difference constraints condition the joint distribution before projecting to the
+// selected ranking mode. Empty optional constraints keep legacy sampling unchanged.
+export function hypotheticalOutcomes(mode, resolved, details) {
+  const battle = details?.battleDiff ?? null, round = details?.roundDiff ?? null;
+  if (mode === 'points') return resolved.outcomes;
+  if (battle === null && round === null) return conditionedOutcomes(mode, resolved.allowedScores);
+  const sourceMode = round !== null ? 'rounds' : mode;
+  const rows = conditionedOutcomes(sourceMode, resolved.allowedScores)
+    .filter(([, , , b, r]) => (battle === null || b === battle) && (round === null || r === round));
+  if (!rows.length) throw new Error('仮定スコアと得失点差の組み合わせが成立しません。');
+  const combined = new Map();
+  for (const [h, a, w, b, r] of rows) {
+    const key = JSON.stringify([h, a, b, mode === 'rounds' ? r : 0]);
+    combined.set(key, (combined.get(key) ?? 0n) + BigInt(w));
+  }
+  return [...combined].map(([key, weight]) => { const [h,a,b,r] = JSON.parse(key); return [h,a,String(weight),b,r]; });
 }
 export function migrateData(value) {
   const errors = validate(value);
@@ -111,6 +135,14 @@ export function migrateData(value) {
     for (const d of data.divisions) { d.calculationMethod='exact'; d.simulation={trials:100000,seed:''}; }
     data.schemaVersion=3;
   }
+  if(data.schemaVersion===3){
+    for(const d of data.divisions){
+      const ids=new Set([...Object.keys(d.fixedScores),...Object.keys(d.matchAssumptions??{})]);
+      for(const id of ids)setMatchRules(d,id,rulesFor(d,id));
+      d.matchAssumptions??={};d.fixedScores={};delete d.fixedDetails;
+    }
+    data.schemaVersion=4;
+  }
   if(!data.conditionSearch)data.conditionSearch=Object.fromEntries(data.divisions.map(d=>[d.id,defaultSearchConfig(d)]));
   return data;
 }
@@ -121,7 +153,7 @@ export function validate(data, singleDivision=false) {
   const errors = [];
   const check = (ok, message) => { if (!ok) errors.push(message); };
   try {
-    check([1,2,3].includes(data.schemaVersion), 'schemaVersionは1・2・3のいずれかが必要です。');
+    check([1,2,3,4].includes(data.schemaVersion), 'schemaVersionは1・2・3・4のいずれかが必要です。');
     check(typeof data.title === 'string' && data.title.length <= 150, '大会名が不正です。');
     check(Array.isArray(data.divisions) && data.divisions.length === (singleDivision?1:2), 'ディビジョンの構成が不正です。');
     const allTeamIds = new Set();
@@ -130,7 +162,7 @@ export function validate(data, singleDivision=false) {
     for (const d of data.divisions) {
       const label = `Division ${d.id}`;
       if(data.conditionSearch!==undefined)check(record(data.conditionSearch)&&searchConfigErrors(d,data.conditionSearch[d.id]).length===0,`${label}：条件探索の設定が不正です。`);
-      if (data.schemaVersion===3) {
+      if (data.schemaVersion>=3) {
         check(Object.hasOwn(CALCULATION_METHODS,d.calculationMethod), `${label}：計算方式が不正です。`);
         check(record(d.simulation) && integer(d.simulation.trials,1,Number.MAX_SAFE_INTEGER) && typeof d.simulation.seed==='string' && d.simulation.seed.length<=256, `${label}：試行回数またはシードが不正です。`);
       }
@@ -206,6 +238,25 @@ export function validate(data, singleDivision=false) {
           for (const condition of c.conditions) {
             check(ids.has(condition.targetTeamId) && Object.hasOwn(CONDITION_MODES,condition.mode), `${label}：シナリオ条件のチームまたは達成条件が不正です。`);
           }
+        }
+      }
+      if(d.matchAssumptions!==undefined){
+        check(record(d.matchAssumptions),`${label}：試合条件はオブジェクトにしてください。`);
+        for(const [id,rules]of Object.entries(d.matchAssumptions)){
+          check(matchIds.has(id)&&!included.has(id)&&!resultIds.includes(id),`${label}：条件は未消化試合に指定してください。`);
+          const errors=ruleErrors(rules);for(const error of errors)check(false,`${label}：${id} ${error}`);
+          if(!errors.length&&matchIds.has(id))try{assumedMatch(d,d.fixtures.find(m=>m.id===id),'rounds');}catch(error){check(false,`${label}：${id} ${error.message} 条件：${rules.map(r=>ruleText(r)).join(' かつ ')}`);}
+        }
+      }
+      if (d.fixedDetails !== undefined) {
+        check(record(d.fixedDetails), `${label}：仮定の得失点差の構造が不正です。`);
+        for (const [id, details] of Object.entries(d.fixedDetails)) {
+          check(Object.hasOwn(fixedScores(d), id), `${label}：得失点差の仮定にはスコアを指定してください。`);
+          const b = details.battleDiff, r = details.roundDiff;
+          check(b === null || integer(b,-9,9), `${label}：仮定のバトル差が不正です。`);
+          check(r === null || integer(r,-60,60), `${label}：仮定のラウンド差が不正です。`);
+          const [h,a] = String(fixedScores(d)[id]).split('-').map(Number);
+          check(validDifferences(h,a,b,r), `${label}：仮定スコアとバトル差・ラウンド差の組み合わせが成立しません。`);
         }
       }
       for (const [id, score] of Object.entries(fixedScores(d))) {

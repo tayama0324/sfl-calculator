@@ -72,7 +72,7 @@ test('v1 migration preserves fixed scores and converts its single condition; inv
   if(old.schemaVersion===2){old.schemaVersion=1;for(const d of old.divisions){d.scenario={mode:'win',targetTeamId:d.teams[0].id,fixedScores:d.fixedScores};delete d.cases;delete d.fixedScores;delete d.explorationMode;}}
   old.divisions[0].scenario.mode='win';
   const upgraded=migrateData(old);
-  assert.equal(upgraded.schemaVersion,3);assert.equal(upgraded.divisions[0].cases[0].conditions[0].mode,'win');assert.deepEqual(validate(upgraded),[]);
+  assert.equal(upgraded.schemaVersion,4);assert.equal(upgraded.divisions[0].cases[0].conditions[0].mode,'win');assert.deepEqual(validate(upgraded),[]);
   assert.deepEqual(migrateData(upgraded),upgraded);
   for(const mutate of [d=>d.explorationMode='invalid',d=>d.cases[0].conditions.push({targetTeamId:'missing',mode:'win'}),d=>d.cases.push(structuredClone(d.cases[0])),d=>d.cases[0].conditions.push({targetTeamId:d.teams[0].id,mode:'normal'})]){const invalid=data();mutate(invalid.divisions[0]);assert(validate(invalid).length);}
 });

@@ -127,9 +127,9 @@ test('Monte Carlo UI distinguishes no observations, certainty, tie bounds and st
   const changed=structuredClone(d);changed.simulation.trials++;assert(!renderComparison(saved,changed).includes('変更前の入力'));
   changed.simulation.seed+='x';assert(renderComparison(saved,changed).includes('変更前の入力'));
 });
-test('settings migrate v1/v2 to v3 with exact default and reject invalid Monte Carlo options',()=>{
-  const current=migrateData(raw);assert.equal(current.schemaVersion,3);assert.equal(current.divisions[0].calculationMethod,'exact');assert.equal(current.divisions[0].simulation.trials,100000);
-  const v2=structuredClone(current);v2.schemaVersion=2;for(const d of v2.divisions){delete d.calculationMethod;delete d.simulation;}assert.equal(migrateData(v2).schemaVersion,3);
+test('settings migrate v1/v2 to v4 with exact default and reject invalid Monte Carlo options',()=>{
+  const current=migrateData(raw);assert.equal(current.schemaVersion,4);assert.equal(current.divisions[0].calculationMethod,'exact');assert.equal(current.divisions[0].simulation.trials,100000);
+  const v2=structuredClone(current);v2.schemaVersion=2;for(const d of v2.divisions){delete d.calculationMethod;delete d.simulation;}assert.equal(migrateData(v2).schemaVersion,4);
   for(const mutate of [d=>d.calculationMethod='oops',d=>d.simulation.trials=0,d=>d.simulation.trials=.5,d=>d.simulation.trials=Number.MAX_SAFE_INTEGER+1,d=>d.simulation.seed=123,d=>d.simulation.seed='x'.repeat(257)]){const x=structuredClone(current);mutate(x.divisions[0]);assert(validate(x).length);}
 });
 test('worker cancels only at full paired-trial boundaries and checkpoint resumes identically',async()=>{
