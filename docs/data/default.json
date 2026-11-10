@@ -588,8 +588,8 @@
         }
       ],
       "baseline": {
-        "asOf": "2026-11-07",
-        "sourceStatus": "secondary-checked",
+        "asOf": "2026-11-10",
+        "sourceStatus": "user-provided",
         "includedMatchIds": [
           "f-1-g8s-oja",
           "f-1-rej-vl",
@@ -608,50 +608,53 @@
           "f-5-oja-rej",
           "f-6-rid-dfm",
           "f-6-vl-rej",
-          "f-6-oja-g8s"
+          "f-6-oja-g8s",
+          "f-7-g8s-vl",
+          "f-7-rej-rid",
+          "f-7-oja-dfm"
         ],
         "standings": [
           {
             "teamId": "rid",
-            "played": 6,
+            "played": 7,
             "points": 180,
-            "battleDiff": 10,
-            "roundDiff": 19
+            "battleDiff": 5,
+            "roundDiff": 11
           },
           {
             "teamId": "g8s",
-            "played": 6,
-            "points": 150,
-            "battleDiff": 7,
-            "roundDiff": 7
+            "played": 7,
+            "points": 190,
+            "battleDiff": 11,
+            "roundDiff": 12
           },
           {
             "teamId": "rej",
-            "played": 6,
-            "points": 140,
-            "battleDiff": 7,
-            "roundDiff": 17
+            "played": 7,
+            "points": 180,
+            "battleDiff": 12,
+            "roundDiff": 25
           },
           {
             "teamId": "dfm",
-            "played": 6,
-            "points": 130,
-            "battleDiff": -1,
-            "roundDiff": -1
+            "played": 7,
+            "points": 140,
+            "battleDiff": -2,
+            "roundDiff": -2
           },
           {
             "teamId": "vl",
-            "played": 6,
+            "played": 7,
             "points": 110,
-            "battleDiff": -9,
-            "roundDiff": -19
+            "battleDiff": -13,
+            "roundDiff": -24
           },
           {
             "teamId": "oja",
-            "played": 6,
-            "points": 60,
-            "battleDiff": -14,
-            "roundDiff": -23
+            "played": 7,
+            "points": 90,
+            "battleDiff": -13,
+            "roundDiff": -22
           }
         ]
       },

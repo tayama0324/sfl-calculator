@@ -140,7 +140,7 @@ AND条件の拡張はv0.13.0で実装しました。
 
 ## データの出典と限界
 
-- 基準順位表：ユーザー提供の2026-11-07時点（S第7節・F第6節終了）。[SF6 Freak](https://sf6freak.com/contents/results/sfl-2026/)の両順位表と一致。
+- 基準順位表：Sは2026-11-07時点の第7節終了。Fはユーザー提供の2026-11-10時点の第7節終了データへ更新。Sの旧照合記録は[SF6 Freak](https://sf6freak.com/contents/results/sfl-2026/)参照。Fの最新値はユーザー提供値を使用。
 - 全60試合の日程とホーム・アウェイ：[格ゲーチェッカー](https://kakuge-checker.com/topic/view/09243/)の各チーム対戦表を参照。各組合せ2試合、各節各チーム1試合、各チームホーム・アウェイ各5試合を検証。
 - [公式日程](https://sf.esports.capcom.com/sfl2026/schedule/)は取得時に403となり、直接照合できていません。公式確認済みとして扱わないでください。
 - 日程データの試合ID・並び順は本ツール用であり、公式のMatch 1〜3の順番を表しません。
@@ -164,7 +164,7 @@ python -m http.server 8000 --directory dist
 
 `http://localhost:8000/`を開きます。`index.html`のダブルクリック（file://）ではデータ取得・Workerを使用できません。
 
-初期データ全組み合わせの検算は次で実行できます。Division Fでは21億通り以上を列挙するため、完了まで待ってください。
+初期データ全組み合わせの検算は次で実行できます。両Divisionとも残り9試合、各10,077,696通りを列挙します。
 
 ```sh
 node scripts/verify-default.js
