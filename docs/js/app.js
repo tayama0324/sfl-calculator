@@ -1,3 +1,5 @@
+import {userSettings,applyUserSettings} from './user-settings.js';
+import {clearStoredCheckpoints,restoreMatchingCheckpoint} from './checkpoint-storage.js';
 import {compactLayout} from './compact-layout.js';
 import {rulesFor,setMatchRules,mergeMatchRules,clearMatchRules,ruleErrors,ruleText,exactRuleScore,ASSUMPTION_METRICS,ASSUMPTION_OPERATORS,filterRuleOutcomes} from './match-assumptions.js';
 import {resultAssumptions,renderAssumptionWarning} from './assumption-warning.js';
@@ -12,7 +14,7 @@ import {renderCost} from './exhaustive-cost.js';
 import {defaultSearchConfig,searchConfigErrors} from './search-config.js';
 
 const $ = s => document.querySelector(s);
-const STORE = 'sfl-rank-probability:v3';
+const STORE = 'sfl-rank-probability:v4';
 const teamColors = ['#c0adff', '#ff9355', '#ffd270', '#91cdb0', '#eb7c87', '#7cb9e7'];
 const signed = n => n === null ? '不明' : `${n > 0 ? '+' : ''}${n}`;
 let defaults, data, active = 'S', storageStatus = 'このブラウザに自動保存', editingMatch = null;
@@ -32,8 +34,14 @@ const notice = (text, error = false) => {
   if ($('#result-dialog').open) { $('#dialog-error').textContent = error ? text : ''; $('#dialog-error').hidden = !error; }
 };
 function persist() {
-  try { localStorage.setItem(STORE, JSON.stringify(data)); storageStatus = 'このブラウザに自動保存済み'; }
+  try { localStorage.setItem(STORE, JSON.stringify(userSettings(data)));
+    for(const version of [1,2,3])localStorage.removeItem(`sfl-rank-probability:v${version}`);
+    storageStatus = '計算設定と将来の仮定をこのブラウザに保存済み。成績・日程は配信データを使用。'; }
   catch { storageStatus = '保存できません。JSONを書き出してください。'; }
+}
+function clearSavedResults(ids){
+  try{clearStoredCheckpoints(localStorage,ids);}
+  catch{notice('保存済みの計算結果を削除できませんでした。ブラウザの保存設定を確認してください。',true);}
 }
 function change(mutator, renderPage = true) {
   const next = structuredClone(data);
@@ -41,10 +49,12 @@ function change(mutator, renderPage = true) {
   for(const d of next.divisions)if(next.conditionSearch?.[d.id]&&next.conditionSearch[d.id].caseId!=='@normal'&&!d.cases.some(c=>c.id===next.conditionSearch[d.id].caseId))next.conditionSearch[d.id].caseId='@normal';
   const errors = validate(next);
   if (errors.length) { notice(errors.join('\n'), true); return false; }
+  const changed=next.divisions.filter(d=>simulationFingerprint({...d,cases:[]})!==simulationFingerprint({...data.divisions.find(old=>old.id===d.id),cases:[]})).map(d=>d.id);
   data = next;
   persist(); notice('');
+  clearSavedResults(changed);
   if (renderPage) render();
-  else { renderOutput(); $('#json-data').value=JSON.stringify(data,null,2); }
+  else renderOutput();
   return true;
 }
 function scoreOptions(selected = '', placeholder = '指定なし · 通常の確率分布') {
@@ -131,7 +141,7 @@ function render() {
     ${feature==='probability'?`<aside class="panel condition-panel"><div class="section-heading"><div><div class="kicker">03 / CALCULATE</div><h2>計算方式・順位判定</h2><p class="section-intro">上の入力をもとに、各チームの1位・PO進出の確率を求めます。</p></div></div><div class="condition-body"><label>計算方式<select id="calculation-method">${Object.entries(CALCULATION_METHODS).map(([id,name])=>`<option value="${id}" ${d.calculationMethod===id?'selected':''}>${name}</option>`).join('')}</select></label><label>順位判定<select id="exploration-mode">${Object.entries(EXPLORATION_MODES).map(([id,name])=>`<option value="${id}" ${d.explorationMode===id?'selected':''}>${rankingLabel(id,d.calculationMethod)}</option>`).join('')}</select></label>${renderSimulationSettings(d)}${d.calculationMethod==='exact'?renderCost({...d,cases:[]}):''}<p class="condition-note">詳細モードは各バトル／ラウンドの勝率50%・独立を仮定します。計算時間に上限はありません。${d.calculationMethod==='monteCarlo'?'試行回数を増やすと、推定の統計的な幅が小さくなります。':'モードによっては非常に多くの状態を探索します。'}</p><div class="run-area"><div class="calc-actions"><button class="primary-button run-button" id="calculate" ${run?'disabled':''}>${run?'計算実行中':'順位確率を計算'} <span aria-hidden="true">→</span></button><button id="cancel" ${run?'':'hidden'} ${run?.stopping?'disabled':''}>${run?.stopping?'停止待ち':'中止'}</button></div><button id="extend" class="tiny-button secondary-button" ${d.calculationMethod==='monteCarlo'?'':'hidden'} ${canResume(d)?'':'disabled'}>指定回数を追加試行</button><progress id="progress" max="100" value="0" ${run?'':'hidden'} aria-label="計算の進捗"></progress><div id="run-status" class="run-status" role="status">${escape(lastRunStatus || '入力した仮定のもとで計算します')}</div></div></div></aside>`:renderSearchControls(d,c,run,lastRunStatus)}
     <section class="panel result-panel ${resultAssumptions(currentSavedResult()).length?'has-assumptions':''}"><div class="section-heading"><div><div class="kicker">04 / RESULTS</div><h2>${feature==='conditions'?'1位・2位以内・PO進出に必要な成績':'1位・PO進出の確率'}</h2><p class="section-intro">${feature==='conditions'?'必要条件は可能性を残す最低成績、十分条件は達成を保証する成績です。':'入力した仮定のもとで、どこまで進めるかを読み取れます。'}</p></div><div class="result-toolbar"><span class="tag">${feature==='conditions'?'厳密条件探索':escape(rankingLabel(results.get(d.id)?.input.explorationMode ?? d.explorationMode,results.get(d.id)?.input.calculationMethod ?? d.calculationMethod))}</span>${(feature==='conditions'?searchResults.has(d.id):results.has(d.id)) ? '<button class="tiny-button secondary-button" id="export-result">結果JSON ↗</button>' : ''}</div></div><div id="result-content">${renderResult(d)}</div></section>
   </div>
-  <section class="panel"><div class="data-tools"><div><h3>データの保存・読み込み</h3><p class="storage-status">${escape(storageStatus)}</p></div><div class="data-tools-buttons"><button class="tiny-button" id="export">設定JSONを書き出す ↗</button><button class="tiny-button" id="import">JSONを読み込む</button><input id="import-file" type="file" accept=".json,application/json" hidden><button class="tiny-button secondary-button" id="reset">初期データに戻す</button></div></div><details id="advanced"><summary>日程・大会データをJSONで編集（詳細設定）</summary><p class="muted">両ディビジョンのデータを編集します。変更は「検証して適用」を押すまで反映されません。対戦日程・チーム名・基準に含む試合も変更できます。</p><div class="json-editor"><label for="json-data">大会データJSON</label><textarea id="json-data" spellcheck="false">${escape(JSON.stringify(data,null,2))}</textarea><button class="tiny-button" id="apply-json">検証して適用</button></div></details><details><summary>計算モデルと精度について</summary><p class="muted">40–0 / 30–10 / 30–20 / 20–30 / 10–30 / 0–40 の重みは1 / 2 / 1 / 1 / 2 / 1です。6通りは等確率ではありません。条件で残った候補を正規化します。厳密方式は全組み合わせを整数の重みで集計し、モンテカルロは同じ分布から抽選して寄与を集計します。ポイントモードは同ポイントを均等配分し、詳細モードは未解決同点を上下限で表示します。入力した仮定はすべてANDで適用します。計算時間の上限は設けていません。厳密計算はタブを閉じると停止します。モンテカルロは中止・完了時のチェックポイント、または書き出したJSONから追加試行できます。詳細モードではバトル／ラウンドの勝率も50%・独立と仮定し、延長を含む整合した試合結果を集計します。未解決同点とPO境界の同点の確率、厳密な分数、計算時の入力、スキップ理由は結果JSONから保存できます。</p></details></section>`;
+  <section class="panel"><div class="data-tools"><div><h3>計算設定・仮定の保存と読み込み</h3><p class="storage-status">${escape(storageStatus)}</p></div><div class="data-tools-buttons"><button class="tiny-button" id="export">設定JSONを書き出す ↗</button><button class="tiny-button" id="import">JSONを読み込む</button><input id="import-file" type="file" accept=".json,application/json" hidden><button class="tiny-button secondary-button" id="reset">初期データに戻す</button></div></div><details><summary>計算モデルと精度について</summary><p class="muted">40–0 / 30–10 / 30–20 / 20–30 / 10–30 / 0–40 の重みは1 / 2 / 1 / 1 / 2 / 1です。6通りは等確率ではありません。条件で残った候補を正規化します。厳密方式は全組み合わせを整数の重みで集計し、モンテカルロは同じ分布から抽選して寄与を集計します。ポイントモードは同ポイントを均等配分し、詳細モードは未解決同点を上下限で表示します。入力した仮定はすべてANDで適用します。計算時間の上限は設けていません。厳密計算はタブを閉じると停止します。モンテカルロは中止・完了時のチェックポイント、または書き出したJSONから追加試行できます。詳細モードではバトル／ラウンドの勝率も50%・独立と仮定し、延長を含む整合した試合結果を集計します。未解決同点とPO境界の同点の確率、厳密な分数、計算時の入力、スキップ理由は結果JSONから保存できます。</p></details></section>`;
   compactLayout($('#app'),{feature,assumptions:pending.filter(m=>rulesFor(d,m.id).length).length,baseline:d.baseline.asOf,remaining:pending.length,method:feature==='conditions'||d.calculationMethod==='exact'?'厳密計算':`モンテカルロ ${d.simulation.trials.toLocaleString()}試行`});
   for(const id of openDetails)document.getElementById(id)?.setAttribute('open','');
   for(const id of closedDetails)document.getElementById(id)?.removeAttribute('open');
@@ -185,6 +195,7 @@ function startCalculation(additional=false) {
   let worker;
   try { worker=new Worker(new URL('./worker.js',import.meta.url),{type:'module'}); }
   catch { return notice('計算用Workerを起動できません。HTTP(S)でページを開いてください。',true); }
+  clearSavedResults([snapshot.id]);
   results.set(snapshot.id,{fingerprint:fingerprint(snapshot),input:snapshot,startedAt:new Date().toLocaleString('ja-JP'),entries:[BASE_CASE,...snapshot.cases].map(definition=>({id:definition.id,name:definition.name,definition,status:'pending'}))});
   run={kind:'exact',worker,divisionId:snapshot.id,started:performance.now(),caseId:null,progress:null};
   notice('');render();timer=setInterval(updateRunStatus,250);
@@ -236,6 +247,10 @@ function monteCarloBundle(cp,status='restored') {
   return {method:'monteCarlo',input:structuredClone(cp.division),checkpoint:cp,status,startedAt:new Date().toLocaleString('ja-JP'),resolutions:[BASE_CASE,...cp.division.cases].map(c=>prepare(cp.division,c).resolution)};
 }
 function saveMonteCarlo(cp) {
+  const current=data.divisions.find(d=>d.id===cp.division.id);
+  // A worker may finish after the user has edited its input. Keep its result
+  // visible as stale, but never restore it as the current result on reload.
+  if(!current||cp.fingerprint!==simulationFingerprint({...current,cases:[]}))return false;
   try {localStorage.setItem(`sfl-mc:last-${cp.division.id}`,JSON.stringify(cp));return true;}
   catch {notice('モンテカルロ結果をブラウザに保存できません。結果JSONを書き出してください。集計値は画面に保持しています。',true);return false;}
 }
@@ -249,6 +264,7 @@ function startMonteCarlo(snapshot,additional){
   }catch(error){notice(error.message,true);return;}
   let worker;
   try{worker=new Worker(new URL('./worker.js',import.meta.url),{type:'module'});}catch{notice('計算用Workerを起動できません。',true);return;}
+  if(!additional)clearSavedResults([snapshot.id]);
   const bundle=monteCarloBundle(cp,'running');bundle.input=snapshot;results.set(snapshot.id,bundle);
   run={kind:'monteCarlo',worker,divisionId:snapshot.id,started:performance.now(),goal:cp.completed+snapshot.simulation.trials,progress:{processed:String(cp.completed)},stopping:false};
   notice('');render();timer=setInterval(updateRunStatus,250);
@@ -280,8 +296,10 @@ function importCheckpoint(cp){
     next.divisions[index]=structuredClone(cp.division);
     if(searchConfigErrors(cp.division,next.conditionSearch[cp.division.id]).length)next.conditionSearch[cp.division.id]=defaultSearchConfig(cp.division);
     const errors=validate(next);if(errors.length)throw new Error(errors.join('\n'));
+    const latest=applyUserSettings(defaults,next).data;
+    if(cp.fingerprint!==simulationFingerprint({...latest.divisions[index],cases:[]}))throw new Error('この計算結果は現在配信されている成績・日程と一致しないため復元できません。最新データで再計算してください。');
     if(run)stopRun('データ変更のため計算を停止しました。最後の受領済み集計を保持します。');
-    data=next;active=cp.division.id;feature='probability';results.set(active,monteCarloBundle(cp));persist();const stored=saveMonteCarlo(cp);render();notice(stored?'チェックポイントを復元しました。指定回数を追加試行できます。':'チェックポイントは復元しましたが、ブラウザに保存できません。結果JSONで保存してください。',!stored);return true;
+    data=latest;active=cp.division.id;feature='probability';results.set(active,monteCarloBundle(cp));persist();const stored=saveMonteCarlo(cp);render();notice(stored?'チェックポイントを復元しました。指定回数を追加試行できます。':'チェックポイントは復元しましたが、ブラウザに保存できません。結果JSONで保存してください。',!stored);return true;
   }catch(error){notice(error.message,true);return false;}
 }
 function download(name, value) {
@@ -289,12 +307,15 @@ function download(name, value) {
   const anchor = document.createElement('a'); anchor.href = url; anchor.download = name; anchor.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
+function settingsNotice(loaded){
+  return loaded.seasonChanged?'大会年度が変わったため、配信データの初期設定を使用します。':`成績・日程は配信データを使用し、計算設定と将来の仮定を読み込みました。${loaded.removed?`終了済み・対戦変更の${loaded.removed}試合の仮定を除外しました。`:''}`;
+}
 function replaceData(value) {
   if(value?.kind==='sfl-monte-carlo-checkpoint')return importCheckpoint(value);
   let migrated;
-  try { migrated=migrateData(value); } catch(error) { notice(error.message,true);return false; }
+  try { migrated=applyUserSettings(defaults,value); } catch(error) { notice(error.message,true);return false; }
   if (run) stopRun('データ変更のため計算を中止しました');
-  data=migrated;results.clear();searchResults.clear();persist();render();notice('データを検証して読み込みました。');return true;
+  data=migrated.data;results.clear();searchResults.clear();persist();render();notice(settingsNotice(migrated));clearSavedResults(['S','F']);return true;
 }
 function openResult(id) {
   if(!remaining(division()).some(m=>m.id===id))return;
@@ -342,7 +363,7 @@ function bind() {
   $('#calculate').onclick = ()=>feature==='conditions'?startConditionSearch():startCalculation(false);
   $('#cancel').onclick = requestStop;
   $('#clear-fixed').onclick = () => change(d => { clearMatchRules(d); });
-  $('#export').onclick = () => download('sfl-2026-settings.json', data);
+  $('#export').onclick = () => download('sfl-2026-settings.json', userSettings(data));
   if($('#export-result'))$('#export-result').onclick=()=>{if(feature==='conditions'){const saved=searchResults.get(active);download(`sfl-2026-${active}-conditions.json`,saved.status==='done'?saved.result:{kind:'sfl-condition-search-incomplete',complete:false,input:saved.input,config:saved.config,status:saved.status,progress:saved.progress});}else download(`sfl-2026-division-${active}-result.json`,results.get(active).method==='monteCarlo'?results.get(active).checkpoint:results.get(active));};
   $('#import').onclick = () => $('#import-file').click();
   $('#import-file').onchange = async event => {
@@ -351,8 +372,8 @@ function bind() {
     try { replaceData(JSON.parse(await file.text())); }
     catch { notice('JSONとして読み込めませんでした。元のデータは保持しています。', true); }
   };
-  $('#apply-json').onclick = () => { try { replaceData(JSON.parse($('#json-data').value)); } catch { notice('JSONの書式が不正です。元のデータは保持しています。', true); } };
-  $('#reset').onclick = () => { if (confirm('両ディビジョンの編集内容と仮定を初期データに戻しますか？必要なら先にJSONを書き出してください。')) replaceData(defaults); };
+
+  $('#reset').onclick = () => { if (confirm('両ディビジョンの計算設定・将来の仮定・保存済み計算結果を初期化しますか？必要なら先にJSONを書き出してください。')) replaceData(defaults); };
 }
 function renderRuleEditor(){
   const d=division(),m=d.fixtures.find(m=>m.id===editingMatch),names={...ASSUMPTION_METRICS,homePoints:`${team(d,m.homeTeamId).shortName}（H）の獲得ポイント`,awayPoints:`${team(d,m.awayTeamId).shortName}（A）の獲得ポイント`};
@@ -383,22 +404,25 @@ $('#result-form').onsubmit=event=>{
 $('#delete-result').onclick=()=>{if(change(d=>setMatchRules(d,editingMatch,[])))$('#result-dialog').close();};
 
 try {
-  const response = await fetch(new URL('../data/default.json', import.meta.url));
+  const response = await fetch(new URL('../data/default.json', import.meta.url),{cache:'no-store'});
   if (!response.ok) throw new Error('標準データを取得できません。');
   defaults = migrateData(await response.json());
   const errors = validate(defaults); if (errors.length) throw new Error(errors.join('\n'));
   data = structuredClone(defaults);
   let saveOnLoad=true;
   try {
-    const stored = localStorage.getItem(STORE) ?? localStorage.getItem('sfl-rank-probability:v2') ?? localStorage.getItem('sfl-rank-probability:v1');
+    const stored = localStorage.getItem(STORE) ?? localStorage.getItem('sfl-rank-probability:v3') ?? localStorage.getItem('sfl-rank-probability:v2') ?? localStorage.getItem('sfl-rank-probability:v1');
     if (stored) {
       const parsed = JSON.parse(stored);
-      if (validate(parsed).length) { saveOnLoad=false;storageStatus='保存済みデータは未変更。標準データを表示しています。';notice('保存データの形式が合わないため、標準データで開きました。保存済みデータは上書きしていません。', true); }
-      else data = migrateData(parsed);
+      const loaded=applyUserSettings(defaults,parsed);data=loaded.data;
+      if(loaded.removed||loaded.seasonChanged)notice(settingsNotice(loaded));
     }
-  } catch { saveOnLoad=false;storageStatus = '保存データを読み込めません。JSONで保存してください。'; }
+  } catch { saveOnLoad=false;storageStatus = '保存設定を読み込めませんでした。最新の配信データと初期設定を使用しています。';notice('保存設定の形式が合わないため復元しませんでした。成績・日程は最新の配信データです。',true); }
   if(saveOnLoad)persist();
-  for(const id of ['S','F'])try{const stored=localStorage.getItem(`sfl-mc:last-${id}`);if(stored){const cp=JSON.parse(stored);validateCheckpoint(cp);results.set(id,monteCarloBundle(cp));}}catch{notice('保存済みモンテカルロ結果を復元できませんでした。保存データは上書きしていません。',true);}
+  for(const d of data.divisions)try{
+    const cp=restoreMatchingCheckpoint(localStorage,{...d,cases:[]});
+    if(cp)results.set(d.id,monteCarloBundle(cp));
+  }catch{notice('保存済みモンテカルロ結果を復元できませんでした。現在の入力から再計算してください。',true);}
   render();
 } catch (error) {
   $('#app').textContent = '読み込みに失敗しました。ページをHTTP(S)経由で開き、再読み込みしてください。';
