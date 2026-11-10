@@ -4,7 +4,7 @@
 
 ## プロジェクトと目的
 
-Street Fighter League 2026 の本節最終順位を計算する、日本語の非公式ツール。GitHub Pagesに公開できる静的ページとして作成。現在はv0.13.0。サーバー・APIキー・外部ライブラリは不要。Node.js 24以降を開発・検証に使用する。
+Street Fighter League 2026 の本節最終順位を計算する、日本語の非公式ツール。GitHub Pagesに公開できる静的ページとして作成。現在はv0.14.0。サーバー・APIキー・外部ライブラリは不要。Node.js 24以降を開発・検証に使用する。
 
 最初にREADME.md、documentation/specification.md、各追加仕様、documentation/verification.mdを読む。旧「初版仕様」と追加仕様が異なる箇所では、追加仕様とこの引き継ぎの最新の合意を参照する。
 
@@ -13,7 +13,7 @@ Street Fighter League 2026 の本節最終順位を計算する、日本語の�
 - docs/：ページのソース。JavaScript ES ModulesとWeb Workerを使用。
 - dist/：直近の公開用ビルド。npm run buildでdocs/から生成。
 - documentation/：仕様、出典記録、検証記録、入力・結果サンプル。
-- tests/：自動テスト。直近の実行で97件成功。
+- tests/：自動テスト。直近の実行で100件成功。
 - scripts/：ビルドと各方式の検証スクリプト。
 - .github/workflows/ci.yml：mainへのpush・PR等でテストとビルドを実行する設定。公開はPages設定のmain /docsから行う。
 
@@ -287,3 +287,13 @@ AND条件による仮定入力の拡張はユーザーの仕様検討依頼で�
 開発時は`docs/`を編集し、Pagesでは`main`の`/docs`を公開元に指定する。
 `npm run build`は`docs/`を`dist/`へコピーする補助処理。`.github/workflows/ci.yml`はテストとビルドのみで、独自デプロイは行わない。
 `TRANSFER-MANIFEST.sha256`は受領時の原本記録として旧パスのまま保持する。現在の構成の検証には使用しない。
+
+
+## v0.14.0：上部の計算フォーム・確率グラフ
+
+`docs/js/compact-layout.js` が既存の入力要素を移動し、機能選択→主要設定→任意の前提／詳細設定→計算→結果の順に配置する。
+フィールドやイベントを二重化しない。現在のチーム状況全体を折りたたみ、仮定の件数・確認／解除と大規模探索警告は閉じていても表示する。
+`docs/js/probability-chart.js` は数値表と同じboundsOf・confidenceIntervalを使い、PO／1位／順位別のグラフを描画する。
+厳密ポイントの順位分布だけを積み上げる。同点の上下限やMCの区間を合計100%と誤認させない。
+グラフの選択は再描画・MC途中更新でも維持する。既存の表・監査表示は折りたたみに残す。
+100テスト・ビルドとPC／390px幅の実ブラウザ検証を実施。折りたたみ内の「現在のチーム状況」から不要になった`01 / INPUT`表記を削除。
