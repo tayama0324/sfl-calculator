@@ -345,11 +345,6 @@
       "id": "F",
       "teams": [
         {
-          "id": "rid",
-          "name": "RIDDLE ORDER",
-          "shortName": "RID"
-        },
-        {
           "id": "g8s",
           "name": "Good 8 Squad",
           "shortName": "G8S"
@@ -358,6 +353,11 @@
           "id": "rej",
           "name": "REJECT",
           "shortName": "REJECT"
+        },
+        {
+          "id": "rid",
+          "name": "RIDDLE ORDER",
+          "shortName": "RID"
         },
         {
           "id": "dfm",
@@ -615,13 +615,6 @@
         ],
         "standings": [
           {
-            "teamId": "rid",
-            "played": 7,
-            "points": 180,
-            "battleDiff": 5,
-            "roundDiff": 11
-          },
-          {
             "teamId": "g8s",
             "played": 7,
             "points": 190,
@@ -634,6 +627,13 @@
             "points": 180,
             "battleDiff": 12,
             "roundDiff": 25
+          },
+          {
+            "teamId": "rid",
+            "played": 7,
+            "points": 180,
+            "battleDiff": 5,
+            "roundDiff": 11
           },
           {
             "teamId": "dfm",
