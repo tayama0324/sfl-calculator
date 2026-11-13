@@ -15,7 +15,7 @@ test('preferences never store standings, teams, full schedule or recorded result
 });
 test('legacy JSON actual results and roster edits cannot override published tournament data',()=>{
  const old=structuredClone(published),d=old.divisions[0],id=remaining(d)[0].id;d.results[id]={homePoints:40,awayPoints:0,homeBattleDiffDelta:7,homeRoundDiffDelta:14};d.teams[0].name='Edited name';assert.deepEqual(validate(old),[]);
- const next=applyUserSettings(published,old).data;assert.deepEqual(next.divisions[0].results,published.divisions[0].results);assert.deepEqual(next.divisions[0].teams,published.divisions[0].teams);assert.equal(remaining(next.divisions[0]).length,9);
+ const next=applyUserSettings(published,old).data;assert.deepEqual(next.divisions[0].results,published.divisions[0].results);assert.deepEqual(next.divisions[0].teams,published.divisions[0].teams);assert.equal(remaining(next.divisions[0]).length,6);
  const preferences=userSettings(old);preferences.divisions[0].baseline=d.baseline;preferences.divisions[0].results=d.results;assert.deepEqual(applyUserSettings(published,preferences).data.divisions[0].results,{});
 });
 test('same match ID with changed opponents does not silently inherit old assumptions',()=>{
@@ -24,4 +24,12 @@ test('same match ID with changed opponents does not silently inherit old assumpt
 test('v1 settings migrate, another season resets preferences, invalid preferences do not mutate published data',()=>{
  assert.deepEqual(validate(applyUserSettings(published,raw).data),[]);const saved=userSettings(published);saved.season=2025;assert.equal(applyUserSettings(published,saved).seasonChanged,true);
  const invalid=userSettings(published);invalid.divisions[0].explorationMode='invalid';const before=JSON.stringify(published);assert.throws(()=>applyUserSettings(published,invalid));assert.equal(JSON.stringify(published),before);
+});
+test('S round 8 publication removes completed assumptions and keeps future assumptions',async()=>{
+ const oldRaw=structuredClone(raw);oldRaw.divisions[0]=JSON.parse(await readFile(new URL('./fixtures/division-s-round7.json',import.meta.url)));
+ const old=migrateData(oldRaw),d=old.divisions[0];d.matchAssumptions={'s-8-fav-ixa':[rule],'s-9-ixa-cr':[rule]};
+ const future=remaining(published.divisions[0])[0].id;delete d.matchAssumptions['s-9-ixa-cr'];d.matchAssumptions[future]=[rule];
+ const loaded=applyUserSettings(published,userSettings(old)),next=loaded.data.divisions[0];
+ assert.equal(loaded.removed,1);assert.deepEqual(Object.keys(next.matchAssumptions),[future]);assert.equal(remaining(next).length,6);
+ assert.deepEqual(next.teams.map(t=>t.id),['zet','sol','fav','ibs','cr','ixa']);assert(current(next).every(t=>t.played===8));assert.deepEqual(next.baseline,published.divisions[0].baseline);
 });

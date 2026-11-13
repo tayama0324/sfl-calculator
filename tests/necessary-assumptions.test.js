@@ -49,8 +49,9 @@ test('necessary clauses are unabridged, contracted, button-free per clause, and 
 });
 
 test('iXA second-place regression: preserve its unique points case and find a battle-qualified outcome',async()=>{
-  const data=migrateData(JSON.parse(await readFile(new URL('../docs/data/default.json',import.meta.url))));
-  const d=data.divisions[0];d.cases=[];
+  const data=JSON.parse(await readFile(new URL('../docs/data/default.json',import.meta.url)));
+  data.divisions[0]=JSON.parse(await readFile(new URL('./fixtures/division-s-round7.json',import.meta.url)));
+  const d=migrateData(data).divisions[0];d.cases=[];
   const c={mode:'points',goal:'all',targetTeamId:'ixa',caseId:'@input'};
   // Independent enumeration of the nine matches, with no engine pruning,
   // classifications, marginal summaries or condition-extraction helpers.

@@ -10,7 +10,7 @@ const baseInput = (points = [0,0,0,0,0,0], matches = []) => ({ points, matches, 
 const match = (home, away, outcomes = SCORES) => ({ home, away, outcomes });
 test('initial fixtures: 60 unique home/away matches; baseline and differences reconcile', () => {
   assert.deepEqual(validate(initial), []);
-  assert.equal(remaining(initial.divisions[0]).length, 9);
+  assert.equal(remaining(initial.divisions[0]).length, 6);
   assert.equal(remaining(initial.divisions[1]).length, 9);
   for (const d of initial.divisions) for (const t of d.teams) {
     assert.equal(d.fixtures.filter(m => m.homeTeamId === t.id).length, 5);

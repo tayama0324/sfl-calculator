@@ -20,11 +20,11 @@ test('cost shares score and detailed assumption filtering with progress in every
 });
 test('mixed match factors, live assumption removal and no remaining games have correct costs',()=>{
   const d=migrateData(raw).divisions[0];d.cases=[];const m=remaining(d)[0];
-  assert.equal(exhaustiveCost(d,'points',1).total,String(6**9));
+  assert.equal(exhaustiveCost(d,'points',1).total,String(6**6));
   d.fixedScores[m.id]='40-0';
-  const cost=exhaustiveCost(d,'points',1);assert.equal(cost.total,String(6**8));assert.equal(cost.states,null);assert.equal(cost.stateCounts.filter(n=>n===1).length,1);
-  const html=renderCost(d,{mode:'points',cases:1});assert(html.includes('1,679,616通り'));assert(html.includes('🟢'));assert(!html.includes('<details>'));assert(!html.includes('<button'));
-  delete d.fixedScores[m.id];assert.equal(exhaustiveCost(d,'points',1).total,String(6**9));
+  const cost=exhaustiveCost(d,'points',1);assert.equal(cost.total,String(6**5));assert.equal(cost.states,null);assert.equal(cost.stateCounts.filter(n=>n===1).length,1);
+  const html=renderCost(d,{mode:'points',cases:1});assert(html.includes('7,776通り'));assert(html.includes('🟢'));assert(!html.includes('<details>'));assert(!html.includes('<button'));
+  delete d.fixedScores[m.id];assert.equal(exhaustiveCost(d,'points',1).total,String(6**6));
   for(const game of remaining(d))d.results[game.id]={homePoints:40,awayPoints:0,homeBattleDiffDelta:7,homeRoundDiffDelta:14};
   for(const mode of ['points','battles','rounds'])assert.equal(exhaustiveCost(d,mode,1).total,'1');
 });

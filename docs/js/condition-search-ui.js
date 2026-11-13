@@ -66,9 +66,9 @@ function matchConjunction(r,thresholds){
   return clauses.length?clauses.join('<span class="match-and">かつ</span>'):'追加条件なしで確定';
 }
 function matchWitness(goal,id,label){return `<button class="tiny-button secondary-button" data-search-goal="${goal}" data-search-example="${id}" data-match-witness>${label}</button>`;}
-function renderSingleMatchConditions(r,goal){
+function renderSingleMatchConditions(r,goal,sufficient){
   if(!r.singleMatchConditions)return '';
-  const a=r.singleMatchConditions.analysis;
+  const a={...r.singleMatchConditions.analysis,sufficient};
   if(a.status==='certain')return '<p>追加条件なしで確定</p>';
   if(a.status==='impossible')return '<p>達成不可能</p>';
   if(!a.sufficient.length)return '<p>この形式では十分条件なし</p><small>複数試合を組み合わせた条件が成立する可能性はあります。</small>';
@@ -94,6 +94,23 @@ function renderAllMatchNecessary(r,goal,stale){
   const button=r.mode==='points'?`<button class="tiny-button secondary-button apply-necessary" data-apply-necessary="${goal}" ${stale?'disabled title="入力が変更されています。再探索してください。"':''}>この条件でバトル得失点差を探索する</button>`:'';
   return `<section class="all-match-necessary">${clauses.length?`<p class="match-options-note">全チームの試合が対象・すべて必須</p>${clauses.join('<span class="match-and">かつ</span>')}`:'-'}${button}</section>`;
 }
+function renderCombinedMatchConditions(r,goal){
+  const data=r.combinedMatchConditions,candidates=data.sufficient;
+  const name=id=>escape(r.input.teams.find(t=>t.id===id).shortName);
+  const candidate=c=>`<div class="match-option">${c.clauses.map(clause=>{
+    const m=data.matches[clause.matchIndex],fixture=r.input.fixtures.find(f=>f.id===m.matchId);
+    const label=`第${fixture.round}節 ${name(fixture.homeTeamId)} vs. ${name(fixture.awayTeamId)}`;
+    const teamName=side=>name(r.initial.teamIds[side===0?m.home:m.away]);
+    const range=(side,min,max)=>`${teamName(side)}が${min===max?`${min}点`:min===0?`${max}点以下`:max===40?`${min}点以上`:`${min}〜${max}点`}`;
+    if(clause.operator==='exact')return `<span class="match-clause">${label} の結果が <b>${clause.score[0]} - ${clause.score[1]}</b></span>`;
+    let text;
+    if(clause.operator==='range')text=range(clause.side,clause.min,clause.max);
+    else if(clause.operator==='ranges')text=clause.bounds.map(([min,max],side)=>range(side,min,max)).join(' かつ ');
+    else {const suffix=clause.operator==='atLeast'?(clause.points===40?'':'以上'):(clause.points===0?'':'以下');text=`${teamName(clause.side)}が${clause.points}点${suffix}`;}
+    return `<span class="match-clause">${label} で <b>${text}</b></span>`;
+  }).join('<span class="match-and">かつ</span>')}${matchWitness(goal,c.witness,CONFIRMED_EXAMPLE)}</div>`;
+  return `<p class="match-options-note">次のいずれか1つを満たせば確定（${candidates.length}条件・最大${data.limit}試合）</p>${candidate(candidates[0])}${candidates.length>1?`<details class="single-match-alternatives" id="single-match-alternatives-${goal}"><summary>ほか${candidates.length-1}条件を表示</summary>${candidates.slice(1).map(candidate).join('')}</details>`:''}`;
+}
 function renderMatchConditions(r,goal,stale=false){
   if(!r.matchConditions)return '';
   const a=r.matchConditions.analysis;
@@ -106,7 +123,13 @@ function renderMatchConditions(r,goal,stale=false){
     const candidate=(c,i)=>`<div class="match-option"><p class="match-option-label">${a.sufficient.length>1?`条件${i+1}`:'この条件なら確定'}</p>${matchConjunction(r,c.thresholds)}${matchWitness(goal,c.witness,CONFIRMED_EXAMPLE)}<details class="match-proof"><summary>条件を緩めた反例</summary>${c.counterexamples.map(e=>`<div class="match-counterexample">${matchClause(r,e.matchIndex,c.thresholds[e.matchIndex]-10)}に緩めると保証できません。${matchWitness(goal,e.witness,'条件を緩めた例')}</div>`).join('')}</details></div>`;
     sufficient=`${a.sufficient.length>1?`<p class="match-options-note">${a.sufficient.length}通りのうち、いずれかを満たせば確定</p>`:''}${candidate(a.sufficient[0],0)}${a.sufficient.length>1?`<details class="match-alternatives" id="match-alternatives-${goal}"><summary>ほか${a.sufficient.length-1}通りを表示</summary>${a.sufficient.slice(1).map((c,i)=>candidate(c,i+1)).join('')}</details>`:''}`;
   }
-  if(r.singleMatchConditions?.analysis.sufficient.length&&!['certain','impossible'].includes(a.status))sufficient=`<section class="own-match-conditions"><h4>自力での確定条件</h4>${sufficient}</section><section class="single-match-conditions"><h4>他力での確定条件</h4>${renderSingleMatchConditions(r,goal)}</section>`;
+  const combined=r.combinedMatchConditions;
+  const otherConditions=(r.singleMatchConditions?.analysis.sufficient??[]).filter(c=>{
+    const m=r.input.fixtures.find(m=>m.id===c.matchId);
+    return m&&m.homeTeamId!==r.targetTeamId&&m.awayTeamId!==r.targetTeamId;
+  });
+  const hasOther=combined?.limit?combined.sufficient.length:otherConditions.length;
+  if(hasOther&&!['certain','impossible'].includes(a.status))sufficient=`<section class="own-match-conditions"><h4>自力での確定条件</h4>${sufficient}</section><section class="single-match-conditions"><h4>他力での確定条件</h4>${combined?.limit?renderCombinedMatchConditions(r,goal):renderSingleMatchConditions(r,goal,otherConditions)}</section>`;
   return `<tr class="match-condition-row"><th scope="row">マッチ</th><td data-label="必要条件" class="match-condition">${resultAssumptions({input:r.input,config:r.config}).length?'<p class="mobile-assumption-note">入力した仮定が成立する場合の必要条件です。仮定で既に指定した結果も含まれます。</p>':''}${necessary}</td><td data-label="十分条件" class="match-condition po-cell">${resultAssumptions({input:r.input,config:r.config}).length?'<p class="mobile-assumption-note">入力した仮定が成立する場合に限り、達成を保証します。</p>':''}${sufficient}</td></tr>`;
 }
 
@@ -123,5 +146,5 @@ function renderCombinedSearch(saved,d,c){
     const exampleLabel=saved.exampleLabels?.[goal]??examples.find(e=>e.id===exampleIndex)?.label??'具体例';
     const message=a.status==='certain'?'この前提なら達成が確定':a.status==='impossible'?'この前提では達成不可能':a.status==='possible-not-guaranteed'?'可能性はありますが、達成の保証はできません':'可能性を残す条件と、保証できる条件';
     return `<section class="goal-result"><div class="section-heading"><div><h3>${goal==='first'?'1位通過':goal==='second'?'2位以内':'PO進出（3位以内）'}</h3><p class="section-intro">${message}</p></div></div><div class="scroll-table"><table class="conditions-table" aria-label="${goal==='first'?'1位':goal==='second'?'2位以内':'PO進出'}の必要条件と十分条件"><thead><tr><th>残りの成績</th><th>必要条件${assumed?'<small class="assumption-condition-note">入力した仮定が成立する場合の必要条件です。仮定で既に指定した結果も含まれます。</small>':''}</th><th>十分条件${assumed?'<small class="assumption-condition-note">入力した仮定が成立する場合に限り、達成を保証します。</small>':''}</th></tr></thead><tbody>${['points'].map(metric=>`<tr><th scope="row">獲得ポイント${r.mode!=='points'?'<small>十分条件は得失込み</small>':''}</th><td data-label="必要条件">${thresholdText(a[metric],metric,'necessary',a,initial)}</td><td data-label="十分条件" class="po-cell">${sufficientText(r,initial)}</td></tr>`).join('')}${renderMatchConditions(r,goal,stale)}</tbody></table></div><details id="examples-${goal}"><summary>具体例を見る</summary><div class="example-actions">${examples.map(e=>`<button class="tiny-button" data-search-goal="${goal}" data-search-example="${e.id}">${escape(e.label)}</button>`).join('')}</div>${renderExample(r,exampleIndex,exampleLabel)}</details></section>`;
-  }).join('')}</div><details id="search-explanation"><summary>条件の読み方・探索の詳細</summary><p class="muted">必要条件を満たしても進出の保証にはなりません。合計ポイントとマッチの行は別々の条件です。マッチの必要条件が「-」でも、合計ポイントの必要条件はあり得ます。十分条件以上なら、入力した仮定のもとですべての結果で目標を達成します。獲得ポイント欄の「他力」は、探索した成績を最大にしても保証できず、他チームの結果または追加タイブレーク戦に依存する意味です。バトルまでの探索では未探索のラウンド得失の影響も残ります。マッチの必要条件は他チーム同士を含む全試合が対象です。達成確定・未確定ケースを合わせた各チームの必要最低点を示し、すべて満たす必要があります。入力した仮定で既に満たす条件も含みます。必要条件の結果表記は、達成確定・未確定ケースの最低点と最高点からスコアが一意に決まる場合です。仮定への反映では、一意スコアと各チームの必要最低点を条件のままANDで追加します。これによりバトル探索に進める達成可能なケースを除外しません。十分条件の「他力での確定条件」は、非達成・未確定ケースの各試合の点数の上限・下限を外れる条件です。いずれか1つを満たせば確定します。この方法で条件が見つからないときは他力での確定条件欄を省略します。マッチ欄は点数だけの条件で、得失を指定する条件は含みません。得失の境界値は整数で示し、ちょうどその値が実現しない場合もあります。${reasonText(c.mode)}のパターンは可能性に含め、保証には含めません。</p><p class="muted">${saved.seconds.toFixed(2)}秒 · ${BigInt(saved.result.processed).toLocaleString()}通りを1回の探索で確認。</p>${renderAudit(saved.input,saved.result.results.po.caseDefinition,saved.result.results.po.resolution)}</details>`;
+  }).join('')}</div><details id="search-explanation"><summary>条件の読み方・探索の詳細</summary><p class="muted">必要条件を満たしても進出の保証にはなりません。合計ポイントとマッチの行は別々の条件です。マッチの必要条件が「-」でも、合計ポイントの必要条件はあり得ます。十分条件以上なら、入力した仮定のもとですべての結果で目標を達成します。獲得ポイント欄の「他力」は、探索した成績を最大にしても保証できず、他チームの結果または追加タイブレーク戦に依存する意味です。バトルまでの探索では未探索のラウンド得失の影響も残ります。マッチの必要条件は他チーム同士を含む全試合が対象です。達成確定・未確定ケースを合わせた各チームの必要最低点を示し、すべて満たす必要があります。入力した仮定で既に満たす条件も含みます。必要条件の結果表記は、達成確定・未確定ケースの最低点と最高点からスコアが一意に決まる場合です。仮定への反映では、一意スコアと各チームの必要最低点を条件のままANDで追加します。これによりバトル探索に進める達成可能なケースを除外しません。十分条件の「他力での確定条件」は、非達成・未確定ケースをすべて除外するポイントの上下限・範囲・確定スコアの条件です。残り3試合以下は最大3試合、4〜9試合は最大2試合の条件を組み合わせます。10試合以上では単独条件のみを調べます。いずれか1つを満たせば確定します。この方法で条件が見つからないときは他力での確定条件欄を省略します。マッチ欄は点数だけの条件で、得失を指定する条件は含みません。得失の境界値は整数で示し、ちょうどその値が実現しない場合もあります。${reasonText(c.mode)}のパターンは可能性に含め、保証には含めません。</p><p class="muted">${saved.seconds.toFixed(2)}秒 · ${BigInt(saved.result.processed).toLocaleString()}通りを1回の探索で確認。</p>${renderAudit(saved.input,saved.result.results.po.caseDefinition,saved.result.results.po.resolution)}</details>`;
 }

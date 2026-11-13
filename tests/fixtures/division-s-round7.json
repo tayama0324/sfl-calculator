@@ -1,0 +1,324 @@
+{
+  "id": "S",
+  "teams": [
+    {
+      "id": "zet",
+      "name": "ZETA DIVISION",
+      "shortName": "ZETA"
+    },
+    {
+      "id": "fav",
+      "name": "FAV gaming",
+      "shortName": "FAV"
+    },
+    {
+      "id": "sol",
+      "name": "Saishunkan Sol 熊本",
+      "shortName": "SOL"
+    },
+    {
+      "id": "ibs",
+      "name": "FUKUSHIMA IBUSHIGIN",
+      "shortName": "IBS"
+    },
+    {
+      "id": "cr",
+      "name": "Crazy Raccoon",
+      "shortName": "CR"
+    },
+    {
+      "id": "ixa",
+      "name": "広島 TEAM iXA",
+      "shortName": "iXA"
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "s-1-fav-ibs",
+      "round": 1,
+      "homeTeamId": "fav",
+      "awayTeamId": "ibs",
+      "scheduledAt": "2026-08-25"
+    },
+    {
+      "id": "s-1-cr-zet",
+      "round": 1,
+      "homeTeamId": "cr",
+      "awayTeamId": "zet",
+      "scheduledAt": "2026-08-25"
+    },
+    {
+      "id": "s-1-ixa-sol",
+      "round": 1,
+      "homeTeamId": "ixa",
+      "awayTeamId": "sol",
+      "scheduledAt": "2026-08-25"
+    },
+    {
+      "id": "s-2-zet-ixa",
+      "round": 2,
+      "homeTeamId": "zet",
+      "awayTeamId": "ixa",
+      "scheduledAt": "2026-09-01"
+    },
+    {
+      "id": "s-2-fav-sol",
+      "round": 2,
+      "homeTeamId": "fav",
+      "awayTeamId": "sol",
+      "scheduledAt": "2026-09-01"
+    },
+    {
+      "id": "s-2-ibs-cr",
+      "round": 2,
+      "homeTeamId": "ibs",
+      "awayTeamId": "cr",
+      "scheduledAt": "2026-09-01"
+    },
+    {
+      "id": "s-3-zet-ibs",
+      "round": 3,
+      "homeTeamId": "zet",
+      "awayTeamId": "ibs",
+      "scheduledAt": "2026-09-08"
+    },
+    {
+      "id": "s-3-sol-cr",
+      "round": 3,
+      "homeTeamId": "sol",
+      "awayTeamId": "cr",
+      "scheduledAt": "2026-09-08"
+    },
+    {
+      "id": "s-3-ixa-fav",
+      "round": 3,
+      "homeTeamId": "ixa",
+      "awayTeamId": "fav",
+      "scheduledAt": "2026-09-08"
+    },
+    {
+      "id": "s-4-fav-cr",
+      "round": 4,
+      "homeTeamId": "fav",
+      "awayTeamId": "cr",
+      "scheduledAt": "2026-10-16"
+    },
+    {
+      "id": "s-4-sol-zet",
+      "round": 4,
+      "homeTeamId": "sol",
+      "awayTeamId": "zet",
+      "scheduledAt": "2026-10-16"
+    },
+    {
+      "id": "s-4-ibs-ixa",
+      "round": 4,
+      "homeTeamId": "ibs",
+      "awayTeamId": "ixa",
+      "scheduledAt": "2026-10-16"
+    },
+    {
+      "id": "s-5-zet-fav",
+      "round": 5,
+      "homeTeamId": "zet",
+      "awayTeamId": "fav",
+      "scheduledAt": "2026-10-23"
+    },
+    {
+      "id": "s-5-ibs-sol",
+      "round": 5,
+      "homeTeamId": "ibs",
+      "awayTeamId": "sol",
+      "scheduledAt": "2026-10-23"
+    },
+    {
+      "id": "s-5-cr-ixa",
+      "round": 5,
+      "homeTeamId": "cr",
+      "awayTeamId": "ixa",
+      "scheduledAt": "2026-10-23"
+    },
+    {
+      "id": "s-6-zet-cr",
+      "round": 6,
+      "homeTeamId": "zet",
+      "awayTeamId": "cr",
+      "scheduledAt": "2026-10-30"
+    },
+    {
+      "id": "s-6-sol-ixa",
+      "round": 6,
+      "homeTeamId": "sol",
+      "awayTeamId": "ixa",
+      "scheduledAt": "2026-10-30"
+    },
+    {
+      "id": "s-6-ibs-fav",
+      "round": 6,
+      "homeTeamId": "ibs",
+      "awayTeamId": "fav",
+      "scheduledAt": "2026-10-30"
+    },
+    {
+      "id": "s-7-sol-fav",
+      "round": 7,
+      "homeTeamId": "sol",
+      "awayTeamId": "fav",
+      "scheduledAt": "2026-11-06"
+    },
+    {
+      "id": "s-7-cr-ibs",
+      "round": 7,
+      "homeTeamId": "cr",
+      "awayTeamId": "ibs",
+      "scheduledAt": "2026-11-06"
+    },
+    {
+      "id": "s-7-ixa-zet",
+      "round": 7,
+      "homeTeamId": "ixa",
+      "awayTeamId": "zet",
+      "scheduledAt": "2026-11-06"
+    },
+    {
+      "id": "s-8-fav-ixa",
+      "round": 8,
+      "homeTeamId": "fav",
+      "awayTeamId": "ixa",
+      "scheduledAt": "2026-11-13"
+    },
+    {
+      "id": "s-8-ibs-zet",
+      "round": 8,
+      "homeTeamId": "ibs",
+      "awayTeamId": "zet",
+      "scheduledAt": "2026-11-13"
+    },
+    {
+      "id": "s-8-cr-sol",
+      "round": 8,
+      "homeTeamId": "cr",
+      "awayTeamId": "sol",
+      "scheduledAt": "2026-11-13"
+    },
+    {
+      "id": "s-9-zet-sol",
+      "round": 9,
+      "homeTeamId": "zet",
+      "awayTeamId": "sol",
+      "scheduledAt": "2026-12-01"
+    },
+    {
+      "id": "s-9-cr-fav",
+      "round": 9,
+      "homeTeamId": "cr",
+      "awayTeamId": "fav",
+      "scheduledAt": "2026-12-01"
+    },
+    {
+      "id": "s-9-ixa-ibs",
+      "round": 9,
+      "homeTeamId": "ixa",
+      "awayTeamId": "ibs",
+      "scheduledAt": "2026-12-01"
+    },
+    {
+      "id": "s-10-fav-zet",
+      "round": 10,
+      "homeTeamId": "fav",
+      "awayTeamId": "zet",
+      "scheduledAt": "2026-12-08"
+    },
+    {
+      "id": "s-10-sol-ibs",
+      "round": 10,
+      "homeTeamId": "sol",
+      "awayTeamId": "ibs",
+      "scheduledAt": "2026-12-08"
+    },
+    {
+      "id": "s-10-ixa-cr",
+      "round": 10,
+      "homeTeamId": "ixa",
+      "awayTeamId": "cr",
+      "scheduledAt": "2026-12-08"
+    }
+  ],
+  "baseline": {
+    "asOf": "2026-11-07",
+    "sourceStatus": "secondary-checked",
+    "includedMatchIds": [
+      "s-1-fav-ibs",
+      "s-1-cr-zet",
+      "s-1-ixa-sol",
+      "s-2-zet-ixa",
+      "s-2-fav-sol",
+      "s-2-ibs-cr",
+      "s-3-zet-ibs",
+      "s-3-sol-cr",
+      "s-3-ixa-fav",
+      "s-4-fav-cr",
+      "s-4-sol-zet",
+      "s-4-ibs-ixa",
+      "s-5-zet-fav",
+      "s-5-ibs-sol",
+      "s-5-cr-ixa",
+      "s-6-zet-cr",
+      "s-6-sol-ixa",
+      "s-6-ibs-fav",
+      "s-7-sol-fav",
+      "s-7-cr-ibs",
+      "s-7-ixa-zet"
+    ],
+    "standings": [
+      {
+        "teamId": "zet",
+        "played": 7,
+        "points": 190,
+        "battleDiff": 12,
+        "roundDiff": 16
+      },
+      {
+        "teamId": "fav",
+        "played": 7,
+        "points": 180,
+        "battleDiff": 12,
+        "roundDiff": 15
+      },
+      {
+        "teamId": "sol",
+        "played": 7,
+        "points": 180,
+        "battleDiff": 5,
+        "roundDiff": 5
+      },
+      {
+        "teamId": "ibs",
+        "played": 7,
+        "points": 150,
+        "battleDiff": -9,
+        "roundDiff": -16
+      },
+      {
+        "teamId": "cr",
+        "played": 7,
+        "points": 130,
+        "battleDiff": -4,
+        "roundDiff": 0
+      },
+      {
+        "teamId": "ixa",
+        "played": 7,
+        "points": 70,
+        "battleDiff": -16,
+        "roundDiff": -20
+      }
+    ]
+  },
+  "results": {},
+  "scenario": {
+    "mode": "normal",
+    "targetTeamId": "zet",
+    "fixedScores": {}
+  }
+}

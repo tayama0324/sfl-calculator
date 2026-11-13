@@ -137,10 +137,10 @@ test('target vs other teams cutoff vector agrees with rank-group classification'
 });
 test('cost reflects assumptions with BigInt across modes and warning boundaries',()=>{
   const x=data(),s=x.divisions[0],f=x.divisions[1];
-  assert.equal(exhaustiveCost(s,'points',1).perCase,'10077696');assert.equal(exhaustiveCost(f,'points',1).perCase,'10077696');
-  assert.equal(exhaustiveCost(s,'battles',1).perCase,'101559956668416');assert.equal(exhaustiveCost(s,'rounds',1).perCase,'462047252296310925912576');
+  assert.equal(exhaustiveCost(s,'points',1).perCase,'46656');assert.equal(exhaustiveCost(f,'points',1).perCase,'10077696');
+  assert.equal(exhaustiveCost(s,'battles',1).perCase,'2176782336');assert.equal(exhaustiveCost(s,'rounds',1).perCase,'5976646846618176');
   const old=exhaustiveCost(s,'rounds',2);for(const m of remaining(s))s.fixedScores[m.id]='40-0';s.cases[0].conditions=[{targetTeamId:s.teams[0].id,mode:'win'}];assert(BigInt(exhaustiveCost(s,'rounds',2).total)<BigInt(old.total));assert.equal(exhaustiveCost(s,'points',2).total,'2');
-  const m=remaining(s)[0];s.results[m.id]={homePoints:40,awayPoints:0,homeBattleDiffDelta:7,homeRoundDiffDelta:14};assert.equal(exhaustiveCost(s,'points',1).matches,8);
+  const m=remaining(s)[0];s.results[m.id]={homePoints:40,awayPoints:0,homeBattleDiffDelta:7,homeRoundDiffDelta:14};assert.equal(exhaustiveCost(s,'points',1).matches,5);
   assert.equal(costLevel(99999999n),'normal');assert.equal(costLevel(100000000n),'notice');assert.equal(costLevel(999999999999n),'notice');assert.equal(costLevel(1000000000000n),'warning');
   assert(!renderCost(s,{mode:'rounds',cases:1,conditionSearch:true}).includes('cost-to-mc'));assert(renderCost({...f,calculationMethod:'exact'},{mode:'rounds',cases:1}).includes('モンテカルロの利用をおすすめ'));assert(!renderCost(f,{mode:'rounds',cases:1}).includes('<button'));
 });

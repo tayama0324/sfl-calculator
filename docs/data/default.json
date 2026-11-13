@@ -22,18 +22,18 @@
       "teams": [
         {
           "id": "zet",
-          "name": "ZETA DIVISION",
+          "name": "ZETA DIVISION Geekly",
           "shortName": "ZETA"
-        },
-        {
-          "id": "fav",
-          "name": "FAV gaming",
-          "shortName": "FAV"
         },
         {
           "id": "sol",
           "name": "Saishunkan Sol 熊本",
           "shortName": "SOL"
+        },
+        {
+          "id": "fav",
+          "name": "KADOKAWA FAV gaming",
+          "shortName": "FAV"
         },
         {
           "id": "ibs",
@@ -264,8 +264,8 @@
         }
       ],
       "baseline": {
-        "asOf": "2026-11-07",
-        "sourceStatus": "secondary-checked",
+        "asOf": "2026-11-13",
+        "sourceStatus": "user-provided",
         "includedMatchIds": [
           "s-1-fav-ibs",
           "s-1-cr-zet",
@@ -287,49 +287,52 @@
           "s-6-ibs-fav",
           "s-7-sol-fav",
           "s-7-cr-ibs",
-          "s-7-ixa-zet"
+          "s-7-ixa-zet",
+          "s-8-fav-ixa",
+          "s-8-ibs-zet",
+          "s-8-cr-sol"
         ],
         "standings": [
           {
             "teamId": "zet",
-            "played": 7,
-            "points": 190,
+            "played": 8,
+            "points": 210,
             "battleDiff": 12,
             "roundDiff": 16
           },
           {
+            "teamId": "sol",
+            "played": 8,
+            "points": 210,
+            "battleDiff": 5,
+            "roundDiff": 6
+          },
+          {
             "teamId": "fav",
-            "played": 7,
-            "points": 180,
-            "battleDiff": 12,
+            "played": 8,
+            "points": 200,
+            "battleDiff": 10,
             "roundDiff": 15
           },
           {
-            "teamId": "sol",
-            "played": 7,
-            "points": 180,
-            "battleDiff": 5,
-            "roundDiff": 5
-          },
-          {
             "teamId": "ibs",
-            "played": 7,
-            "points": 150,
+            "played": 8,
+            "points": 180,
             "battleDiff": -9,
             "roundDiff": -16
           },
           {
             "teamId": "cr",
-            "played": 7,
-            "points": 130,
+            "played": 8,
+            "points": 150,
             "battleDiff": -4,
-            "roundDiff": 0
+            "roundDiff": -1
           },
           {
             "teamId": "ixa",
-            "played": 7,
-            "points": 70,
-            "battleDiff": -16,
+            "played": 8,
+            "points": 100,
+            "battleDiff": -14,
             "roundDiff": -20
           }
         ]

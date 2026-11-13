@@ -112,3 +112,25 @@ test('other-team necessary minima include unresolved cases and v4 exports stay v
   for(const m of legacy.singleMatchConditions.matches)for(const side of m.sides)delete side.possible;
   assert(verifySearchResult(legacy));
 });
+
+test('round 8 ZETA hides own fixtures from other-team guarantees, including opponent score bounds',async()=>{
+ const data=migrateData(JSON.parse(await readFile(new URL('../docs/data/default.json',import.meta.url))));
+ const d=data.divisions[0];d.cases=[];
+ const c={targetTeamId:'zet',mode:'points',goal:'all',caseId:'@input'},r=runConditionSearch(d,c);
+ // Legacy single-match rendering remains filtered when no joint tables exist.
+ for(const result of Object.values(r.results))delete result.combinedMatchConditions;
+ const render=result=>renderSearchResult({status:'done',input:d,config:c,result,seconds:0,fingerprint:result.fingerprint},d,c);
+ const before=JSON.stringify(r),html=render(r);
+ assert.equal(r.results.po.singleMatchConditions.analysis.sufficient.length,4);
+ for(const block of html.matchAll(/<section class="single-match-conditions">([\s\S]*?)<\/section>/g))assert(!/第9節 ZETA vs\. SOL|第10節 FAV vs\. ZETA/.test(block[1]));
+ assert.equal(JSON.stringify(r),before); // Rendering must retain engine evidence.
+ assert(html.includes('ZETAが40点'));
+ assert(!html.includes('<section class="single-match-conditions">'));
+ assert(!html.includes('<h4>自力での確定条件</h4>'));
+ // A candidate referring to a match between two other teams remains visible.
+ const mixed=structuredClone(r),first=mixed.results.po;
+ const candidate=first.singleMatchConditions.analysis.sufficient[0];assert(candidate);
+ const other=d.fixtures.find(m=>m.round===9&&m.homeTeamId!=='zet'&&m.awayTeamId!=='zet');
+ first.singleMatchConditions.analysis.sufficient.push({...candidate,matchId:other.id,teamId:other.homeTeamId});
+ const mixedHtml=render(mixed);assert(mixedHtml.includes('<h4>他力での確定条件</h4>'));assert(mixedHtml.includes('次のいずれか1つを満たせば確定（1条件）'));assert(mixedHtml.includes('<h4>自力での確定条件</h4>'));
+});

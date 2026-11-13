@@ -2,7 +2,7 @@ import test from 'node:test';import assert from 'node:assert/strict';import {rea
 import {migrateData,remaining} from '../docs/js/model.js';import {divisionAutoPlan,shouldAutoSearch,parseSummaryRoute,normalizedTrials,MC_PRESETS,withinAutoLimit} from '../docs/js/summary-policy.js';
 const data=migrateData(JSON.parse(await readFile(new URL('../docs/data/default.json',import.meta.url))));
 test('division auto always uses points, exact up to 100000 states and fast MC above',()=>{
- const d=structuredClone(data.divisions[0]);d.explorationMode='rounds';d.simulation.trials=3000000;
+ const d=structuredClone(data.divisions[1]);d.explorationMode='rounds';d.simulation.trials=3000000;
  assert.deepEqual(divisionAutoPlan(d),{explorationMode:'points',calculationMethod:'monteCarlo',trials:100000});
  for(const m of remaining(d).slice(0,3))d.fixedScores[m.id]='40-0';
  assert.equal(divisionAutoPlan(d).calculationMethod,'exact');assert.equal(d.explorationMode,'rounds');assert.equal(d.simulation.trials,3000000);
@@ -10,7 +10,7 @@ test('division auto always uses points, exact up to 100000 states and fast MC ab
 test('exact 100000 boundary includes assumptions, while 100001 is too large',()=>{
  assert.equal(withinAutoLimit('100000'),true);assert.equal(withinAutoLimit('100001'),false);
  // Each unconditioned points match has six states. 6^6 < 100000 < 6^7.
- const d=structuredClone(data.divisions[0]);for(const m of remaining(d).slice(0,2))d.fixedScores[m.id]='40-0';
+ const d=structuredClone(data.divisions[1]);for(const m of remaining(d).slice(0,2))d.fixedScores[m.id]='40-0';
  assert.equal(shouldAutoSearch(d,{mode:'points'},null,'new'),false);
  d.fixedScores[remaining(d)[2].id]='40-0';assert.equal(shouldAutoSearch(d,{mode:'points'},null,'new'),true);
  assert.equal(shouldAutoSearch(d,{mode:'points'},{status:'done',fingerprint:'new'},'new'),false);
