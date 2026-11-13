@@ -23,7 +23,7 @@ test('mixed match factors, live assumption removal and no remaining games have c
   assert.equal(exhaustiveCost(d,'points',1).total,String(6**9));
   d.fixedScores[m.id]='40-0';
   const cost=exhaustiveCost(d,'points',1);assert.equal(cost.total,String(6**8));assert.equal(cost.states,null);assert.equal(cost.stateCounts.filter(n=>n===1).length,1);
-  const html=renderCost(d,{mode:'points',cases:1});assert(html.includes('6<sup>8</sup>'));assert(html.includes('仮定を、選択した順位判定に合わせて反映'));assert(!html.includes('仮定や部分木の集約を反映しない'));
+  const html=renderCost(d,{mode:'points',cases:1});assert(html.includes('1,679,616通り'));assert(html.includes('🟢'));assert(!html.includes('<details>'));assert(!html.includes('<button'));
   delete d.fixedScores[m.id];assert.equal(exhaustiveCost(d,'points',1).total,String(6**9));
   for(const game of remaining(d))d.results[game.id]={homePoints:40,awayPoints:0,homeBattleDiffDelta:7,homeRoundDiffDelta:14};
   for(const mode of ['points','battles','rounds'])assert.equal(exhaustiveCost(d,mode,1).total,'1');

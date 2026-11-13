@@ -1,4 +1,6 @@
-import { calculate } from './engine.js';
+// Version the calculation imports as well as the Worker URL: module workers
+// can retain cached dependencies independently of the page reload.
+import { calculate } from './engine.js?v=point-borders-1';
 import { prepare, BASE_CASE } from './model.js';
 import { createMonteCarlo } from './monte-carlo.js';
 import {runConditionSearch,verifySearchResult} from './condition-search.js';

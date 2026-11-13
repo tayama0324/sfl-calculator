@@ -4,16 +4,20 @@
 
 ## プロジェクトと目的
 
-Street Fighter League 2026 の本節最終順位を計算する、日本語の非公式ツール。GitHub Pagesに公開できる静的ページとして作成。現在はv0.15.0。サーバー・APIキー・外部ライブラリは不要。Node.js 24以降を開発・検証に使用する。
+Street Fighter League 2026 の本節最終順位を計算する、日本語の非公式ツール。GitHub Pagesに公開できる静的ページとして作成。現在はv0.16.0。サーバー・APIキー・外部ライブラリは不要。Node.js 24以降を開発・検証に使用する。
 
 最初にREADME.md、documentation/specification.md、各追加仕様、documentation/verification.mdを読む。旧「初版仕様」と追加仕様が異なる箇所では、追加仕様とこの引き継ぎの最新の合意を参照する。
+
+## 最新UI（v0.16.0）
+
+Division選択 → Divisionサマリー → チームサマリーの3階層。結果を設定より上に表示。自動計算の規模判定・MC3択は`summary-policy.js`、画面構成は`summary-layout.js`。詳細はREADMEのv0.16.0を参照。旧機能一覧の追加試行は現在のUIでは提供しない。
 
 ## 現在の成果物
 
 - docs/：ページのソース。JavaScript ES ModulesとWeb Workerを使用。
 - dist/：直近の公開用ビルド。npm run buildでdocs/から生成。
 - documentation/：仕様、出典記録、検証記録、入力・結果サンプル。
-- tests/：自動テスト。直近の実行で109件成功。
+- tests/：自動テスト。直近の実行で116件成功。
 - scripts/：ビルドと各方式の検証スクリプト。
 - .github/workflows/ci.yml：mainへのpush・PR等でテストとビルドを実行する設定。公開はPages設定のmain /docsから行う。
 

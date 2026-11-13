@@ -1,7 +1,9 @@
+import {pointBorders,recordPointBorder} from './point-borders.js';
 // Bounded-memory exact enumeration of joint score states. A subtree is summed
 // without enumeration only when interval bounds prove every pair's ordering.
 export function calculateDetailed(input, onProgress = () => {}) {
   const { mode, teamIds, matches } = input;
+  const borders=pointBorders();
   const dimensions = mode === 'rounds' ? 3 : 2;
   const values = [input.points, input.battleDiffs, ...(dimensions === 3 ? [input.roundDiffs] : [])].map(a => [...a]);
   if (!['battles', 'rounds'].includes(mode) || values.some(a => a.length !== 6 || a.some(n => !Number.isSafeInteger(n))) || matches.length > 30) throw new Error('詳細計算の入力が不正です。');
@@ -58,9 +60,10 @@ export function calculateDetailed(input, onProgress = () => {}) {
     }
     return true;
   }
-  function count(weight) {
+  function count(weight,depth) {
     for (let i=0; i<6; i++) {
       const first = greater[i], last = first + ties[i] - 1;
+      recordPointBorder(borders,first,last,values[0][i]+minimum[depth][0][i],values[0][i]+maximum[depth][0][i]);
       for (let r=first; r<=last; r++) {
         hi[i*6+r] += weight;
         if (first === last) lo[i*6+r] += weight;
@@ -74,7 +77,7 @@ export function calculateDetailed(input, onProgress = () => {}) {
   function visit(depth, weight) {
     visited++;
     if (knownOrder(depth)) {
-      count(weight * suffixWeights[depth]);
+      count(weight * suffixWeights[depth],depth);
       processed += suffixPaths[depth];
       if (depth < games.length) collapsed++;
       report(); return;
@@ -92,5 +95,5 @@ export function calculateDetailed(input, onProgress = () => {}) {
   }
   report(true); visit(0,1n); report(true);
   const matrix = a => Array.from({length:6}, (_,i) => a.slice(i*6,i*6+6).map(String));
-  return { kind:'intervals', mode, teamIds, denominator:String(suffixWeights[0]), processed:String(processed), visited:String(visited), collapsed:String(collapsed), lowerRanks:matrix(lo), upperRanks:matrix(hi), poLower:poLo.map(String), poUpper:poHi.map(String), unresolved:unresolved.map(String), borderTies:border.map(String) };
+  return { kind:'intervals', pointBorders:borders, mode, teamIds, denominator:String(suffixWeights[0]), processed:String(processed), visited:String(visited), collapsed:String(collapsed), lowerRanks:matrix(lo), upperRanks:matrix(hi), poLower:poLo.map(String), poUpper:poHi.map(String), unresolved:unresolved.map(String), borderTies:border.map(String) };
 }

@@ -1,14 +1,14 @@
-import {renderProbabilityChart} from './probability-chart.js';
-import { BASE_CASE, prepare, rankingLabel, formatPercent, verifyFractions } from './model.js';
+import {renderProbabilityChart,monteCarloPercent} from './probability-chart.js';
+import { BASE_CASE, prepare, rankingLabel, verifyFractions } from './model.js';
 import { checkpointResults, confidenceInterval, simulationFingerprint } from './monte-carlo.js';
-const pct=n=>`${n!==0&&Math.abs(n*100)<.0001?(n*100).toExponential(4):(n*100).toFixed(4)}%`;
+const pct=n=>`${(n*100).toFixed(2)}%`;
 const delta=n=>`${n>0?'+':n<0?'−':''}${pct(Math.abs(n)).replace(/%$/,'')}ポイント`;
 export function estimateText(n,N) {
   const value=BigInt(n),den=BigInt(N)*60n;
   if(!N)return '未試行';
   if(value===0n)return `観測なし／${N.toLocaleString()}試行`;
   if(value===den)return `全${N.toLocaleString()}試行で観測`;
-  return `推定 ${formatPercent(value,den)}`;
+  return `推定 ${monteCarloPercent(value,den)}`;
 }
 function intervalText(n,N,difference=false) {
   const c=confidenceInterval(n,N,{difference});
@@ -29,8 +29,8 @@ function differenceCell(record,N) {
 }
 export function renderMonteCarlo(saved,d,{escape,renderAudit,simple=false}) {
   const cp=saved.checkpoint,snapshot=saved.input;
-  const stale=simulationFingerprint(d)!==cp.fingerprint,N=cp.completed;
-  const header=`<div class="result-context">${stale?'<span class="tag stale">変更前の入力による結果</span> ':''}<span class="tag">モンテカルロ推定</span> ${escape(rankingLabel(snapshot.explorationMode,'monteCarlo'))} · ${N.toLocaleString()}試行<br>シード <code class="seed-display">${escape(snapshot.simulation.seed)}</code> · ${escape(saved.status==='running'?'実行中':saved.status==='stopped'?'中止・途中結果を保持':saved.status==='restored'?'チェックポイントから復元':saved.status==='error'?'異常停止・最後の受領済み集計':'指定試行数に到達')}</div>`;
+  const stale=saved.viewFingerprint?JSON.stringify(d)!==saved.viewFingerprint:simulationFingerprint(d)!==cp.fingerprint,N=cp.completed;
+  const header=`<div class="result-context">${stale?'<span class="tag stale">変更前の入力による結果</span> ':''}<span class="tag mc-method">モンテカルロ推定</span> ${escape(rankingLabel(snapshot.explorationMode,'monteCarlo'))} · ${N.toLocaleString()}試行<details class="simulation-details"><summary>シード・計算状況</summary>シード <code class="seed-display">${escape(snapshot.simulation.seed)}</code> · ${escape(saved.status==='running'?'実行中':saved.status==='stopped'?'中止・途中結果を保持':saved.status==='restored'?'チェックポイントから復元':saved.status==='error'?'異常停止・最後の受領済み集計':'指定試行数に到達')}</details></div>`;
   if(!N)return header+'<div class="empty-state"><p>完了した試行はまだありません。</p><small>全ケースが揃った試行から結果を表示します。</small></div>';
   if(simple)return renderSimpleMonteCarlo(saved,d,{escape,renderAudit},header);
   const definitions=[BASE_CASE,...snapshot.cases],results=checkpointResults(cp),teamIds=results[0].teamIds;
@@ -48,5 +48,5 @@ export function renderMonteCarlo(saved,d,{escape,renderAudit,simple=false}) {
 function renderSimpleMonteCarlo(saved,d,{escape,renderAudit},header){
   const cp=saved.checkpoint,N=cp.completed,r=cp.records[0],snapshot=cp.division;
   const result=checkpointResults(cp)[0],ids=result.teamIds;
-  return header+renderProbabilityChart(snapshot,result,{completed:N})+`<details id="probability-table"><summary>数値を表で見る</summary><div class="scroll-table"><table class="outcome-table mc-summary" aria-label="1位とPO進出の推定確率"><thead><tr><th>チーム</th><th>1位通過</th><th>PO進出 <small>3位以内</small></th></tr></thead><tbody>${snapshot.teams.map(t=>{const i=ids.indexOf(t.id);return `<tr><td class="team-name">${escape(t.shortName)}</td><td>${cell(r.lowerRanks[i*6],r.upperRanks[i*6],N)}</td><td>${cell(r.poLower[i],r.poUpper[i],N)}</td></tr>`;}).join('')}</tbody></table></div><p class="result-explanation">同点による幅と、試行数による推定誤差（個別95%区間）を分けて表示しています。観測なしでも確率0%とは限りません。</p><details id="rank-details"><summary>1〜6位の内訳・推定の詳細</summary><div class="scroll-table"><table class="mc-table"><thead><tr><th>チーム</th>${[1,2,3,4,5,6].map(n=>`<th>${n}位</th>`).join('')}</tr></thead><tbody>${ids.map((id,i)=>`<tr><td class="team-name">${escape(snapshot.teams.find(t=>t.id===id).shortName)}</td>${Array.from({length:6},(_,j)=>`<td>${cell(r.lowerRanks[i*6+j],r.upperRanks[i*6+j],N)}</td>`).join('')}</tr>`).join('')}</tbody></table></div><p class="muted">95%区間は途中確認・中止・追加試行に対応する保守的な区間です。全チーム・全指標を同時に保証するものではありません。全試行での観測も確率100%の保証ではありません。</p>${renderAudit(snapshot,BASE_CASE,saved.resolutions?.[0]??prepare(snapshot,BASE_CASE).resolution)}</details></details>`;
+  return header+renderProbabilityChart(snapshot,result,{completed:N})+`<div class="border-switch border-section"><h3>進出ボーダー</h3><p>1位・プレイオフ進出ボーダーは全探索で計算できます。現在はモンテカルロのため表示していません。</p><button id="switch-to-exact" class="tiny-button">全探索に切り替える</button></div>`+`<details id="probability-table"><summary>数値を表で見る</summary><div class="scroll-table"><table class="outcome-table mc-summary" aria-label="1位とPO進出の推定確率"><thead><tr><th>チーム</th><th>1位通過</th><th>PO進出 <small>3位以内</small></th></tr></thead><tbody>${snapshot.teams.map(t=>{const i=ids.indexOf(t.id);return `<tr><td class="team-name">${escape(t.shortName)}</td><td>${cell(r.lowerRanks[i*6],r.upperRanks[i*6],N)}</td><td>${cell(r.poLower[i],r.poUpper[i],N)}</td></tr>`;}).join('')}</tbody></table></div><p class="result-explanation">同点による幅と、試行数による推定誤差（個別95%区間）を分けて表示しています。観測なしでも確率0%とは限りません。</p><details id="rank-details"><summary>1〜6位の内訳・推定の詳細</summary><div class="scroll-table"><table class="mc-table"><thead><tr><th>チーム</th>${[1,2,3,4,5,6].map(n=>`<th>${n}位</th>`).join('')}</tr></thead><tbody>${ids.map((id,i)=>`<tr><td class="team-name">${escape(snapshot.teams.find(t=>t.id===id).shortName)}</td>${Array.from({length:6},(_,j)=>`<td>${cell(r.lowerRanks[i*6+j],r.upperRanks[i*6+j],N)}</td>`).join('')}</tr>`).join('')}</tbody></table></div><p class="muted">95%区間は途中確認・中止・追加試行に対応する保守的な区間です。全チーム・全指標を同時に保証するものではありません。全試行での観測も確率100%の保証ではありません。</p>${renderAudit(snapshot,BASE_CASE,saved.resolutions?.[0]??prepare(snapshot,BASE_CASE).resolution)}</details></details>`;
 }

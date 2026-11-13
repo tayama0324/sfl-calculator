@@ -36,7 +36,7 @@ export function renderComparison(saved,d) {
   if (!saved) return `<div class="empty-state"><div class="empty-symbol" aria-hidden="true">▥</div><p>条件の先にある順位を、ケースごとに比較。</p><small>探索モードと条件を設定して「順位確率を計算」を押してください。</small></div>`;
   const snapshot=saved.input, entries=saved.entries;
   const baseline=entries.find(e=>e.id==='baseline');
-  const stale=JSON.stringify(d)!==saved.fingerprint;
+  const stale=JSON.stringify(d)!==(saved.viewFingerprint??saved.fingerprint);
   const complete=entries.filter(e=>e.status==='done').length;
   const status={pending:'未計算',running:'計算中',cancelled:'中止',error:'エラー',done:'完了'};
   return `<div class="result-context">${stale?'<span class="tag stale">変更前の入力による結果</span> ':''}${escape(EXPLORATION_MODES[snapshot.explorationMode])} · ${complete}/${entries.length}ケース完了<br>共通固定スコア ${Object.keys(snapshot.fixedScores).length}試合 · ${escape(saved.startedAt)}開始</div>
@@ -53,10 +53,11 @@ export function renderComparison(saved,d) {
 // saved case definitions remain available for older exports and engine callers.
 export function renderProbability(saved,d) {
   if(saved?.method==='monteCarlo')return renderMonteCarlo(saved,d,{escape,renderAudit,simple:true});
-  if(!saved)return '<div class="empty-state"><div class="empty-symbol" aria-hidden="true">↗</div><p>ここに、各チームの1位・PO進出の確率が表示されます。</p><small>上の入力を確認して「順位確率を計算」を押してください。</small></div>';
-  const entry=saved.entries.find(e=>e.id==='baseline'),stale=JSON.stringify(d)!==saved.fingerprint;
+  if(!saved)return '<div class="empty-state"><div class="empty-symbol" aria-hidden="true">↗</div><p>ここに、各チームの1位・PO進出の確率が表示されます。</p><small>下の計算条件を確認して「順位確率を計算」を押してください。</small></div>';
+  const entry=saved.entries.find(e=>e.id==='baseline'),stale=JSON.stringify(d)!==(saved.viewFingerprint??saved.fingerprint);
   const heading=`<div class="result-context">${stale?'<span class="tag stale">変更前の入力による結果</span> ':''}${escape(rankingLabel(saved.input.explorationMode))} · 仮定 ${remaining(saved.input).filter(m=>rulesFor(saved.input,m.id).length).length}試合</div>`;
   if(entry.status!=='done')return heading+`<div class="empty-state"><p>${{pending:'計算待ち',running:'計算中です',cancelled:'計算を中止しました',error:'計算に失敗しました'}[entry.status]}</p><small>完了後に確率を表示します。</small></div>`;
   const r=entry.result,b=boundsOf(r);
-  return heading+renderProbabilityChart(saved.input,r)+`<details id="probability-table"><summary>数値を表で見る</summary><div class="scroll-table"><table class="outcome-table" aria-label="1位とPO進出の確率"><thead><tr><th>チーム</th><th>1位通過</th><th>PO進出 <small>3位以内</small></th></tr></thead><tbody>${saved.input.teams.map(t=>{const i=r.teamIds.indexOf(t.id);return `<tr><td class="team-name">${escape(t.name)}</td><td>${formatRange(b.lower[i][0],b.upper[i][0],r.denominator)}</td><td class="po-cell">${formatRange(b.poLower[i],b.poUpper[i],r.denominator)}</td></tr>`;}).join('')}</tbody></table></div><p class="result-explanation">${r.kind==='intervals'?'幅のある数値は、同点の決着によって変わる確率の下限〜上限です。':'同ポイントのチームは順位を均等に分けたモデルです。'} 入力した仮定が成立した場合の確率です。</p><details id="rank-details"><summary>1〜6位の内訳・計算の詳細</summary>${rankTable(saved.input,entry)}<p class="muted">${entry.seconds.toFixed(2)}秒 · 検算済み</p>${renderAudit(saved.input,entry.definition,entry.resolution)}</details></details>`;
+  const borders=`<section class="border-section" aria-label="進出ボーダー"><h3>進出ボーダー</h3>${r.pointBorders?`<div class="point-borders">${[['first','1位ボーダー'],['playoff','プレイオフ進出ボーダー']].map(([key,label])=>`<div><span>${label}</span><strong>${r.pointBorders[key].min}〜${r.pointBorders[key].max}点</strong></div>`).join('')}</div>`:'<p class="border-unavailable">この結果にはボーダーの集計値がありません。下の「順位確率を計算」を押して、全探索で再計算してください。</p>'}</section>`;
+  return heading+renderProbabilityChart(saved.input,r)+borders+`<details id="probability-table"><summary>数値を表で見る</summary><div class="scroll-table"><table class="outcome-table" aria-label="1位とPO進出の確率"><thead><tr><th>チーム</th><th>1位通過</th><th>PO進出 <small>3位以内</small></th></tr></thead><tbody>${saved.input.teams.map(t=>{const i=r.teamIds.indexOf(t.id);return `<tr><td class="team-name">${escape(t.name)}</td><td>${formatRange(b.lower[i][0],b.upper[i][0],r.denominator)}</td><td class="po-cell">${formatRange(b.poLower[i],b.poUpper[i],r.denominator)}</td></tr>`;}).join('')}</tbody></table></div><p class="result-explanation">${r.kind==='intervals'?'幅のある数値は、同点の決着によって変わる確率の下限〜上限です。':'同ポイントのチームは順位を均等に分けたモデルです。'} 入力した仮定が成立した場合の確率です。</p><details id="rank-details"><summary>1〜6位の内訳・計算の詳細</summary>${rankTable(saved.input,entry)}<p class="muted">${entry.seconds.toFixed(2)}秒 · 検算済み</p>${renderAudit(saved.input,entry.definition,entry.resolution)}</details></details>`;
 }
