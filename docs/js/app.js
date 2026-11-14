@@ -1,3 +1,4 @@
+import {verifyTeamSummary} from './team-summary.js';
 import {divisionAutoPlan,shouldAutoSearch,parseSummaryRoute,MC_PRESETS,normalizedTrials} from './summary-policy.js';
 import {divisionSelection,summaryLayout,linkSummaryTeams,simplifyResultPresentation} from './summary-layout.js';
 import {userSettings,applyUserSettings} from './user-settings.js';
@@ -198,7 +199,7 @@ function updateResumeAvailability(){if($('#extend'))$('#extend').disabled=!canRe
 function updateRunStatus() {
   if (!run || !$('#run-status')) return;
   const seconds=(performance.now()-run.started)/1000,p=run.progress;
-  if(run.kind==='search'){const p=run.progress;$('#run-status').textContent=`Division ${run.divisionId} · 条件探索 · ${seconds.toFixed(1)}秒${p?` · ${BigInt(p.processed).toLocaleString()} / ${BigInt(p.total).toLocaleString()}状態`:''}`;$('#progress').value=p?Number(BigInt(p.processed)*100000n/BigInt(p.total))/1000:0;return;}
+  if(run.kind==='search'){const p=run.progress;$('#run-status').textContent=`Division ${run.divisionId} · ${p?.phase==='team-summary'?'順位・得点分布を集計':'条件探索'} · ${seconds.toFixed(1)}秒${p?` · ${BigInt(p.processed).toLocaleString()} / ${BigInt(p.total).toLocaleString()}状態`:''}`;$('#progress').value=p?Number(BigInt(p.processed)*100000n/BigInt(p.total))/1000:0;return;}
   const bundle=results.get(run.divisionId);
   if(run.kind==='monteCarlo'){ $('#run-status').textContent=`Division ${run.divisionId} · モンテカルロ · ${seconds.toFixed(1)}秒 · ${p?BigInt(p.processed).toLocaleString():0} / ${run.goal.toLocaleString()}試行${run.stopping?' · 停止待ち':''}`;$('#progress').value=p?Number(p.processed)/run.goal*100:0;return; }
   const entry=bundle.entries.find(e=>e.id===run.caseId);
@@ -214,7 +215,7 @@ function stopRun(message, failed=false) {
   if (run?.kind!=='monteCarlo'&&run?.kind!=='search'&&run) for (const entry of results.get(run.divisionId).entries) if (entry.status!=='done') entry.status=failed?'error':'cancelled';
   run?.worker.terminate(); run=null;
   clearInterval(timer); lastRunStatus=message;
-  $('#calculate').disabled=false;$('#calculate').innerHTML=feature==='conditions'?'必要・十分条件を探索 →':'順位確率を計算 →';
+  $('#calculate').disabled=false;$('#calculate').innerHTML=feature==='conditions'?'サマリーを計算 →':'順位確率を計算 →';
   $('#cancel').hidden=true;$('#cancel').disabled=false;$('#cancel').textContent='中止';$('#progress').hidden=true;$('#run-status').textContent=message;
   renderOutput();
 }
@@ -236,7 +237,7 @@ function startCalculation(additional=false,automatic=false) {
   if (missing.length) return notice(`現在の集計値を補完してください。${missing.join('、')}`,true);
   if(snapshot.calculationMethod==='monteCarlo'){startMonteCarlo(snapshot,additional,automatic);return;}
   let worker;
-  try { worker=new Worker(new URL('./worker.js?v=three-matches-1',import.meta.url),{type:'module'}); }
+  try { worker=new Worker(new URL('./worker.js?v=team-summary-1',import.meta.url),{type:'module'}); }
   catch { return notice('計算用Workerを起動できません。HTTP(S)でページを開いてください。',true); }
   clearSavedResults([snapshot.id]);
   results.set(snapshot.id,{fingerprint:fingerprint(snapshot),input:snapshot,viewFingerprint:fingerprint(inputDivision()),automatic,startedAt:new Date().toLocaleString('ja-JP'),entries:[BASE_CASE,...snapshot.cases].map(definition=>({id:definition.id,name:definition.name,definition,status:'pending'}))});
@@ -262,7 +263,7 @@ function startConditionSearch(){
   const errors=validate(data);if(errors.length)return notice(errors.join('\n'),true);
   const snapshot=structuredClone(inputDivision()),config=structuredClone(searchConfig());
   try{prepareSearch(snapshot,config);}catch(error){notice(error.message,true);return;}
-  let worker;try{worker=new Worker(new URL('./worker.js?v=three-matches-1',import.meta.url),{type:'module'});}catch{notice('探索用Workerを起動できません。',true);return;}
+  let worker;try{worker=new Worker(new URL('./worker.js?v=team-summary-1',import.meta.url),{type:'module'});}catch{notice('探索用Workerを起動できません。',true);return;}
   const saved={status:'running',input:snapshot,config,fingerprint:searchFingerprint(snapshot,config),result:null,exampleIndex:null};
   searchResults.set(snapshot.id,saved);run={kind:'search',worker,divisionId:snapshot.id,started:performance.now(),progress:null};
   notice('');render();timer=setInterval(updateRunStatus,250);
@@ -271,11 +272,11 @@ function startConditionSearch(){
     if(message.type==='search-progress'){run.progress=message;saved.progress=message;updateRunStatus();}
     if(message.type==='error'){stopRun('条件探索に失敗しました。',true);notice(message.message,true);return;}
     if(message.type==='search-done'){
-      if(!verifySearchResult(message.result)||message.result.fingerprint!==saved.fingerprint){stopRun('条件探索の集計検証に失敗しました。',true);notice('結果が入力・代表例と一致しないため表示しません。',true);return;}
+      if(!verifySearchResult(message.result)||!verifyTeamSummary(message.result.teamSummary)||message.result.teamSummary.targetTeamId!==config.targetTeamId||message.result.teamSummary.mode!==config.mode||message.result.fingerprint!==saved.fingerprint){stopRun('条件探索の集計検証に失敗しました。',true);notice('結果が入力・代表例と一致しないため表示しません。',true);return;}
       saved.status='done';saved.result=message.result;saved.seconds=(performance.now()-run.started)/1000;
       saved.exampleIndices={};
       saved.exampleLabels={}; // Rendering selects the first available named example.
-      stopRun(`条件探索が完了しました · ${saved.seconds.toFixed(2)}秒`);
+      stopRun(`サマリーの計算が完了しました · ${saved.seconds.toFixed(2)}秒`);
     }
   };
   worker.onerror=event=>{if(run?.worker!==worker)return;event.preventDefault();stopRun('探索用Workerが停止しました。未完了の保証は表示しません。',true);};
@@ -306,7 +307,7 @@ function startMonteCarlo(snapshot,additional,automatic=false){
     if(!Number.isSafeInteger(cp.completed+snapshot.simulation.trials))throw new Error('総試行数が上限を超えます。');
   }catch(error){notice(error.message,true);return;}
   let worker;
-  try{worker=new Worker(new URL('./worker.js?v=three-matches-1',import.meta.url),{type:'module'});}catch{notice('計算用Workerを起動できません。',true);return;}
+  try{worker=new Worker(new URL('./worker.js?v=team-summary-1',import.meta.url),{type:'module'});}catch{notice('計算用Workerを起動できません。',true);return;}
   if(!additional)clearSavedResults([snapshot.id]);
   const bundle=monteCarloBundle(cp,'running');bundle.input=snapshot;bundle.viewFingerprint=fingerprint(inputDivision());bundle.automatic=automatic;results.set(snapshot.id,bundle);
   run={kind:'monteCarlo',worker,divisionId:snapshot.id,started:performance.now(),goal:cp.completed+snapshot.simulation.trials,progress:{processed:String(cp.completed)},stopping:false};

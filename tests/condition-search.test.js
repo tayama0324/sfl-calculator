@@ -1,3 +1,4 @@
+import {verifyTeamSummary} from '../docs/js/team-summary.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -158,7 +159,7 @@ test('real worker returns only complete condition results with verified witnesse
   const worker=new Worker(new URL('./helpers/worker-harness.js',import.meta.url));
   try{
     const messages=await new Promise((resolve,reject)=>{const all=[],timeout=setTimeout(()=>reject(new Error('worker timeout')),10000);worker.on('error',error=>{clearTimeout(timeout);reject(error);});worker.on('message',m=>{all.push(m);if(m.type==='error'){clearTimeout(timeout);reject(new Error(m.message));}if(m.type==='search-done'){clearTimeout(timeout);resolve(all);}});worker.postMessage({type:'condition-search',division:d,config:x.conditionSearch.S});});
-    assert(messages.some(m=>m.type==='search-progress'));const r=messages.at(-1).result;assert(r.complete);assert(verifySearchResult(r));assert.equal(r.processed,r.total);
+    assert(messages.some(m=>m.type==='search-progress'));const r=messages.at(-1).result;assert(r.complete);assert(verifySearchResult(r));assert.equal(r.processed,r.total);assert(verifyTeamSummary(r.teamSummary));assert.equal(r.teamSummary.processed,r.total);assert.equal(r.teamSummary.targetTeamId,x.conditionSearch.S.targetTeamId);assert(messages.some(m=>m.phase==='team-summary'));
   }finally{await worker.terminate();}
 });
 

@@ -1,9 +1,10 @@
+import {calculateTeamSummary,verifyTeamSummary} from './team-summary.js';
 // Version the calculation imports as well as the Worker URL: module workers
 // can retain cached dependencies independently of the page reload.
 import { calculate } from './engine.js?v=point-borders-1';
 import { prepare, BASE_CASE } from './model.js';
 import { createMonteCarlo } from './monte-carlo.js';
-import {runConditionSearch,verifySearchResult} from './condition-search.js?v=three-matches-1';
+import {runConditionSearch,verifySearchResult,prepareSearch} from './condition-search.js?v=three-matches-1';
 let simulationJob=null;
 self.onmessage = async ({ data }) => {
   if(data.type==='mc-cancel'){if(simulationJob)simulationJob.cancelled=true;return;}
@@ -31,6 +32,9 @@ self.onmessage = async ({ data }) => {
     if(data.type==='condition-search'){
       const result=runConditionSearch(data.division,data.config,progress=>self.postMessage({type:'search-progress',...progress}));
       if(!verifySearchResult(result))throw new Error('条件探索の代表例・集計の検証に失敗しました。');
+      const {prepared}=prepareSearch(data.division,data.config);
+      result.teamSummary=calculateTeamSummary(prepared,data.config.targetTeamId,progress=>self.postMessage({type:'search-progress',...progress}));
+      if(!verifyTeamSummary(result.teamSummary))throw new Error('順位・得点分布の集計検証に失敗しました。');
       self.postMessage({type:'search-done',result});return;
     }
     if (data.type === 'comparison') {

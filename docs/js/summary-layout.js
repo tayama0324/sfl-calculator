@@ -7,7 +7,7 @@ export function summaryLayout(root,{page,d,targetId}){
   const panel=root.querySelector('.condition-panel'),result=root.querySelector('.result-panel'),layout=root.querySelector('.layout');
   const target=d.teams.find(t=>t.id===targetId);
   const header=document.createElement('header');header.className='summary-heading';header.innerHTML=`<nav aria-label="階層"><a href="#">Division選択</a>${page==='team'?`<span>›</span><a href="#division/${d.id}">Division ${escape(d.id)}</a>`:''}</nav><h1>${page==='team'?escape(target.name):`Division ${escape(d.id)}`}</h1><p>${page==='team'?'1位・2位以内・PO進出に必要な成績':`各チームの順位確率 · 基準日 ${escape(d.baseline.asOf)}`}</p>`;root.prepend(header);
-  if(page==='team'){root.querySelector('#search-team').closest('label').remove();header.querySelector('p').remove();}
+  if(page==='team'){root.querySelector('#search-team').closest('label').remove();header.querySelector('p').remove();result.querySelector('h2').textContent='最終順位・得点と進出条件';}
   panel.querySelector('h2').textContent='計算条件・将来の仮定';
   panel.querySelector('.section-intro')?.remove();
   const run=panel.querySelector('.run-area');run.classList.add('summary-run');if(page==='team')result.querySelector('.section-heading').after(run);
