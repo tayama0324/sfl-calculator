@@ -3,7 +3,7 @@
 import { calculate } from './engine.js?v=point-borders-1';
 import { prepare, BASE_CASE } from './model.js';
 import { createMonteCarlo } from './monte-carlo.js';
-import {runConditionSearch,verifySearchResult} from './condition-search.js?v=score-ranges-1';
+import {runConditionSearch,verifySearchResult} from './condition-search.js?v=three-matches-1';
 let simulationJob=null;
 self.onmessage = async ({ data }) => {
   if(data.type==='mc-cancel'){if(simulationJob)simulationJob.cancelled=true;return;}

@@ -1,4 +1,4 @@
-import {createCombinedCollector,analyzeCombinedConditions,combinationLimit} from './combined-match-conditions.js?v=score-ranges-1';
+import {createCombinedCollector,analyzeCombinedConditions,combinationLimit} from './combined-match-conditions.js?v=three-matches-1';
 import {prepare,current,BASE_CASE} from './model.js';
 import {MODEL_VERSION,matchDistribution,playerExample} from './distributions.js';
 import {searchConfigErrors,goalCutoff,searchGoals} from './search-config.js';
@@ -6,7 +6,7 @@ import {classifyTarget,compareLex,compareTeams} from './ranking.js';
 import {analyzeMatchConditions} from './match-conditions.js';
 import {analyzeRankingCondition} from './ranking-condition.js';
 import {analyzeSingleMatchConditions} from './single-match-conditions.js';
-export const SEARCH_VERSION=8;
+export const SEARCH_VERSION=9;
 export function searchFingerprint(d,c){
   return JSON.stringify({teams:d.teams,fixtures:d.fixtures,baseline:d.baseline,results:d.results,config:c,caseDefinition:['@normal','@input'].includes(c.caseId)?null:d.cases.find(x=>x.id===c.caseId),fixedScores:c.caseId==='@normal'?{}:d.fixedScores,...(c.caseId!=='@normal'&&Object.keys(d.matchAssumptions??{}).length?{matchAssumptions:d.matchAssumptions}:{}),...(c.caseId!=='@normal'&&d.fixedDetails?{fixedDetails:d.fixedDetails}:{})});
 }
@@ -255,8 +255,8 @@ export function reconstructExample(result,index){
 }
 export function verifySearchResult(r){
   try{
-    if(r.kind==='sfl-condition-search-results')return [1,2,3,4,5,6,7,SEARCH_VERSION].includes(r.version)&&r.complete&&['both','all'].includes(r.goal)&&r.processed===r.total&&searchGoals(r.goal).every(goal=>r.results[goal].goal===goal&&r.results[goal].processed===r.processed&&verifySearchResult(r.results[goal]));
-    if(r.kind!=='sfl-condition-search-result'||![1,2,3,4,5,6,7,SEARCH_VERSION].includes(r.version)||!r.complete||BigInt(r.total)<1n||r.total!==r.processed||!r.cells.length)return false;
+    if(r.kind==='sfl-condition-search-results')return [1,2,3,4,5,6,7,8,SEARCH_VERSION].includes(r.version)&&r.complete&&['both','all'].includes(r.goal)&&r.processed===r.total&&searchGoals(r.goal).every(goal=>r.results[goal].goal===goal&&r.results[goal].processed===r.processed&&verifySearchResult(r.results[goal]));
+    if(r.kind!=='sfl-condition-search-result'||![1,2,3,4,5,6,7,8,SEARCH_VERSION].includes(r.version)||!r.complete||BigInt(r.total)<1n||r.total!==r.processed||!r.cells.length)return false;
     for(const cell of r.cells){
       if(!Number.isInteger(cell.points)||cell.points<0||cell.points%10||!Number.isInteger(cell.wins)||cell.wins<0)return false;
       let present=false;
@@ -325,7 +325,7 @@ export function verifySearchResult(r){
     }
     if(r.version>=7){
       const combined=r.combinedMatchConditions,ti=r.initial.teamIds.indexOf(r.targetTeamId);
-      if(!combined||r.version>=8&&combined.format!=='score-ranges'||combined.limit!==combinationLimit(r.matches.length)||combined.matches.length!==r.matches.length)return false;
+      if(!combined||r.version>=8&&combined.format!=='score-ranges'||combined.limit!==(r.version>=9?combinationLimit(r.matches.length):r.matches.length<=3?3:r.matches.length<=9?2:0)||combined.matches.length!==r.matches.length)return false;
       for(let i=0;i<r.matches.length;i++){
         const m=r.matches[i],expected=[...new Map(r.outcomeSets[m.outcomeSet].map(o=>[`${o[0]}/${o[1]}`,[o[0],o[1]]])).values()];
         const actual=combined.matches[i];if(actual.matchId!==m.id||actual.home!==m.home||actual.away!==m.away||JSON.stringify(actual.scores)!==JSON.stringify(expected))return false;

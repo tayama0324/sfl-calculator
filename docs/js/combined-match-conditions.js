@@ -1,6 +1,6 @@
 // Project uniformly classified subtrees onto small joint score tables. This
 // retains cross-match correlations without enumerating detailed suffix states.
-export const combinationLimit=matches=>matches<=3?3:matches<=9?2:0;
+export const combinationLimit=matches=>matches<=6?3:matches<=9?2:0;
 export function createCombinedCollector(games,goalCount,target,witness){
   const limit=combinationLimit(games.length);
   const supports=games.map(g=>{const rows=[],lookup=new Map(),indices=g.outcomes.map((o,i)=>{const key=`${o.h}/${o.a}`;if(!lookup.has(key)){lookup.set(key,rows.length);rows.push({h:o.h,a:o.a,index:i});}return lookup.get(key);});return {rows,indices};});

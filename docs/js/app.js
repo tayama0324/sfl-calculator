@@ -236,7 +236,7 @@ function startCalculation(additional=false,automatic=false) {
   if (missing.length) return notice(`現在の集計値を補完してください。${missing.join('、')}`,true);
   if(snapshot.calculationMethod==='monteCarlo'){startMonteCarlo(snapshot,additional,automatic);return;}
   let worker;
-  try { worker=new Worker(new URL('./worker.js?v=score-ranges-1',import.meta.url),{type:'module'}); }
+  try { worker=new Worker(new URL('./worker.js?v=three-matches-1',import.meta.url),{type:'module'}); }
   catch { return notice('計算用Workerを起動できません。HTTP(S)でページを開いてください。',true); }
   clearSavedResults([snapshot.id]);
   results.set(snapshot.id,{fingerprint:fingerprint(snapshot),input:snapshot,viewFingerprint:fingerprint(inputDivision()),automatic,startedAt:new Date().toLocaleString('ja-JP'),entries:[BASE_CASE,...snapshot.cases].map(definition=>({id:definition.id,name:definition.name,definition,status:'pending'}))});
@@ -262,7 +262,7 @@ function startConditionSearch(){
   const errors=validate(data);if(errors.length)return notice(errors.join('\n'),true);
   const snapshot=structuredClone(inputDivision()),config=structuredClone(searchConfig());
   try{prepareSearch(snapshot,config);}catch(error){notice(error.message,true);return;}
-  let worker;try{worker=new Worker(new URL('./worker.js?v=score-ranges-1',import.meta.url),{type:'module'});}catch{notice('探索用Workerを起動できません。',true);return;}
+  let worker;try{worker=new Worker(new URL('./worker.js?v=three-matches-1',import.meta.url),{type:'module'});}catch{notice('探索用Workerを起動できません。',true);return;}
   const saved={status:'running',input:snapshot,config,fingerprint:searchFingerprint(snapshot,config),result:null,exampleIndex:null};
   searchResults.set(snapshot.id,saved);run={kind:'search',worker,divisionId:snapshot.id,started:performance.now(),progress:null};
   notice('');render();timer=setInterval(updateRunStatus,250);
@@ -306,7 +306,7 @@ function startMonteCarlo(snapshot,additional,automatic=false){
     if(!Number.isSafeInteger(cp.completed+snapshot.simulation.trials))throw new Error('総試行数が上限を超えます。');
   }catch(error){notice(error.message,true);return;}
   let worker;
-  try{worker=new Worker(new URL('./worker.js?v=score-ranges-1',import.meta.url),{type:'module'});}catch{notice('計算用Workerを起動できません。',true);return;}
+  try{worker=new Worker(new URL('./worker.js?v=three-matches-1',import.meta.url),{type:'module'});}catch{notice('計算用Workerを起動できません。',true);return;}
   if(!additional)clearSavedResults([snapshot.id]);
   const bundle=monteCarloBundle(cp,'running');bundle.input=snapshot;bundle.viewFingerprint=fingerprint(inputDivision());bundle.automatic=automatic;results.set(snapshot.id,bundle);
   run={kind:'monteCarlo',worker,divisionId:snapshot.id,started:performance.now(),goal:cp.completed+snapshot.simulation.trials,progress:{processed:String(cp.completed)},stopping:false};

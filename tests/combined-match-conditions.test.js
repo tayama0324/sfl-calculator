@@ -9,8 +9,8 @@ function oracle(source,cutoff){
  visit(0);return states;
 }
 const admits=(state,clauses)=>clauses.every(c=>c.mask&(1<<state.path[c.matchIndex]));
-test('limits use 3 matches for the last round, 2 up to nine matches, none beyond',()=>{
- for(const [m,n]of [[0,3],[3,3],[4,2],[6,2],[9,2],[10,0],[12,0]])assert.equal(combinationLimit(m),n);
+test('limits use 3 matches for the last two rounds, 2 up to nine matches, none beyond',()=>{
+ for(const [m,n]of [[0,3],[3,3],[4,3],[6,3],[7,2],[9,2],[10,0],[12,0]])assert.equal(combinationLimit(m),n);
 });
 test('joint tables and guarantees match independent exhaustive enumeration in every ranking mode',()=>{
  let multiple=0;
@@ -81,4 +81,22 @@ test('older joint results retain their one-sided interpretation and new format i
  const result=searchPrepared({...input,mode:'points'},{targetTeamId:'a',goal:'first'});
  const old=structuredClone(result);old.version=7;delete old.combinedMatchConditions.format;old.combinedMatchConditions.sufficient=old.analysis.status==='conditional'?analyzeCombinedConditions(old.combinedMatchConditions,0):[];assert(verifySearchResult(old));
  const broken=structuredClone(result);broken.combinedMatchConditions.format='unknown';assert(!verifySearchResult(broken));
+});
+
+test('six remaining matches use triples with exact evidence in all modes and retain v8 compatibility',async()=>{
+ const {analyzeCombinedConditions}=await import('../docs/js/combined-match-conditions.js');
+ for(const mode of ['points','battles','rounds']){
+ const source={...input,mode,matches:[...input.matches,...input.matches.map(m=>({...m,id:m.id+'-return',home:m.away,away:m.home}))].map(m=>({...m,outcomes:m.outcomes.slice(0,2)}))};
+ const results=searchPrepared(source,{targetTeamId:'a',goal:'all'});assert(verifySearchResult(results));
+ for(const [goal,cutoff]of [['first',1],['second',2],['po',3]]){
+ const r=results.results[goal],joint=r.combinedMatchConditions,states=oracle(source,cutoff);
+ assert.equal(joint.limit,3);assert.equal(joint.tables.length,41);
+ for(const table of joint.tables)for(let cell=0;cell<table.good.length;cell++){
+ const matching=states.filter(s=>table.indices.reduce((n,i)=>n*2+s.path[i],0)===cell);
+ assert.equal(table.good[cell]!==null,matching.some(s=>s.good));assert.equal(table.bad[cell]!==null,matching.some(s=>!s.good));
+ }
+ for(const c of joint.sufficient){const matching=states.filter(s=>admits(s,c.clauses));assert(matching.length);assert(matching.every(s=>s.good));}
+ const old=structuredClone(r);old.version=8;old.combinedMatchConditions.limit=2;old.combinedMatchConditions.tables=old.combinedMatchConditions.tables.filter(t=>t.indices.length<=2);old.combinedMatchConditions.sufficient=old.analysis.status==='conditional'?analyzeCombinedConditions(old.combinedMatchConditions,0):[];assert(verifySearchResult(old));
+ }
+ }
 });
