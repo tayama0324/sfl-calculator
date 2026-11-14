@@ -1,3 +1,4 @@
+import {renderQualificationTrendBody} from './qualification-trends-ui.js';
 import {verifyTeamSummary} from './team-summary.js';
 import {divisionAutoPlan,shouldAutoSearch,parseSummaryRoute,MC_PRESETS,normalizedTrials} from './summary-policy.js';
 import {divisionSelection,summaryLayout,linkSummaryTeams,simplifyResultPresentation} from './summary-layout.js';
@@ -71,6 +72,11 @@ function renderResult(d) {
 }
 function bindExampleButtons(){
   simplifyResultPresentation(document);
+  for(const id of ['trend-goal','trend-include-own'])if($('#'+id))$('#'+id).onchange=()=>{
+    const saved=currentSavedResult();if(!saved?.result?.teamSummary)return;
+    saved.trendOptions={goal:Number($('#trend-goal').value),includeOwn:$('#trend-include-own').checked};
+    $('#qualification-trend-body').innerHTML=renderQualificationTrendBody(saved.result.teamSummary,saved.input,saved.trendOptions);
+  };
   if($('#switch-to-exact'))$('#switch-to-exact').onclick=()=>{
     if(run)return;
     change(d=>{d.calculationMethod='exact';});

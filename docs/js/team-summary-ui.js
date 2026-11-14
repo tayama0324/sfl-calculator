@@ -20,3 +20,4 @@ export function renderMatchImpacts(s,d){
    return `<td>${probability(row.goalLower[i],row.goalUpper[i],row.mass)}<small class="team-probability-delta">(${Math.abs(high-low)<.0000001?delta(low):`${delta(low)}〜${delta(high)}`})</small></td>`;
  }).join('')}</tr>`).join('')}</tbody></table></div></section>`;}).join(''):'<p>残り試合はありません。</p>'}</details>`;
 }
+export {percent as formatTeamPercent};
